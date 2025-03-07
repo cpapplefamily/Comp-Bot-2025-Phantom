@@ -78,7 +78,21 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
     );
 
     /* The SysId routine to test */
-    private SysIdRoutine m_sysIdRoutineToApply = m_sysIdRoutineTranslation;
+    public Command GetSysIdRoutine (boolean do_translation, boolean do_dynamic, SysIdRoutine.Direction direction) {
+        if (do_translation) {
+            if (do_dynamic) {
+                return m_sysIdRoutineTranslation.dynamic(direction);
+            } else {
+                return m_sysIdRoutineTranslation.quasistatic(direction);
+            }
+        } else {
+            if (do_dynamic) {
+                return m_sysIdRoutineSteer.dynamic(direction);
+            } else {
+                return m_sysIdRoutineSteer.quasistatic(direction);
+            }
+        }
+    }
 
     /**
      * Constructs a CTRE SwerveDrivetrain using the specified constants.
@@ -187,28 +201,6 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
      */
     public Command applyRequest(Supplier<SwerveRequest> requestSupplier) {
         return run(() -> this.setControl(requestSupplier.get()));
-    }
-
-    /**
-     * Runs the SysId Quasistatic test in the given direction for the routine
-     * specified by {@link #m_sysIdRoutineToApply}.
-     *
-     * @param direction Direction of the SysId Quasistatic test
-     * @return Command to run
-     */
-    public Command sysIdQuasistatic(SysIdRoutine.Direction direction) {
-        return m_sysIdRoutineToApply.quasistatic(direction);
-    }
-
-    /**
-     * Runs the SysId Dynamic test in the given direction for the routine
-     * specified by {@link #m_sysIdRoutineToApply}.
-     *
-     * @param direction Direction of the SysId Dynamic test
-     * @return Command to run
-     */
-    public Command sysIdDynamic(SysIdRoutine.Direction direction) {
-        return m_sysIdRoutineToApply.dynamic(direction);
     }
 
     @Override
