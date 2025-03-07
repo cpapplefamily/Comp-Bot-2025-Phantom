@@ -1,18 +1,18 @@
 package frc.robot.subsystems;
 
-import static edu.wpi.first.units.Units.*;
-
-import java.util.function.Supplier;
+import static edu.wpi.first.units.Units.Volts;
 
 import com.ctre.phoenix6.SignalLogger;
 import com.ctre.phoenix6.swerve.SwerveDrivetrainConstants;
 import com.ctre.phoenix6.swerve.SwerveModuleConstants;
 import com.ctre.phoenix6.swerve.SwerveRequest;
+import com.ctre.phoenix6.swerve.SwerveRequest.ApplyRobotSpeeds;
+import com.ctre.phoenix6.swerve.SwerveRequest.SysIdSwerveSteerGains;
+import com.ctre.phoenix6.swerve.SwerveRequest.SysIdSwerveTranslation;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.config.PIDConstants;
 import com.pathplanner.lib.config.RobotConfig;
 import com.pathplanner.lib.controllers.PPHolonomicDriveController;
-
 import edu.wpi.first.math.Matrix;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.numbers.N1;
@@ -22,8 +22,8 @@ import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Subsystem;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine;
-
 import frc.robot.generated.TunerConstants.TunerSwerveDrivetrain;
+import java.util.function.Supplier;
 
 /**
  * Class that extends the Phoenix 6 SwerveDrivetrain class and implements
@@ -38,12 +38,12 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
     /* Keep track if we've ever applied the operator perspective before or not */
     private boolean m_hasAppliedOperatorPerspective = false;
 
-    /** Swerve request to apply during robot-centric path following */
-    private final SwerveRequest.ApplyRobotSpeeds m_pathApplyRobotSpeeds = new SwerveRequest.ApplyRobotSpeeds();
+    /* Swerve request to apply during robot-centric path following */
+    private final ApplyRobotSpeeds m_pathApplyRobotSpeeds = new ApplyRobotSpeeds();
 
     /* Swerve requests to apply during SysId characterization */
-    private final SwerveRequest.SysIdSwerveTranslation m_translationCharacterization = new SwerveRequest.SysIdSwerveTranslation();
-    private final SwerveRequest.SysIdSwerveSteerGains m_steerCharacterization = new SwerveRequest.SysIdSwerveSteerGains();
+    private final SysIdSwerveTranslation m_translationCharacterization = new SysIdSwerveTranslation();
+    private final SysIdSwerveSteerGains m_steerCharacterization = new SysIdSwerveSteerGains();
 
     /* SysId routine for characterizing translation. This is used to find PID gains for the drive motors. */
     private final SysIdRoutine m_sysIdRoutineTranslation = new SysIdRoutine(
@@ -77,16 +77,23 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
         )
     );
 
-    /* The SysId routine to test */
-    public Command GetSysIdRoutine (boolean do_translation, boolean do_dynamic, SysIdRoutine.Direction direction) {
-        if (do_translation) {
-            if (do_dynamic) {
+    /**
+     * The SysId routine to test.
+     *
+     * @param doTranslation True for translation, false for rotation
+     * @param doDynamic True for dynamic, false for quasistatic
+     * @param direction SysIdRoutine.Direction value
+     * @return Command to run the SysID rountine
+     */
+    public Command getSysIdRoutine(boolean doTranslation, boolean doDynamic, SysIdRoutine.Direction direction) {
+        if (doTranslation) {
+            if (doDynamic) {
                 return m_sysIdRoutineTranslation.dynamic(direction);
             } else {
                 return m_sysIdRoutineTranslation.quasistatic(direction);
             }
         } else {
-            if (do_dynamic) {
+            if (doDynamic) {
                 return m_sysIdRoutineSteer.dynamic(direction);
             } else {
                 return m_sysIdRoutineSteer.quasistatic(direction);
@@ -96,8 +103,8 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
 
     /**
      * Constructs a CTRE SwerveDrivetrain using the specified constants.
-     * <p>
-     * This constructs the underlying hardware devices, so users should not construct
+     *
+     * <p>This constructs the underlying hardware devices, so users should not construct
      * the devices themselves. If they need the devices, they can access them through
      * getters in the classes.
      *
@@ -114,8 +121,8 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
 
     /**
      * Constructs a CTRE SwerveDrivetrain using the specified constants.
-     * <p>
-     * This constructs the underlying hardware devices, so users should not construct
+     *
+     * <p>This constructs the underlying hardware devices, so users should not construct
      * the devices themselves. If they need the devices, they can access them through
      * getters in the classes.
      *
@@ -136,8 +143,8 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
 
     /**
      * Constructs a CTRE SwerveDrivetrain using the specified constants.
-     * <p>
-     * This constructs the underlying hardware devices, so users should not construct
+     *
+     * <p>This constructs the underlying hardware devices, so users should not construct
      * the devices themselves. If they need the devices, they can access them through
      * getters in the classes.
      *
@@ -164,6 +171,9 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
         configureAutoBuilder();
     }
 
+    /**
+     * Auto builder from PathPlanner.
+     */
     private void configureAutoBuilder() {
         try {
             var config = RobotConfig.fromGUISettings();
@@ -196,7 +206,7 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
     /**
      * Returns a command that applies the specified control request to this swerve drivetrain.
      *
-     * @param request Function returning the request to apply
+     * @param requestSupplier Function returning the request to apply
      * @return Command to run
      */
     public Command applyRequest(Supplier<SwerveRequest> requestSupplier) {

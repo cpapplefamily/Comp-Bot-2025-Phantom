@@ -1,0 +1,138 @@
+// Copyright (c) FIRST and other WPILib contributors.
+// Open Source Software; you can modify and/or share it under the terms of
+// the WPILib BSD license file in the root directory of this project.
+
+package frc.robot.subsystems;
+
+import com.ctre.phoenix6.configs.CANdiConfiguration;
+import com.ctre.phoenix6.configs.TalonFXConfiguration;
+import com.ctre.phoenix6.controls.DynamicMotionMagicTorqueCurrentFOC;
+import com.ctre.phoenix6.controls.Follower;
+import com.ctre.phoenix6.hardware.CANdi;
+import com.ctre.phoenix6.hardware.TalonFX;
+import com.ctre.phoenix6.signals.GravityTypeValue;
+import com.ctre.phoenix6.signals.InvertedValue;
+import com.ctre.phoenix6.signals.NeutralModeValue;
+import com.ctre.phoenix6.signals.ReverseLimitSourceValue;
+import com.ctre.phoenix6.signals.S1CloseStateValue;
+import com.ctre.phoenix6.signals.S1FloatStateValue;
+import com.ctre.phoenix6.signals.S2CloseStateValue;
+import com.ctre.phoenix6.signals.S2FloatStateValue;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Calibrations.ElevatorCalibrations;
+import frc.robot.Constants.ElevatorConstants;
+
+/**
+ * Elevator subsystem.
+ */
+public class ElevatorSubsystem extends SubsystemBase {
+
+    private final TalonFX m_motor1;
+    private final TalonFX m_motor2;
+    private final TalonFX m_motor3;
+    private final TalonFX m_motor4; 
+    private final CANdi m_candi;
+    private TalonFXConfiguration m_talonFxConfig;
+    private CANdiConfiguration m_candiConfig;
+    private final DynamicMotionMagicTorqueCurrentFOC m_request;
+
+    /**
+     * Elevator subsystem constructor.
+     */
+    public ElevatorSubsystem() {
+
+        /* Create the hardware and configurators */
+        m_motor1 = new TalonFX(ElevatorConstants.kmotor1CanId, "kachow");
+        m_motor2 = new TalonFX(ElevatorConstants.kmotor2CanId, "kachow");
+        m_motor3 = new TalonFX(ElevatorConstants.kmotor3CanId, "kachow");
+        m_motor4 = new TalonFX(ElevatorConstants.kmotor4CanId, "kachow");
+        m_candi = new CANdi(ElevatorConstants.kcandiCanId, "kachow");
+        m_talonFxConfig = new TalonFXConfiguration();
+        m_candiConfig = new CANdiConfiguration();
+
+        /* TODO: Should a starting (or last known) position be loaded here?? */
+        m_request = new DynamicMotionMagicTorqueCurrentFOC(
+            0, 
+            ElevatorCalibrations.kMaxSpeedMotionMagic, 
+            ElevatorCalibrations.kMaxAccelerationMotionMagic, 
+            0);
+      
+        /* Configure the motors */
+        m_talonFxConfig.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
+        m_talonFxConfig.Slot0.GravityType = GravityTypeValue.Elevator_Static;
+        // TODO: Should the Slot1 config also be Elevator_Static??
+ 
+        m_talonFxConfig.Slot0.kG = ElevatorCalibrations.kG;
+        m_talonFxConfig.Slot0.kS = ElevatorCalibrations.kS;
+        m_talonFxConfig.Slot0.kV = ElevatorCalibrations.kV;
+        m_talonFxConfig.Slot0.kA = ElevatorCalibrations.kA;
+        m_talonFxConfig.Slot0.kP = ElevatorCalibrations.kP;
+        m_talonFxConfig.Slot0.kD = ElevatorCalibrations.kD;
+ 
+        m_talonFxConfig.Slot1.kG = ElevatorCalibrations.kClimbG;
+        m_talonFxConfig.Slot1.kS = ElevatorCalibrations.kS;
+        m_talonFxConfig.Slot1.kV = ElevatorCalibrations.kV;
+        m_talonFxConfig.Slot1.kA = ElevatorCalibrations.kA;
+        m_talonFxConfig.Slot1.kP = ElevatorCalibrations.kP;
+        m_talonFxConfig.Slot1.kD = ElevatorCalibrations.kD;
+ 
+        m_talonFxConfig.MotionMagic.MotionMagicCruiseVelocity = ElevatorCalibrations.kMaxSpeedMotionMagic;
+        m_talonFxConfig.MotionMagic.MotionMagicAcceleration = ElevatorCalibrations.kMaxAccelerationMotionMagic;
+
+        m_talonFxConfig.TorqueCurrent.PeakForwardTorqueCurrent = ElevatorCalibrations.kMaxCurrentPerMotor;
+        m_talonFxConfig.TorqueCurrent.PeakReverseTorqueCurrent = -ElevatorCalibrations.kMaxCurrentPerMotor;
+    
+        m_talonFxConfig.HardwareLimitSwitch.ReverseLimitSource = ReverseLimitSourceValue.RemoteCANdiS1;
+        m_talonFxConfig.HardwareLimitSwitch.ReverseLimitRemoteSensorID = m_candi.getDeviceID();
+        m_talonFxConfig.HardwareLimitSwitch.ReverseLimitEnable = true;
+
+        m_talonFxConfig.SoftwareLimitSwitch.ForwardSoftLimitEnable = true;
+        m_talonFxConfig.SoftwareLimitSwitch.ForwardSoftLimitThreshold = ElevatorCalibrations.kForwardSoftLimitThreshold;
+
+        m_talonFxConfig.MotorOutput.NeutralMode = NeutralModeValue.Brake;
+
+        /* Configure the CANdi */
+        /* Closed(tripped) and float(open) states. These settings can vary based on the type of sensor */
+        m_candiConfig.DigitalInputs.S1CloseState = S1CloseStateValue.CloseWhenLow;
+        m_candiConfig.DigitalInputs.S1FloatState = S1FloatStateValue.PullHigh;
+        m_candiConfig.DigitalInputs.S2CloseState = S2CloseStateValue.CloseWhenLow;
+        m_candiConfig.DigitalInputs.S2FloatState = S2FloatStateValue.PullHigh;
+
+        /* Apply hardware configurations */
+        m_motor1.getConfigurator().apply(m_talonFxConfig);  
+        m_motor2.getConfigurator().apply(m_talonFxConfig);
+        m_motor3.getConfigurator().apply(m_talonFxConfig);
+        m_motor4.getConfigurator().apply(m_talonFxConfig);        
+        m_candi.getConfigurator().apply(m_candiConfig);
+
+        m_motor2.setControl(new Follower(ElevatorConstants.kmotor1CanId, true));
+        m_motor3.setControl(new Follower(ElevatorConstants.kmotor1CanId, false));
+        m_motor4.setControl(new Follower(ElevatorConstants.kmotor1CanId, true));
+
+    }
+
+    /**
+     * Passes in a value in degrees for the Motion Magic Motion Profiler to use.
+     *
+     * @param newSetpoint - New setpoint for the elevator in inches.
+     */
+    public void updateSetpoint(double newSetpoint, boolean isClimbing) {
+
+        if (isClimbing) {
+            m_motor1.setControl(m_request.withPosition(newSetpoint * ElevatorConstants.kPulleyGearRatio)
+                                         .withVelocity(ElevatorCalibrations.kClimbSpeedMotionMagic)
+                                         .withSlot(1));
+        } else {
+            m_motor1.setControl(m_request.withPosition(newSetpoint * ElevatorConstants.kPulleyGearRatio)
+                                         .withVelocity(ElevatorCalibrations.kMaxSpeedMotionMagic)
+                                         .withSlot(0));
+        }
+    
+    }
+
+    @Override
+    public void periodic() {
+
+    }
+ 
+}
