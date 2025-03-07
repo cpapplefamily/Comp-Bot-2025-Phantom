@@ -11,19 +11,25 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
+import frc.robot.subsystems.ElevatorSubsystem;
+import frc.robot.subsystems.WindmillSubsystem;
 
 /**
  * The robot container.
  */
 public class RobotContainer {
 
+    public final CommandSwerveDrivetrain m_drivetrain = TunerConstants.createDrivetrain();
+    public final ElevatorSubsystem m_elevator = new ElevatorSubsystem();
+    public final WindmillSubsystem m_windmill = new WindmillSubsystem();
+    private final CommandXboxController m_joystick = new CommandXboxController(0);
+
     /** TODO: Look into using DriveRequestType.Velocity */
     private final SwerveRequest.FieldCentric m_drive = new SwerveRequest.FieldCentric()
             .withDeadband(Calibrations.DriverCalibrations.kmaxSpeed * 0.1)
             .withRotationalDeadband(Calibrations.DriverCalibrations.kmaxAngularRate * 0.1)
             .withDriveRequestType(DriveRequestType.OpenLoopVoltage);
-    private final CommandXboxController m_joystick = new CommandXboxController(0);
-    public final CommandSwerveDrivetrain m_drivetrain = TunerConstants.createDrivetrain();
+
 
 
     /**

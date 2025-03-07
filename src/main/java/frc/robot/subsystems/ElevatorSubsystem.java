@@ -130,6 +130,15 @@ public class ElevatorSubsystem extends SubsystemBase {
     
     }
 
+    /**
+     * Return the position of the elevator (in).
+     *
+     * @return Position of the elevator (in)
+     */
+    public double getPosition() {
+        return m_motor1.getPosition().getValueAsDouble() / ElevatorConstants.kPulleyGearRatio;
+    }
+
     @Override
     public void periodic() {
 
