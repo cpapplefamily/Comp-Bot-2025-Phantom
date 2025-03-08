@@ -9,6 +9,8 @@ import com.ctre.phoenix6.swerve.SwerveRequest;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import frc.robot.Calibrations.ManipulatorCalibrations;
+import frc.robot.commands.CGOuttakeThenStow;
 import frc.robot.commands.CoralStation;
 import frc.robot.commands.L4;
 import frc.robot.commands.LollipopStow;
@@ -64,11 +66,16 @@ public class RobotContainer {
 
         m_joystick.x().onTrue(new PendulumStow(m_elevator, m_windmill));
     
+        /* Coral station pickup sequence */
         m_joystick.rightBumper().onTrue(new CoralStation(m_elevator, m_windmill));
         m_joystick.rightBumper().whileTrue(new RunIntake(m_manipulator));
         m_joystick.rightBumper().onFalse(new LollipopStow(m_elevator, m_windmill));
 
+        /* Coral reef dropoff sequence */
         m_joystick.povUp().onTrue(new L4(m_elevator, m_windmill));
+        m_joystick.povUp().onFalse(new CGOuttakeThenStow(ManipulatorCalibrations.kL4OuttakeSpeed, 
+                                                        ManipulatorCalibrations.kL4OuttakeTime, 
+                                                        m_elevator, m_windmill, m_manipulator));
 
     }
 

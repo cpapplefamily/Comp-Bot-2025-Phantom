@@ -114,5 +114,9 @@ public class Calibrations {
         public static final double kMaxSpeed = 100;
         public static final double kMaxStatorCurrent = 40;
         public static final double kCurrentThreshold = 15;
+
+        public static final double kL4OuttakeSpeed = -30;
+        public static final double kL4OuttakeTime = 0.25;
+
     }
 }
