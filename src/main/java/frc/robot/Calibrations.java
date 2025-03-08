@@ -50,6 +50,9 @@ public class Calibrations {
         public static final double kForwardSoftLimitThreshold = 88;
 
         public static final double kBottomPosition = -0.2;
+
+        public static final double kPendulumTolerance = 2;
+        public static final double kPendulumPosition = 28;
     }
 
     /**
@@ -82,6 +85,8 @@ public class Calibrations {
 
         public static final double kLollipopTolerance = 30;
         public static final double kLollipopPosition = 90;
+
+        public static final double kPendulumPosition = 270;
     }
 
     /**

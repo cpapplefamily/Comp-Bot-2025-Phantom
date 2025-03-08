@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.commands.LollipopStow;
+import frc.robot.commands.PendulumStow;
 import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
 import frc.robot.subsystems.ElevatorSubsystem;
@@ -57,6 +58,8 @@ public class RobotContainer {
         m_joystick.start().onTrue(m_drivetrain.runOnce(() -> m_drivetrain.seedFieldCentric()));
 
         m_joystick.b().onTrue(new LollipopStow(m_elevator, m_windmill));
+
+        m_joystick.x().onTrue(new PendulumStow(m_elevator, m_windmill));
     
     }
 

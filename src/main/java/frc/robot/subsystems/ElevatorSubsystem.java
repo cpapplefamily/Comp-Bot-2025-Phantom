@@ -148,6 +148,10 @@ public class ElevatorSubsystem extends SubsystemBase {
         return m_request.Position / ElevatorConstants.kPulleyGearRatio;
     }
 
+    public boolean isWithinTolerance(double tolerance) {
+        return (getPosition() - getSetpoint()) < tolerance;
+    }
+
     @Override
     public void periodic() {
 
