@@ -149,7 +149,7 @@ public class ElevatorSubsystem extends SubsystemBase {
     }
 
     public boolean isWithinTolerance(double tolerance) {
-        return (getPosition() - getSetpoint()) < tolerance;
+        return Math.abs(getPosition() - getSetpoint()) < tolerance;
     }
 
     @Override
