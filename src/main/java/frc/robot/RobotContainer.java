@@ -94,13 +94,13 @@ public class RobotContainer {
                                                            m_elevator, m_windmill, m_manipulator));
         /* Target the left coral reef stick */
         m_joystick.axisGreaterThan(2, 0.1).whileTrue(new AlignToTag(1,
-                                                                                   () -> m_joystick.getLeftX(), 
                                                                                    () -> m_joystick.getLeftY(), 
+                                                                                   () -> m_joystick.getLeftX(), 
                                                                                    m_drivetrain));
         /* Target the right coral reef stick */
         m_joystick.axisGreaterThan(3, 0.1).whileTrue(new AlignToTag(0,
-                                                                                   () -> m_joystick.getLeftX(), 
                                                                                    () -> m_joystick.getLeftY(), 
+                                                                                   () -> m_joystick.getLeftX(), 
                                                                                    m_drivetrain));
 
     }

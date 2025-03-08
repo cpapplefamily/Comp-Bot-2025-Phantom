@@ -7,6 +7,7 @@ package frc.robot.commands;
 import com.ctre.phoenix6.swerve.SwerveRequest.FieldCentric;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.Calibrations;
 import frc.robot.Calibrations.DriverCalibrations;
 import frc.robot.LimelightHelpers;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
@@ -19,11 +20,12 @@ import java.util.function.DoubleSupplier;
 public class AlignToTag extends Command {
 
     private CommandSwerveDrivetrain m_drivetrain;
-    private FieldCentric m_swerveRequest;
     private DoubleSupplier m_driverX;
     private DoubleSupplier m_driverY;
     private double m_rotationSpeed;
     private int m_pipeline;
+
+    private FieldCentric m_swerveRequest = new FieldCentric().withDeadband(DriverCalibrations.kmaxSpeed * 0.1);
 
     /**
      * AlignToTag Constructor.
@@ -32,10 +34,10 @@ public class AlignToTag extends Command {
      * @param driverY The driver input for Y translation as a value from [0, 1]
      * @param drivetrain The drivetrain
      */
-    public AlignToTag(int pipeline, DoubleSupplier driverX, DoubleSupplier driverY, CommandSwerveDrivetrain drivetrain) {
+    public AlignToTag(int pipeline, DoubleSupplier driverY, DoubleSupplier driverX, CommandSwerveDrivetrain drivetrain) {
         m_pipeline = pipeline;
-        m_driverX = driverX;
         m_driverY = driverY;
+        m_driverX = driverX;
         m_drivetrain = drivetrain;
         addRequirements(drivetrain);
     }
@@ -47,13 +49,17 @@ public class AlignToTag extends Command {
 
     @Override
     public void execute() {
-        m_rotationSpeed = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx")
+        m_rotationSpeed = NetworkTableInstance.getDefault().getTable("limelight-one").getEntry("tx")
                                               .getDouble(DriverCalibrations.kLimelightDefaultKX)
                                               * DriverCalibrations.kAprilTagAlignmentKP;
         
-        m_drivetrain.setControl(m_swerveRequest.withVelocityX(m_driverX.getAsDouble() * DriverCalibrations.kmaxSpeed)
-                                               .withVelocityY(m_driverY.getAsDouble() * DriverCalibrations.kmaxSpeed)
-                                               .withRotationalRate(m_rotationSpeed));
+
+        m_drivetrain.setControl(m_swerveRequest
+            .withVelocityX(-m_driverY.getAsDouble() * Calibrations.DriverCalibrations.kmaxSpeed)
+            .withVelocityY(-m_driverX.getAsDouble() * Calibrations.DriverCalibrations.kmaxSpeed)
+            .withRotationalRate(m_rotationSpeed)
+        );
+
     }
 
     @Override
