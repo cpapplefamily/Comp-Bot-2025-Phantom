@@ -11,9 +11,9 @@ import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.WindmillSubsystem;
 
 /**
- * CoralStation command.
+ * L4 command.
  */
-public class CoralStation extends Command {
+public class L4 extends Command {
   
     private WindmillSubsystem m_windmill;
     private ElevatorSubsystem m_elevator;
@@ -21,7 +21,7 @@ public class CoralStation extends Command {
     /**
      * CoralStation command constructor.
      */
-    public CoralStation(ElevatorSubsystem elevator, WindmillSubsystem windmill) {
+    public L4(ElevatorSubsystem elevator, WindmillSubsystem windmill) {
         m_windmill = windmill;
         m_elevator = elevator;
         addRequirements(m_windmill, m_elevator);
@@ -29,24 +29,24 @@ public class CoralStation extends Command {
 
     @Override
     public void initialize() {
-        m_elevator.updateSetpoint(ElevatorCalibrations.kCoralStationPosition, false);
+        m_elevator.updateSetpoint(ElevatorCalibrations.kL4Position, false);
         // TODO: Add direcionality here
-        if (m_elevator.isWithinTolerance(ElevatorCalibrations.kCoralStationTolerance)) {
+        if (m_elevator.isWithinTolerance(ElevatorCalibrations.kL4Tolerance)) {
             m_windmill.updateSetpoint(WindmillCalibrations.kCoralStationPosition, false);
         }
     }
 
     @Override
     public void execute() {
-        if (m_elevator.isWithinTolerance(ElevatorCalibrations.kCoralStationTolerance)) {
-            m_windmill.updateSetpoint(WindmillCalibrations.kCoralStationPosition, false);
+        if (m_elevator.isWithinTolerance(ElevatorCalibrations.kL4Tolerance)) {
+            m_windmill.updateSetpoint(WindmillCalibrations.kL4Position, false);
         }
     }
 
     @Override
     public boolean isFinished() {
-        return m_elevator.getSetpoint() == ElevatorCalibrations.kCoralStationPosition 
-            && m_windmill.getSetpoint() == WindmillCalibrations.kCoralStationPosition;
+        return m_elevator.getSetpoint() == ElevatorCalibrations.kL4Position 
+            && m_windmill.getSetpoint() == WindmillCalibrations.kL4Position;
     }
 
 }

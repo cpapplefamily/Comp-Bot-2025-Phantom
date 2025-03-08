@@ -57,6 +57,8 @@ public class Calibrations {
         public static final double kCoralStationTolerance = 2;
         public static final double kCoralStationPosition = 34.5;
 
+        public static final double kL4Tolerance = 2;
+        public static final double kL4Position = 52.5;
 
     }
 
@@ -94,6 +96,7 @@ public class Calibrations {
         public static final double kPendulumPosition = 270;
         
         public static final double kCoralStationPosition = 287;
+        public static final double kL4Position = 110;
     }
 
     /**
@@ -108,8 +111,8 @@ public class Calibrations {
         public static final double kD = 0;
 
         public static final double kMaxAcceleration = 140;
-        public static final double kMaxSpeed = 20;
-        public static final double kMaxStatorCurrent = 100;
-        public static final double kCurrentThreshold = 10;
+        public static final double kMaxSpeed = 100;
+        public static final double kMaxStatorCurrent = 40;
+        public static final double kCurrentThreshold = 15;
     }
 }

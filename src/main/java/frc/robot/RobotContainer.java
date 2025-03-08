@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.commands.CoralStation;
+import frc.robot.commands.L4;
 import frc.robot.commands.LollipopStow;
 import frc.robot.commands.PendulumStow;
 import frc.robot.commands.RunIntake;
@@ -35,8 +36,6 @@ public class RobotContainer {
             .withDeadband(Calibrations.DriverCalibrations.kmaxSpeed * 0.1)
             .withRotationalDeadband(Calibrations.DriverCalibrations.kmaxAngularRate * 0.1)
             .withDriveRequestType(DriveRequestType.OpenLoopVoltage);
-
-
 
     /**
      * The robot container constructor.
@@ -68,6 +67,8 @@ public class RobotContainer {
         m_joystick.rightBumper().onTrue(new CoralStation(m_elevator, m_windmill));
         m_joystick.rightBumper().whileTrue(new RunIntake(m_manipulator));
         m_joystick.rightBumper().onFalse(new LollipopStow(m_elevator, m_windmill));
+
+        m_joystick.povUp().onTrue(new L4(m_elevator, m_windmill));
 
     }
 
