@@ -8,6 +8,7 @@ import com.ctre.phoenix6.swerve.SwerveModule.DriveRequestType;
 import com.ctre.phoenix6.swerve.SwerveRequest;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.commands.CoralStation;
 import frc.robot.commands.LollipopStow;
@@ -15,6 +16,7 @@ import frc.robot.commands.PendulumStow;
 import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
 import frc.robot.subsystems.ElevatorSubsystem;
+import frc.robot.subsystems.ManipulatorSubsystem;
 import frc.robot.subsystems.WindmillSubsystem;
 
 /**
@@ -25,6 +27,7 @@ public class RobotContainer {
     public final CommandSwerveDrivetrain m_drivetrain = TunerConstants.createDrivetrain();
     public final ElevatorSubsystem m_elevator = new ElevatorSubsystem();
     public final WindmillSubsystem m_windmill = new WindmillSubsystem();
+    public final ManipulatorSubsystem m_manipulator = new ManipulatorSubsystem();
     private final CommandXboxController m_joystick = new CommandXboxController(0);
 
     /** TODO: Look into using DriveRequestType.Velocity */
@@ -63,6 +66,7 @@ public class RobotContainer {
         m_joystick.x().onTrue(new PendulumStow(m_elevator, m_windmill));
     
         m_joystick.rightBumper().onTrue(new CoralStation(m_elevator, m_windmill));
+        m_joystick.rightBumper().whileTrue(new InstantCommand(() -> m_manipulator.updateSetpoint(1.0)));
 
     }
 
