@@ -13,7 +13,7 @@ import frc.robot.subsystems.WindmillSubsystem;
 /**
  * L4 command.
  */
-public class L4 extends Command {
+public class L3 extends Command {
   
     private WindmillSubsystem m_windmill;
     private ElevatorSubsystem m_elevator;
@@ -21,7 +21,7 @@ public class L4 extends Command {
     /**
      * CoralStation command constructor.
      */
-    public L4(ElevatorSubsystem elevator, WindmillSubsystem windmill) {
+    public L3(ElevatorSubsystem elevator, WindmillSubsystem windmill) {
         m_windmill = windmill;
         m_elevator = elevator;
         addRequirements(m_windmill, m_elevator);
@@ -29,24 +29,24 @@ public class L4 extends Command {
 
     @Override
     public void initialize() {
-        m_elevator.updateSetpoint(ElevatorCalibrations.kL4Position, false);
+        m_elevator.updateSetpoint(ElevatorCalibrations.kL3Position, false);
         // TODO: Add direcionality here
-        if (m_elevator.isWithinTolerance(ElevatorCalibrations.kL4Tolerance)) {
-            m_windmill.updateSetpoint(WindmillCalibrations.kL4Position, false);
+        if (m_elevator.isWithinTolerance(ElevatorCalibrations.kL3Tolerance)) {
+            m_windmill.updateSetpoint(WindmillCalibrations.kL3Position, false);
         }
     }
 
     @Override
     public void execute() {
-        if (m_elevator.isWithinTolerance(ElevatorCalibrations.kL4Tolerance)) {
-            m_windmill.updateSetpoint(WindmillCalibrations.kL4Position, false);
+        if (m_elevator.isWithinTolerance(ElevatorCalibrations.kL3Tolerance)) {
+            m_windmill.updateSetpoint(WindmillCalibrations.kL3Position, false);
         }
     }
 
     @Override
     public boolean isFinished() {
-        return m_elevator.getSetpoint() == ElevatorCalibrations.kL4Position 
-            && m_windmill.getSetpoint() == WindmillCalibrations.kL4Position;
+        return m_elevator.getSetpoint() == ElevatorCalibrations.kL3Position 
+            && m_windmill.getSetpoint() == WindmillCalibrations.kL3Position;
     }
 
 }

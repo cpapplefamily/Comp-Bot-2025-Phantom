@@ -12,6 +12,8 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Calibrations.ManipulatorCalibrations;
 import frc.robot.commands.CGOuttakeThenStow;
 import frc.robot.commands.CoralStation;
+import frc.robot.commands.L2;
+import frc.robot.commands.L3;
 import frc.robot.commands.L4;
 import frc.robot.commands.LollipopStow;
 import frc.robot.commands.PendulumStow;
@@ -71,11 +73,23 @@ public class RobotContainer {
         m_joystick.rightBumper().whileTrue(new RunIntake(m_manipulator));
         m_joystick.rightBumper().onFalse(new LollipopStow(m_elevator, m_windmill));
 
-        /* Coral reef dropoff sequence */
+        /* Coral reef L4 dropoff sequence */
         m_joystick.povUp().onTrue(new L4(m_elevator, m_windmill));
         m_joystick.povUp().onFalse(new CGOuttakeThenStow(ManipulatorCalibrations.kL4OuttakeSpeed, 
-                                                        ManipulatorCalibrations.kL4OuttakeTime, 
-                                                        m_elevator, m_windmill, m_manipulator));
+                                                         ManipulatorCalibrations.kL4OuttakeTime, 
+                                                         m_elevator, m_windmill, m_manipulator));
+
+        /* Coral reef L3 dropoff sequence */
+        m_joystick.povLeft().onTrue(new L3(m_elevator, m_windmill));
+        m_joystick.povLeft().onFalse(new CGOuttakeThenStow(ManipulatorCalibrations.kL3OuttakeSpeed,
+                                                           ManipulatorCalibrations.kL3OuttakeTime,
+                                                           m_elevator, m_windmill, m_manipulator));
+
+        /* Coral reef L3 dropoff sequence */
+        m_joystick.povLeft().onTrue(new L2(m_elevator, m_windmill));
+        m_joystick.povLeft().onFalse(new CGOuttakeThenStow(ManipulatorCalibrations.kL2OuttakeSpeed,
+                                                           ManipulatorCalibrations.kL2OuttakeTime,
+                                                           m_elevator, m_windmill, m_manipulator));
 
     }
 

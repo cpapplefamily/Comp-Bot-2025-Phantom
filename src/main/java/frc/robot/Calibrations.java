@@ -60,6 +60,12 @@ public class Calibrations {
         public static final double kL4Tolerance = 2;
         public static final double kL4Position = 52.5;
 
+        public static final double kL3Tolerance = 2;
+        public static final double kL3Position = 24;
+
+        public static final double kL2Tolerance = 2;
+        public static final double kL2Position = 9.5;
+
     }
 
     /**
@@ -97,6 +103,8 @@ public class Calibrations {
         
         public static final double kCoralStationPosition = 287;
         public static final double kL4Position = 120;
+        public static final double kL3Position = 110;
+        public static final double kL2Position = 110;
     }
 
     /**
@@ -117,6 +125,12 @@ public class Calibrations {
 
         public static final double kL4OuttakeSpeed = -30;
         public static final double kL4OuttakeTime = 0.25;
+
+        public static final double kL3OuttakeSpeed = -30;
+        public static final double kL3OuttakeTime = 0.25;
+
+        public static final double kL2OuttakeSpeed = -30;
+        public static final double kL2OuttakeTime = 0.25;
 
     }
 }
