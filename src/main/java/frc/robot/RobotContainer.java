@@ -66,7 +66,7 @@ public class RobotContainer {
         m_joystick.x().onTrue(new PendulumStow(m_elevator, m_windmill));
     
         m_joystick.rightBumper().onTrue(new CoralStation(m_elevator, m_windmill));
-        m_joystick.rightBumper().whileTrue(new InstantCommand(() -> m_manipulator.updateSetpoint(1.0)));
+        m_joystick.rightBumper().whileTrue(new InstantCommand(() -> m_manipulator.updateSetpoint(1.0), m_manipulator));
 
     }
 
