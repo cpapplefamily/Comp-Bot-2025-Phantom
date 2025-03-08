@@ -96,7 +96,7 @@ public class Calibrations {
         public static final double kPendulumPosition = 270;
         
         public static final double kCoralStationPosition = 287;
-        public static final double kL4Position = 110;
+        public static final double kL4Position = 120;
     }
 
     /**
