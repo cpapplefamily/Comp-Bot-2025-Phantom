@@ -66,6 +66,8 @@ public class Calibrations {
         public static final double kL2Tolerance = 2;
         public static final double kL2Position = 8.5;
 
+        public static final double kCoralStationStowPosition = 30;
+
     }
 
     /**
@@ -105,6 +107,10 @@ public class Calibrations {
         public static final double kL4Position = 120;
         public static final double kL3Position = 110;
         public static final double kL2Position = 110;
+
+        public static final double kCoralStationStowPosition = 287;
+        public static final double kCoralStationStowTolerance = 5;
+        
     }
 
     /**
