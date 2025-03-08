@@ -55,7 +55,7 @@ public class Calibrations {
         public static final double kPendulumPosition = 28;
 
         public static final double kCoralStationTolerance = 2;
-        public static final double kCoralStationPosition = 37;
+        public static final double kCoralStationPosition = 34.5;
 
 
     }
@@ -93,7 +93,7 @@ public class Calibrations {
 
         public static final double kPendulumPosition = 270;
         
-        public static final double kCoralStationPosition = 290;
+        public static final double kCoralStationPosition = 287;
     }
 
     /**
