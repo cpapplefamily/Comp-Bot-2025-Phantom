@@ -64,7 +64,7 @@ public class Calibrations {
         public static final double kL3Position = 24;
 
         public static final double kL2Tolerance = 2;
-        public static final double kL2Position = 9.5;
+        public static final double kL2Position = 8.5;
 
     }
 
