@@ -8,11 +8,11 @@ import com.ctre.phoenix6.swerve.SwerveModule.DriveRequestType;
 import com.ctre.phoenix6.swerve.SwerveRequest;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.commands.CoralStation;
 import frc.robot.commands.LollipopStow;
 import frc.robot.commands.PendulumStow;
+import frc.robot.commands.RunIntake;
 import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
 import frc.robot.subsystems.ElevatorSubsystem;
@@ -66,7 +66,8 @@ public class RobotContainer {
         m_joystick.x().onTrue(new PendulumStow(m_elevator, m_windmill));
     
         m_joystick.rightBumper().onTrue(new CoralStation(m_elevator, m_windmill));
-        m_joystick.rightBumper().whileTrue(new InstantCommand(() -> m_manipulator.updateSetpoint(1.0), m_manipulator));
+        m_joystick.rightBumper().whileTrue(new RunIntake(m_manipulator));
+        m_joystick.rightBumper().onFalse(new LollipopStow(m_elevator, m_windmill));
 
     }
 

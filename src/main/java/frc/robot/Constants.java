@@ -37,6 +37,6 @@ public final class Constants {
      * Manipulator Constants.
      */
     public static class ManipulatorConstants {
-        public static final int kmotorCanId = 40;
+        public static final int kmotorCanId = 13;
     }
 }
