@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Calibrations.ManipulatorCalibrations;
+import frc.robot.commands.AlignToTag;
 import frc.robot.commands.CGOuttakeThenStow;
 import frc.robot.commands.CoralStation;
 import frc.robot.commands.L2;
@@ -90,6 +91,10 @@ public class RobotContainer {
         m_joystick.povRight().onFalse(new CGOuttakeThenStow(ManipulatorCalibrations.kL2OuttakeSpeed,
                                                            ManipulatorCalibrations.kL2OuttakeTime,
                                                            m_elevator, m_windmill, m_manipulator));
+
+        m_joystick.axisGreaterThan(3, 0.1).whileTrue(new AlignToTag(() -> m_joystick.getLeftX(), 
+                                                                                   () -> m_joystick.getLeftY(), 
+                                                                                   m_drivetrain));
 
     }
 

@@ -2,7 +2,9 @@ package frc.robot;
 
 import static edu.wpi.first.units.Units.MetersPerSecond;
 import static edu.wpi.first.units.Units.RadiansPerSecond;
+import static edu.wpi.first.units.Units.RadiansPerSecondPerSecond;
 import static edu.wpi.first.units.Units.RotationsPerSecond;
+import static edu.wpi.first.units.Units.Second;
 
 import frc.robot.generated.TunerConstants;
 
@@ -20,6 +22,16 @@ public class Calibrations {
         public static final double kmaxSpeed = TunerConstants.kSpeedAt12Volts.in(MetersPerSecond);
         // 3/4 of a rotation per second max angular velocity
         public static final double kmaxAngularRate = RotationsPerSecond.of(0.75).in(RadiansPerSecond);
+
+        public static final double kMaxAngularAcceleration = RotationsPerSecond.per(Second).of(0.75)
+                                                                               .in(RadiansPerSecondPerSecond);
+
+        public static final double kAprilTagAlignmentKP = 1;
+        public static final double kAprilTagAlignmentKI = 0;
+        public static final double kAprilTagAlignmentKD = 0;
+
+        public static final double kLimelightDefaultKX = 0;
+        
     }
 
     /**
