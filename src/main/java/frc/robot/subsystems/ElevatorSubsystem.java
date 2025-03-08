@@ -139,6 +139,15 @@ public class ElevatorSubsystem extends SubsystemBase {
         return m_motor1.getPosition().getValueAsDouble() / ElevatorConstants.kPulleyGearRatio;
     }
 
+    /**
+     * Return elevator setpoint in inches.
+     *
+     * @return setpoint as a number in inches
+     */
+    public double getSetpoint() {
+        return m_request.Position / ElevatorConstants.kPulleyGearRatio;
+    }
+
     @Override
     public void periodic() {
 

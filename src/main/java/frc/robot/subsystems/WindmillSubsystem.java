@@ -121,6 +121,10 @@ public class WindmillSubsystem extends SubsystemBase {
         return Math.abs(getPosition() - getSetpoint()) < WindmillCalibrations.kWindmillTolerance;
     }
 
+    public boolean isWithinTolerance(double tolerance) {
+        return Math.abs(getPosition() - getSetpoint()) < tolerance;
+    }
+
     @Override
     public void periodic() {
 

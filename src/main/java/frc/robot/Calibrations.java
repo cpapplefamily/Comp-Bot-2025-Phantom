@@ -49,6 +49,7 @@ public class Calibrations {
         // Swith limits
         public static final double kForwardSoftLimitThreshold = 88;
 
+        public static final double kBottomPosition = -0.2;
     }
 
     /**
@@ -78,6 +79,9 @@ public class Calibrations {
 
         // The windmill will report that it is at it's setpoint if it is within this amount of degrees.
         public static final double kWindmillTolerance = 5;
+
+        public static final double kLollipopTolerance = 30;
+        public static final double kLollipopPosition = 90;
     }
 
     /**
@@ -96,5 +100,4 @@ public class Calibrations {
         public static final double kMaxStatorCurrent = 100;
         public static final double kCurrentThreshold = 10;
     }
-
 }
