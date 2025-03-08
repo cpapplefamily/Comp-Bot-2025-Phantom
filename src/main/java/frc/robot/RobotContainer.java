@@ -85,9 +85,9 @@ public class RobotContainer {
                                                            ManipulatorCalibrations.kL3OuttakeTime,
                                                            m_elevator, m_windmill, m_manipulator));
 
-        /* Coral reef L3 dropoff sequence */
-        m_joystick.povLeft().onTrue(new L2(m_elevator, m_windmill));
-        m_joystick.povLeft().onFalse(new CGOuttakeThenStow(ManipulatorCalibrations.kL2OuttakeSpeed,
+        /* Coral reef L2 dropoff sequence */
+        m_joystick.povRight().onTrue(new L2(m_elevator, m_windmill));
+        m_joystick.povRight().onFalse(new CGOuttakeThenStow(ManipulatorCalibrations.kL2OuttakeSpeed,
                                                            ManipulatorCalibrations.kL2OuttakeTime,
                                                            m_elevator, m_windmill, m_manipulator));
 
