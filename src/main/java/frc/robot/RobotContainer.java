@@ -6,7 +6,6 @@ package frc.robot;
 
 import com.ctre.phoenix6.swerve.SwerveModule.DriveRequestType;
 import com.ctre.phoenix6.swerve.SwerveRequest;
-
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
@@ -43,10 +42,9 @@ public class RobotContainer {
     public final ElevatorSubsystem m_elevator = new ElevatorSubsystem();
     public final WindmillSubsystem m_windmill = new WindmillSubsystem();
     public final ManipulatorSubsystem m_manipulator = new ManipulatorSubsystem();
-    private final LEDSubsystem m_leds = new LEDSubsystem();
+    public final LEDSubsystem m_leds = new LEDSubsystem();
     private final CommandXboxController m_joystick = new CommandXboxController(0);
 
-    /** TODO: Look into using DriveRequestType.Velocity */
     private final SwerveRequest.FieldCentric m_drive = new SwerveRequest.FieldCentric()
             .withDeadband(Calibrations.DriverCalibrations.kmaxSpeed * 0.1)
             .withRotationalDeadband(Calibrations.DriverCalibrations.kmaxAngularRate * 0.1)
@@ -129,7 +127,9 @@ public class RobotContainer {
 
         m_joystick.a().onTrue(new RunManipulator(m_manipulator, ManipulatorCalibrations.kAlgaeHoldingVelocity));
 
-        m_joystick.back().onTrue(new BargeAlgae(m_elevator, m_windmill)).onFalse(new RunManipulator(m_manipulator, ManipulatorCalibrations.kAlgaeBargingVelocity).withTimeout(1));
+        m_joystick.back().onTrue(new BargeAlgae(m_elevator, m_windmill))
+                         .onFalse(new RunManipulator(m_manipulator, ManipulatorCalibrations.kAlgaeBargingVelocity)
+                         .withTimeout(1));
 
     }
 

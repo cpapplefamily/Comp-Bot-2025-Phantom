@@ -37,7 +37,6 @@ public class WindmillSubsystem extends SubsystemBase {
         m_talonFxConfig = new TalonFXConfiguration();
         m_canCoderConfig = new CANcoderConfiguration();
 
-        /* TODO: Should a starting (or last known) position be loaded here?? */
         m_request = new DynamicMotionMagicTorqueCurrentFOC(
             0, 
             WindmillCalibrations.kMaxSpeedMotionMagic, 

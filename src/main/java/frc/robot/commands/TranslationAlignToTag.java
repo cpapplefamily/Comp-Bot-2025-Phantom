@@ -8,7 +8,6 @@ import com.ctre.phoenix6.swerve.SwerveRequest.RobotCentric;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Calibrations.DriverCalibrations;
-import frc.robot.LimelightHelpers;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
 
 
@@ -36,7 +35,7 @@ public class TranslationAlignToTag extends Command {
 
     @Override
     public void initialize() {
-        LimelightHelpers.setPipelineIndex("limelight-one", m_pipeline);
+        NetworkTableInstance.getDefault().getTable("limelight-one").getEntry("pipeline").setDouble(m_pipeline);
     }
 
     @Override
@@ -56,11 +55,6 @@ public class TranslationAlignToTag extends Command {
             .withRotationalRate(0)
         );
 
-        System.out.println("Y Velocity " + (DriverCalibrations.kAprilTagTranslationYRate 
-            / NetworkTableInstance.getDefault()
-            .getTable("limelight-one")
-            .getEntry("ta")
-            .getDouble(DriverCalibrations.kLimelightDefaultKA)));
     }
 
     @Override

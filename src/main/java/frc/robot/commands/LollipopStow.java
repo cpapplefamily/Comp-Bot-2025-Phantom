@@ -7,6 +7,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Calibrations.ElevatorCalibrations;
 import frc.robot.Calibrations.WindmillCalibrations;
+import frc.robot.Utils;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.WindmillSubsystem;
 
@@ -54,9 +55,8 @@ public class LollipopStow extends Command {
 
     @Override
     public boolean isFinished() {
-        return m_windmill.getSetpoint() == WindmillCalibrations.kLollipopPosition 
-            && m_elevator.getSetpoint() == ElevatorCalibrations.kBottomPosition;
-        // TODO: Fix Errors of innacurate math results with rounding
+        return Utils.isDoubleEqual(m_windmill.getSetpoint(), WindmillCalibrations.kLollipopPosition, 0.01)
+               && Utils.isDoubleEqual(m_elevator.getSetpoint(), ElevatorCalibrations.kBottomPosition, 0.01);
     }
 
 }

@@ -7,6 +7,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Calibrations.ElevatorCalibrations;
 import frc.robot.Calibrations.WindmillCalibrations;
+import frc.robot.Utils;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.WindmillSubsystem;
 
@@ -30,7 +31,6 @@ public class PendulumStow extends Command {
     @Override
     public void initialize() {
         m_elevator.updateSetpoint(ElevatorCalibrations.kPendulumPosition, false);
-        // TODO: Add direcionality here
         if (m_elevator.isWithinTolerance(ElevatorCalibrations.kPendulumTolerance)) {
             m_windmill.updateSetpoint(WindmillCalibrations.kPendulumPosition, false);
         }
@@ -45,7 +45,7 @@ public class PendulumStow extends Command {
 
     @Override
     public boolean isFinished() {
-        return m_elevator.getSetpoint() == ElevatorCalibrations.kPendulumPosition 
-            && m_windmill.getSetpoint() == WindmillCalibrations.kPendulumPosition;
+        return Utils.isDoubleEqual(m_windmill.getSetpoint(), WindmillCalibrations.kPendulumPosition, 0.01)
+               && Utils.isDoubleEqual(m_elevator.getSetpoint(), ElevatorCalibrations.kPendulumPosition, 0.01);
     }
 }

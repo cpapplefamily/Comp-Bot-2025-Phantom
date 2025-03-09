@@ -7,6 +7,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Calibrations.ElevatorCalibrations;
 import frc.robot.Calibrations.WindmillCalibrations;
+import frc.robot.Utils;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.WindmillSubsystem;
 
@@ -44,8 +45,8 @@ public class CoralStationStow extends Command {
 
     @Override
     public boolean isFinished() {
-        return m_elevator.getSetpoint() == ElevatorCalibrations.kCoralStationStowPosition 
-            && m_windmill.getSetpoint() == WindmillCalibrations.kCoralStationStowPosition;
+        return Utils.isDoubleEqual(m_windmill.getSetpoint(), WindmillCalibrations.kCoralStationStowPosition, 0.01)
+               && Utils.isDoubleEqual(m_elevator.getSetpoint(), ElevatorCalibrations.kCoralStationStowPosition, 0.01);
     }
 
 }

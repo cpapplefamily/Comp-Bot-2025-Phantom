@@ -55,7 +55,6 @@ public class ElevatorSubsystem extends SubsystemBase {
         m_talonFxConfig = new TalonFXConfiguration();
         m_candiConfig = new CANdiConfiguration();
 
-        /* TODO: Should a starting (or last known) position be loaded here?? */
         m_request = new DynamicMotionMagicTorqueCurrentFOC(
             0, 
             ElevatorCalibrations.kMaxSpeedMotionMagic, 
@@ -65,7 +64,6 @@ public class ElevatorSubsystem extends SubsystemBase {
         /* Configure the motors */
         m_talonFxConfig.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
         m_talonFxConfig.Slot0.GravityType = GravityTypeValue.Elevator_Static;
-        // TODO: Should the Slot1 config also be Elevator_Static??
  
         m_talonFxConfig.Slot0.kG = ElevatorCalibrations.kG;
         m_talonFxConfig.Slot0.kS = ElevatorCalibrations.kS;

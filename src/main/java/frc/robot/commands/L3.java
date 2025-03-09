@@ -7,6 +7,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Calibrations.ElevatorCalibrations;
 import frc.robot.Calibrations.WindmillCalibrations;
+import frc.robot.Utils;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.WindmillSubsystem;
 
@@ -30,7 +31,6 @@ public class L3 extends Command {
     @Override
     public void initialize() {
         m_elevator.updateSetpoint(ElevatorCalibrations.kL3Position, false);
-        // TODO: Add direcionality here
         if (m_elevator.isWithinTolerance(ElevatorCalibrations.kL3Tolerance)) {
             m_windmill.updateSetpoint(WindmillCalibrations.kL3Position, false);
         }
@@ -45,8 +45,8 @@ public class L3 extends Command {
 
     @Override
     public boolean isFinished() {
-        return m_elevator.getSetpoint() == ElevatorCalibrations.kL3Position 
-            && m_windmill.getSetpoint() == WindmillCalibrations.kL3Position;
+        return Utils.isDoubleEqual(m_windmill.getSetpoint(), WindmillCalibrations.kL3Position, 0.01)
+               && Utils.isDoubleEqual(m_elevator.getSetpoint(), ElevatorCalibrations.kL3Position, 0.01);
     }
 
 }
