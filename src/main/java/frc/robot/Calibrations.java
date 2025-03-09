@@ -83,6 +83,13 @@ public class Calibrations {
     }
 
     /**
+     * Elevator lock calibrations.
+     */
+    public static class ElevatorLockCalibrations {
+        public static final int kservoLockAngle = 110;
+    }
+
+    /**
      * Windmill calibrations.
      */
     public static class WindmillCalibrations {

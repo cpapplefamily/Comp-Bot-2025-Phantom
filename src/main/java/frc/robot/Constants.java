@@ -21,7 +21,16 @@ public final class Constants {
         public static final int kmotor4CanId = 15;
         public static final int kcandiCanId = 55;
         public static final double kPulleyGearRatio = 1.6925;
+        public static final int kservoPort = 0;
     }
+
+    /**
+     * Elevator lock constants.
+     */
+    public static class ElevatorLockConstants {
+        public static final int kservoPort = 0;
+    }
+
 
     /**
      * Windmill constants.
