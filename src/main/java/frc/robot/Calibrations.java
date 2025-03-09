@@ -61,7 +61,7 @@ public class Calibrations {
         // Swith limits
         public static final double kForwardSoftLimitThreshold = 88;
 
-        public static final double kDefaultTolerance = 2;
+        public static final double kDefaultTolerance = 5;
 
         public static final double kBottomPosition = -0.2;
 
@@ -82,7 +82,8 @@ public class Calibrations {
 
         public static final double kCoralStationStowPosition = 30;
 
-        public static final int kservoLockAngle = 110;
+        public static final int kservoLockAngle = 100;
+        public static final int kservoUnlockAngle = 30;
 
         public static final double kClimbPosition = 4;
 
@@ -114,7 +115,7 @@ public class Calibrations {
         public static final double kClimbMaxSpeedMotionMagic = 0.25;
 
         // The windmill will report that it is at it's setpoint if it is within this amount of degrees.
-        public static final double kWindmillTolerance = 5;
+        public static final double kWindmillTolerance = 10;
 
         public static final double kLollipopTolerance = 30;
         public static final double kLollipopPosition = 90;

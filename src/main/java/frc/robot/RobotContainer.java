@@ -6,10 +6,13 @@ package frc.robot;
 
 import com.ctre.phoenix6.swerve.SwerveModule.DriveRequestType;
 import com.ctre.phoenix6.swerve.SwerveRequest;
+
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import frc.robot.Calibrations.ElevatorCalibrations;
 import frc.robot.Calibrations.ManipulatorCalibrations;
 import frc.robot.commands.CGClimb;
 import frc.robot.commands.CGOuttakeThenStow;
@@ -49,6 +52,12 @@ public class RobotContainer {
      * The robot container constructor.
      */
     public RobotContainer() {
+        SmartDashboard.putData("Unlock", new InstantCommand(
+            () -> m_elevator.setAngle(ElevatorCalibrations.kservoUnlockAngle)));
+
+        SmartDashboard.putData("Lock", new InstantCommand(
+            () -> m_elevator.setAngle(ElevatorCalibrations.kservoLockAngle))); 
+
         configureBindings();
     }
 
