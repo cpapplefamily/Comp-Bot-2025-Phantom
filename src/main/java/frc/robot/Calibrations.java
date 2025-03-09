@@ -30,7 +30,8 @@ public class Calibrations {
         public static final double kLimelightDefaultKX = 0;
 
         public static final double kAprilTagTranslationAlignmentKP = 0.07;
-        public static final double kAprilTagTranslationYRate = -0.01;
+        public static final double kAprilTagTranslationYRate = -0.8;
+        public static final double kLimelightDefaultKA = 4.0;
         
     }
 

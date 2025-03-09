@@ -60,7 +60,7 @@ public class TranslationAlignToTag extends Command {
             / NetworkTableInstance.getDefault()
             .getTable("limelight-one")
             .getEntry("ta")
-            .getDouble(m_pipeline)));
+            .getDouble(DriverCalibrations.kLimelightDefaultKA)));
     }
 
     @Override
