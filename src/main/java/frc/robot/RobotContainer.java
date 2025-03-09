@@ -30,6 +30,7 @@ import frc.robot.commands.TranslationAlignToTag;
 import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
 import frc.robot.subsystems.ElevatorSubsystem;
+import frc.robot.subsystems.LEDSubsystem;
 import frc.robot.subsystems.ManipulatorSubsystem;
 import frc.robot.subsystems.WindmillSubsystem;
 
@@ -42,6 +43,7 @@ public class RobotContainer {
     public final ElevatorSubsystem m_elevator = new ElevatorSubsystem();
     public final WindmillSubsystem m_windmill = new WindmillSubsystem();
     public final ManipulatorSubsystem m_manipulator = new ManipulatorSubsystem();
+    private final LEDSubsystem m_leds = new LEDSubsystem();
     private final CommandXboxController m_joystick = new CommandXboxController(0);
 
     /** TODO: Look into using DriveRequestType.Velocity */
