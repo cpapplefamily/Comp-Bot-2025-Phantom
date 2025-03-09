@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Calibrations.ElevatorCalibrations;
 import frc.robot.Calibrations.ManipulatorCalibrations;
+import frc.robot.commands.BargeAlgae;
 import frc.robot.commands.CGClimb;
 import frc.robot.commands.CGOuttakeThenStow;
 import frc.robot.commands.CoralStation;
@@ -24,6 +25,7 @@ import frc.robot.commands.LollipopStow;
 import frc.robot.commands.PendulumStow;
 import frc.robot.commands.PrepClimb;
 import frc.robot.commands.RunIntake;
+import frc.robot.commands.RunManipulator;
 import frc.robot.commands.TranslationAlignToTag;
 import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
@@ -122,6 +124,10 @@ public class RobotContainer {
                                                                                    m_drivetrain));
 
         m_joystick.y().onTrue(new PrepClimb(m_elevator, m_windmill)).onFalse(new CGClimb(m_windmill, m_elevator));
+
+        m_joystick.a().onTrue(new RunManipulator(m_manipulator, ManipulatorCalibrations.kAlgaeHoldingVelocity));
+
+        m_joystick.back().onTrue(new BargeAlgae(m_elevator, m_windmill)).onFalse(new RunManipulator(m_manipulator, ManipulatorCalibrations.kAlgaeBargingVelocity).withTimeout(1));
 
     }
 

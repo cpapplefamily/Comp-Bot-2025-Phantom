@@ -26,7 +26,7 @@ public class CGOuttakeThenStow extends SequentialCommandGroup {
     public CGOuttakeThenStow(double outtakeSpeed, double outtakeTime, 
                             ElevatorSubsystem elevator, WindmillSubsystem windmill, ManipulatorSubsystem manipulator) {
         super(
-            new RunOuttake(manipulator, outtakeSpeed).withTimeout(outtakeTime),
+            new RunManipulator(manipulator, outtakeSpeed).withTimeout(outtakeTime),
             new LollipopStow(elevator, windmill)
         //new CoralStationStow(elevator, windmill)
         );

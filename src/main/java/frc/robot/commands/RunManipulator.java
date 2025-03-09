@@ -10,7 +10,7 @@ import frc.robot.subsystems.ManipulatorSubsystem;
 /**
  * RunOutake.
  */
-public class RunOuttake extends Command {
+public class RunManipulator extends Command {
 
     private ManipulatorSubsystem m_manipulator;
     private double m_outtakeSpeed;
@@ -18,7 +18,7 @@ public class RunOuttake extends Command {
     /**
      * RunIntake command constructor.
      */
-    public RunOuttake(ManipulatorSubsystem manipulator, double outtakeSpeed) {
+    public RunManipulator(ManipulatorSubsystem manipulator, double outtakeSpeed) {
         m_manipulator = manipulator;
         m_outtakeSpeed = outtakeSpeed;
         addRequirements(m_manipulator);

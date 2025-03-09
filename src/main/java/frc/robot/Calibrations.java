@@ -88,6 +88,8 @@ public class Calibrations {
 
         public static final double kClimbPosition = 4;
 
+        public static final double kBargePosition = 53.5;
+
     }
 
     /**
@@ -133,6 +135,9 @@ public class Calibrations {
 
         public static final double kClimbPosition = 120;
         public static final double kClimbTolerance = 5;
+
+        public static final double kBargePosition = 90;
+        public static final double kBargeTolerance = 10;
         
     }
 
@@ -147,7 +152,7 @@ public class Calibrations {
         public static final double kP = 5;
         public static final double kD = 0;
 
-        public static final double kMaxAcceleration = 140;
+        public static final double kMaxAcceleration = 1000;
         public static final double kMaxSpeed = 100;
         public static final double kMaxStatorCurrent = 40;
         public static final double kCurrentThreshold = 15;
@@ -160,6 +165,9 @@ public class Calibrations {
 
         public static final double kL2OuttakeSpeed = -30;
         public static final double kL2OuttakeTime = 0.25;
+
+        public static final double kAlgaeHoldingVelocity = -5;
+        public static final double kAlgaeBargingVelocity = 100;
 
     }
 }
