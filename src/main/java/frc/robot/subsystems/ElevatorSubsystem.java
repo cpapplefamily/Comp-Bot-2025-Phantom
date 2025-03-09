@@ -18,9 +18,11 @@ import com.ctre.phoenix6.signals.S1CloseStateValue;
 import com.ctre.phoenix6.signals.S1FloatStateValue;
 import com.ctre.phoenix6.signals.S2CloseStateValue;
 import com.ctre.phoenix6.signals.S2FloatStateValue;
+import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Calibrations.ElevatorCalibrations;
 import frc.robot.Constants.ElevatorConstants;
+
 
 
 /**
@@ -33,6 +35,7 @@ public class ElevatorSubsystem extends SubsystemBase {
     private final TalonFX m_motor3;
     private final TalonFX m_motor4; 
     private final CANdi m_candi;
+    private final Servo m_lockServo;
     private TalonFXConfiguration m_talonFxConfig;
     private CANdiConfiguration m_candiConfig;
     private final DynamicMotionMagicTorqueCurrentFOC m_request;
@@ -48,6 +51,7 @@ public class ElevatorSubsystem extends SubsystemBase {
         m_motor3 = new TalonFX(ElevatorConstants.kmotor3CanId, "kachow");
         m_motor4 = new TalonFX(ElevatorConstants.kmotor4CanId, "kachow");
         m_candi = new CANdi(ElevatorConstants.kcandiCanId, "kachow");
+        m_lockServo = new Servo(ElevatorConstants.kservoPort);
         m_talonFxConfig = new TalonFXConfiguration();
         m_candiConfig = new CANdiConfiguration();
 
@@ -149,8 +153,41 @@ public class ElevatorSubsystem extends SubsystemBase {
         return m_request.Position / ElevatorConstants.kPulleyGearRatio;
     }
 
+    public boolean getCANdiState() {
+        return m_candi.getS2Closed().getValue();
+    }
+
+    public boolean atTarget() {
+        return Math.abs(getPosition() - getSetpoint()) < ElevatorCalibrations.kDefaultTolerance;
+    }
+
     public boolean isWithinTolerance(double tolerance) {
         return Math.abs(getPosition() - getSetpoint()) < tolerance;
+    }
+
+    /**
+     * Disable lock servo.
+     */
+    public void disableServo() {
+        m_lockServo.setDisabled();
+    }
+  
+    /**
+     * Set the lock servo angle.
+     *
+     * @param angle servo angle in degrees
+     */
+    public void setAngle(double angle) {
+        m_lockServo.setAngle(angle);
+    }
+  
+    /**
+     * Return the lock servo postion.
+     *
+     * @return servo position in degrees
+     */
+    public double getServoPos() {
+        return m_lockServo.getAngle();
     }
 
     @Override

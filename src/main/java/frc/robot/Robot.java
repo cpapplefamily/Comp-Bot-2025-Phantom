@@ -27,7 +27,7 @@ public class Robot extends TimedRobot {
 
     @Override
     public void disabledInit() {
-        m_robotContainer.m_elevatorLock.disableServo();
+        m_robotContainer.m_elevator.disableServo();
     }
 
     @Override

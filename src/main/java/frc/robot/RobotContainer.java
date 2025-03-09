@@ -10,8 +10,8 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
-import frc.robot.Calibrations.ElevatorLockCalibrations;
 import frc.robot.Calibrations.ManipulatorCalibrations;
+import frc.robot.commands.CGClimb;
 import frc.robot.commands.CGOuttakeThenStow;
 import frc.robot.commands.CoralStation;
 import frc.robot.commands.L2;
@@ -19,11 +19,11 @@ import frc.robot.commands.L3;
 import frc.robot.commands.L4;
 import frc.robot.commands.LollipopStow;
 import frc.robot.commands.PendulumStow;
+import frc.robot.commands.PrepClimb;
 import frc.robot.commands.RunIntake;
 import frc.robot.commands.TranslationAlignToTag;
 import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
-import frc.robot.subsystems.ElevatorLockSubsystem;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.ManipulatorSubsystem;
 import frc.robot.subsystems.WindmillSubsystem;
@@ -35,7 +35,6 @@ public class RobotContainer {
 
     public final CommandSwerveDrivetrain m_drivetrain = TunerConstants.createDrivetrain();
     public final ElevatorSubsystem m_elevator = new ElevatorSubsystem();
-    public final ElevatorLockSubsystem m_elevatorLock = new ElevatorLockSubsystem();
     public final WindmillSubsystem m_windmill = new WindmillSubsystem();
     public final ManipulatorSubsystem m_manipulator = new ManipulatorSubsystem();
     private final CommandXboxController m_joystick = new CommandXboxController(0);
@@ -113,8 +112,7 @@ public class RobotContainer {
         m_joystick.axisGreaterThan(3, 0.1).whileTrue(new TranslationAlignToTag(0,
                                                                                    m_drivetrain));
 
-        m_joystick.y().onTrue(new InstantCommand(() -> m_elevatorLock.setAngle(ElevatorLockCalibrations.kservoLockAngle)));
-
+        m_joystick.y().onTrue(new PrepClimb(m_elevator, m_windmill)).onFalse(new CGClimb(m_windmill, m_elevator));
 
     }
 

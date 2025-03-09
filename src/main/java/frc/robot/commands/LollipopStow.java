@@ -56,6 +56,7 @@ public class LollipopStow extends Command {
     public boolean isFinished() {
         return m_windmill.getSetpoint() == WindmillCalibrations.kLollipopPosition 
             && m_elevator.getSetpoint() == ElevatorCalibrations.kBottomPosition;
+        // TODO: Fix Errors of innacurate math results with rounding
     }
 
 }

@@ -61,6 +61,8 @@ public class Calibrations {
         // Swith limits
         public static final double kForwardSoftLimitThreshold = 88;
 
+        public static final double kDefaultTolerance = 2;
+
         public static final double kBottomPosition = -0.2;
 
         public static final double kPendulumTolerance = 2;
@@ -80,13 +82,10 @@ public class Calibrations {
 
         public static final double kCoralStationStowPosition = 30;
 
-    }
-
-    /**
-     * Elevator lock calibrations.
-     */
-    public static class ElevatorLockCalibrations {
         public static final int kservoLockAngle = 110;
+
+        public static final double kClimbPosition = 4;
+
     }
 
     /**
@@ -129,6 +128,9 @@ public class Calibrations {
 
         public static final double kCoralStationStowPosition = 287;
         public static final double kCoralStationStowTolerance = 5;
+
+        public static final double kClimbPosition = 120;
+        public static final double kClimbTolerance = 5;
         
     }
 

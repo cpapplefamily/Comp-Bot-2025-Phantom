@@ -25,14 +25,6 @@ public final class Constants {
     }
 
     /**
-     * Elevator lock constants.
-     */
-    public static class ElevatorLockConstants {
-        public static final int kservoPort = 0;
-    }
-
-
-    /**
      * Windmill constants.
      */
     public static class WindmillConstants {

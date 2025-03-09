@@ -113,7 +113,7 @@ public class WindmillSubsystem extends SubsystemBase {
     }
 
     /**
-     * Return if the windmill has reached target position.
+     * Return if the windmill has reached target position within a default tolerance.
      *
      * @return true is at target within tolerance
      */
