@@ -7,6 +7,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Calibrations.ElevatorCalibrations;
 import frc.robot.subsystems.ElevatorSubsystem;
+import frc.robot.subsystems.LEDSubsystem;
 
 public class LockElevatorWhenDown extends Command {
     private ElevatorSubsystem m_elevator;
@@ -28,6 +29,7 @@ public class LockElevatorWhenDown extends Command {
     @Override
     public void end(boolean interrupted) {
         m_elevator.setAngle(ElevatorCalibrations.kservoLockAngle);
+        LEDSubsystem.setClimb();
     }
 
     // Returns true when the command should end.
