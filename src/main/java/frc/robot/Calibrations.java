@@ -26,8 +26,11 @@ public class Calibrations {
         public static final double kMaxAngularAcceleration = RotationsPerSecond.per(Second).of(0.75)
                                                                                .in(RadiansPerSecondPerSecond);
 
-        public static final double kAprilTagAlignmentKP = 0.05;
+        public static final double kAprilTagRotationAlignmentKP = 0.05;
         public static final double kLimelightDefaultKX = 0;
+
+        public static final double kAprilTagTranslationAlignmentKP = 0.07;
+        public static final double kAprilTagTranslationYRate = -0.01;
         
     }
 

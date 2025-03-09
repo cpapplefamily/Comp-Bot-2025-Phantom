@@ -4,40 +4,32 @@
 
 package frc.robot.commands;
 
-import com.ctre.phoenix6.swerve.SwerveRequest.FieldCentric;
+import com.ctre.phoenix6.swerve.SwerveRequest.RobotCentric;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.Calibrations;
 import frc.robot.Calibrations.DriverCalibrations;
 import frc.robot.LimelightHelpers;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
-import java.util.function.DoubleSupplier;
 
 
 /**
  * AlignToTag command.
  */
-public class AlignToTag extends Command {
+public class TranslationAlignToTag extends Command {
 
     private CommandSwerveDrivetrain m_drivetrain;
-    private DoubleSupplier m_driverX;
-    private DoubleSupplier m_driverY;
-    private double m_rotationSpeed;
+    private double m_xspeed;
     private int m_pipeline;
 
-    private FieldCentric m_swerveRequest = new FieldCentric().withDeadband(DriverCalibrations.kmaxSpeed * 0.1);
+    private RobotCentric m_swerveRequest = new RobotCentric().withRotationalDeadband(DriverCalibrations.kmaxSpeed * 0.1);
 
     /**
      * AlignToTag Constructor.
      *
-     * @param driverX The driver input for X translation as a value from [0, 1]
-     * @param driverY The driver input for Y translation as a value from [0, 1]
      * @param drivetrain The drivetrain
      */
-    public AlignToTag(int pipeline, DoubleSupplier driverY, DoubleSupplier driverX, CommandSwerveDrivetrain drivetrain) {
+    public TranslationAlignToTag(int pipeline, CommandSwerveDrivetrain drivetrain) {
         m_pipeline = pipeline;
-        m_driverY = driverY;
-        m_driverX = driverX;
         m_drivetrain = drivetrain;
         addRequirements(drivetrain);
     }
@@ -49,17 +41,26 @@ public class AlignToTag extends Command {
 
     @Override
     public void execute() {
-        m_rotationSpeed = NetworkTableInstance.getDefault().getTable("limelight-one").getEntry("tx")
+        m_xspeed = NetworkTableInstance.getDefault().getTable("limelight-one").getEntry("tx")
                                               .getDouble(DriverCalibrations.kLimelightDefaultKX)
-                                              * DriverCalibrations.kAprilTagAlignmentKP;
+                                              * DriverCalibrations.kAprilTagTranslationAlignmentKP;
         
 
         m_drivetrain.setControl(m_swerveRequest
-            .withVelocityX(-m_driverY.getAsDouble() * Calibrations.DriverCalibrations.kmaxSpeed)
-            .withVelocityY(-m_driverX.getAsDouble() * Calibrations.DriverCalibrations.kmaxSpeed)
-            .withRotationalRate(m_rotationSpeed)
+            .withVelocityX(m_xspeed)
+            .withVelocityY(DriverCalibrations.kAprilTagTranslationYRate 
+                           / NetworkTableInstance.getDefault()
+                           .getTable("limelight-one")
+                           .getEntry("ta")
+                           .getDouble(m_pipeline))
+            .withRotationalRate(0)
         );
 
+        System.out.println("Y Velocity " + (DriverCalibrations.kAprilTagTranslationYRate 
+            / NetworkTableInstance.getDefault()
+            .getTable("limelight-one")
+            .getEntry("ta")
+            .getDouble(m_pipeline)));
     }
 
     @Override

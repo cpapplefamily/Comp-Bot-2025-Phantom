@@ -9,9 +9,7 @@ import com.ctre.phoenix6.swerve.SwerveRequest;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
-import frc.robot.Calibrations.DriverCalibrations;
 import frc.robot.Calibrations.ManipulatorCalibrations;
-import frc.robot.commands.AlignToTag;
 import frc.robot.commands.CGOuttakeThenStow;
 import frc.robot.commands.CoralStation;
 import frc.robot.commands.L2;
@@ -20,6 +18,7 @@ import frc.robot.commands.L4;
 import frc.robot.commands.LollipopStow;
 import frc.robot.commands.PendulumStow;
 import frc.robot.commands.RunIntake;
+import frc.robot.commands.TranslationAlignToTag;
 import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
 import frc.robot.subsystems.ElevatorSubsystem;
@@ -92,15 +91,22 @@ public class RobotContainer {
         m_joystick.povRight().onFalse(new CGOuttakeThenStow(ManipulatorCalibrations.kL2OuttakeSpeed,
                                                            ManipulatorCalibrations.kL2OuttakeTime,
                                                            m_elevator, m_windmill, m_manipulator));
+        // /* Target the left coral reef stick */
+        // m_joystick.axisGreaterThan(2, 0.1).whileTrue(new RotationAlignToTag(1,
+        //                                                                            () -> m_joystick.getLeftY(), 
+        //                                                                            () -> m_joystick.getLeftX(), 
+        //                                                                            m_drivetrain));
+        // /* Target the right coral reef stick */
+        // m_joystick.axisGreaterThan(3, 0.1).whileTrue(new RotationAlignToTag(0,
+        //                                                                            () -> m_joystick.getLeftY(), 
+        //                                                                            () -> m_joystick.getLeftX(), 
+        //                                                                            m_drivetrain));
+
         /* Target the left coral reef stick */
-        m_joystick.axisGreaterThan(2, 0.1).whileTrue(new AlignToTag(1,
-                                                                                   () -> m_joystick.getLeftY(), 
-                                                                                   () -> m_joystick.getLeftX(), 
+        m_joystick.axisGreaterThan(2, 0.1).whileTrue(new TranslationAlignToTag(1, 
                                                                                    m_drivetrain));
         /* Target the right coral reef stick */
-        m_joystick.axisGreaterThan(3, 0.1).whileTrue(new AlignToTag(0,
-                                                                                   () -> m_joystick.getLeftY(), 
-                                                                                   () -> m_joystick.getLeftX(), 
+        m_joystick.axisGreaterThan(3, 0.1).whileTrue(new TranslationAlignToTag(0,
                                                                                    m_drivetrain));
 
     }
