@@ -41,8 +41,8 @@ public class TranslationAlignToTag extends Command {
     @Override
     public void execute() {
         m_xspeed = NetworkTableInstance.getDefault().getTable("limelight-one").getEntry("tx")
-                                              .getDouble(DriverCalibrations.kLimelightDefaultKX)
-                                              * DriverCalibrations.kAprilTagTranslationAlignmentKP;
+                                              .getDouble(DriverCalibrations.kLimelightDefaultKTx)
+                                              * DriverCalibrations.kAprilTagTranslationXAlignmentKP;
         
 
         m_drivetrain.setControl(m_swerveRequest

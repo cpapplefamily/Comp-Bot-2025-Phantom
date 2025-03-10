@@ -38,6 +38,7 @@ import frc.robot.subsystems.WindmillSubsystem;
  */
 public class RobotContainer {
 
+    /* Create the robot subsystems */
     public final CommandSwerveDrivetrain m_drivetrain = TunerConstants.createDrivetrain();
     public final ElevatorSubsystem m_elevator = new ElevatorSubsystem();
     public final WindmillSubsystem m_windmill = new WindmillSubsystem();
@@ -45,6 +46,7 @@ public class RobotContainer {
     public final LEDSubsystem m_leds = new LEDSubsystem();
     private final CommandXboxController m_joystick = new CommandXboxController(0);
 
+    /* Drive request for default drivetrain command */
     private final SwerveRequest.FieldCentric m_drive = new SwerveRequest.FieldCentric()
             .withDeadband(Calibrations.DriverCalibrations.kmaxSpeed * 0.1)
             .withRotationalDeadband(Calibrations.DriverCalibrations.kmaxAngularRate * 0.1)

@@ -52,7 +52,7 @@ public class RotationAlignToTag extends Command {
     @Override
     public void execute() {
         m_rotationSpeed = NetworkTableInstance.getDefault().getTable("limelight-one").getEntry("tx")
-                                              .getDouble(DriverCalibrations.kLimelightDefaultKX)
+                                              .getDouble(DriverCalibrations.kLimelightDefaultKTx)
                                               * DriverCalibrations.kAprilTagRotationAlignmentKP;
         
 
