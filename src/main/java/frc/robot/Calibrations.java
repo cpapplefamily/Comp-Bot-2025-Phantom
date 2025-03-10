@@ -116,6 +116,8 @@ public class Calibrations {
 
         public static final double kAlgaePickupPosition = 3;
 
+        public static final double kAlgaeL2Position = 13;
+
     }
 
     /**
@@ -188,6 +190,7 @@ public class Calibrations {
         /*  */
         public static final double kAlgaePickupPosition = 345;
         
+        public static final double kAlgaeL2Position = 26;
     }
 
     /**

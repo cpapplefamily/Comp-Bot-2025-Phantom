@@ -130,7 +130,7 @@ public class WindmillSubsystem extends SubsystemBase {
     public void periodic() {
 
         /* Debug vaues */
-        // SmartDashboard.putNumber("Windmill Position", getPosition());
+        SmartDashboard.putNumber("Windmill Position", getPosition());
     }
 
 }

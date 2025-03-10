@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Calibrations.ElevatorCalibrations;
 import frc.robot.Calibrations.ManipulatorCalibrations;
 import frc.robot.commands.AlgaeFloorPickup;
+import frc.robot.commands.AlgaeL2Pickup;
 import frc.robot.commands.BargeAlgae;
 import frc.robot.commands.CGClimb;
 import frc.robot.commands.CGOuttakeThenStow;
@@ -92,20 +93,20 @@ public class RobotContainer {
         m_joystick.rightBumper().onFalse(new LollipopStow(m_elevator, m_windmill));
 
         /* Coral reef L4 dropoff sequence */
-        m_joystick.povUp().onTrue(new L4(m_elevator, m_windmill));
-        m_joystick.povUp().onFalse(new CGOuttakeThenStow(ManipulatorCalibrations.kL4OuttakeSpeed, 
+        m_joystick.povUp().and(m_joystick.leftBumper().negate()).onTrue(new L4(m_elevator, m_windmill));
+        m_joystick.povUp().and(m_joystick.leftBumper().negate()).onFalse(new CGOuttakeThenStow(ManipulatorCalibrations.kL4OuttakeSpeed, 
                                                          ManipulatorCalibrations.kL4OuttakeTime, 
                                                          m_elevator, m_windmill, m_manipulator));
 
         /* Coral reef L3 dropoff sequence */
-        m_joystick.povLeft().onTrue(new L3(m_elevator, m_windmill));
-        m_joystick.povLeft().onFalse(new CGOuttakeThenStow(ManipulatorCalibrations.kL3OuttakeSpeed,
+        m_joystick.povLeft().and(m_joystick.leftBumper().negate()).onTrue(new L3(m_elevator, m_windmill));
+        m_joystick.povLeft().and(m_joystick.leftBumper().negate()).onFalse(new CGOuttakeThenStow(ManipulatorCalibrations.kL3OuttakeSpeed,
                                                            ManipulatorCalibrations.kL3OuttakeTime,
                                                            m_elevator, m_windmill, m_manipulator));
 
         /* Coral reef L2 dropoff sequence */
-        m_joystick.povRight().onTrue(new L2(m_elevator, m_windmill));
-        m_joystick.povRight().onFalse(new CGOuttakeThenStow(ManipulatorCalibrations.kL2OuttakeSpeed,
+        m_joystick.povRight().and(m_joystick.leftBumper().negate()).onTrue(new L2(m_elevator, m_windmill));
+        m_joystick.povRight().and(m_joystick.leftBumper().negate()).onFalse(new CGOuttakeThenStow(ManipulatorCalibrations.kL2OuttakeSpeed,
                                                            ManipulatorCalibrations.kL2OuttakeTime,
                                                            m_elevator, m_windmill, m_manipulator));
         // /* Target the left coral reef stick */
@@ -131,6 +132,8 @@ public class RobotContainer {
         //m_joystick.a().onTrue(new RunManipulator(m_manipulator, ManipulatorCalibrations.kAlgaeHoldingVelocity));
 
         m_joystick.a().onTrue(new AlgaeFloorPickup(m_elevator, m_windmill, m_manipulator));
+
+        m_joystick.povDown().and(m_joystick.leftBumper()).onTrue(new AlgaeL2Pickup(m_elevator, m_windmill, m_manipulator));
 
         m_joystick.back().onTrue(new BargeAlgae(m_elevator, m_windmill))
                          .onFalse(new RunManipulator(m_manipulator, ManipulatorCalibrations.kAlgaeBargingVelocity)

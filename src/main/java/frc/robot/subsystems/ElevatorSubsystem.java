@@ -193,7 +193,7 @@ public class ElevatorSubsystem extends SubsystemBase {
     public void periodic() {
 
         /* Debug values */
-        // SmartDashboard.putNumber("Elevator Position", getPosition());
+        SmartDashboard.putNumber("Elevator Position", getPosition());
         SmartDashboard.putBoolean("CANdi State", getCANdiState());
     }
  
