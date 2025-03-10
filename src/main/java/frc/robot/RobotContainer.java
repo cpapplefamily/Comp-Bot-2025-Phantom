@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Calibrations.ElevatorCalibrations;
 import frc.robot.Calibrations.ManipulatorCalibrations;
+import frc.robot.commands.AlgaeFloorPickup;
 import frc.robot.commands.BargeAlgae;
 import frc.robot.commands.CGClimb;
 import frc.robot.commands.CGOuttakeThenStow;
@@ -127,7 +128,9 @@ public class RobotContainer {
 
         m_joystick.y().onTrue(new PrepClimb(m_elevator, m_windmill)).onFalse(new CGClimb(m_windmill, m_elevator));
 
-        m_joystick.a().onTrue(new RunManipulator(m_manipulator, ManipulatorCalibrations.kAlgaeHoldingVelocity));
+        //m_joystick.a().onTrue(new RunManipulator(m_manipulator, ManipulatorCalibrations.kAlgaeHoldingVelocity));
+
+        m_joystick.a().onTrue(new AlgaeFloorPickup(m_elevator, m_windmill, m_manipulator));
 
         m_joystick.back().onTrue(new BargeAlgae(m_elevator, m_windmill))
                          .onFalse(new RunManipulator(m_manipulator, ManipulatorCalibrations.kAlgaeBargingVelocity)

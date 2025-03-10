@@ -19,6 +19,7 @@ import com.ctre.phoenix6.signals.S1FloatStateValue;
 import com.ctre.phoenix6.signals.S2CloseStateValue;
 import com.ctre.phoenix6.signals.S2FloatStateValue;
 import edu.wpi.first.wpilibj.Servo;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Calibrations.ElevatorCalibrations;
 import frc.robot.Constants.ElevatorConstants;
@@ -191,6 +192,9 @@ public class ElevatorSubsystem extends SubsystemBase {
     @Override
     public void periodic() {
 
+        /* Debug values */
+        // SmartDashboard.putNumber("Elevator Position", getPosition());
+        SmartDashboard.putBoolean("CANdi State", getCANdiState());
     }
  
 }

@@ -11,6 +11,8 @@ import com.ctre.phoenix6.signals.GravityTypeValue;
 import com.ctre.phoenix6.signals.InvertedValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.ctre.phoenix6.signals.SensorDirectionValue;
+
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Calibrations.WindmillCalibrations;
 import frc.robot.Constants.WindmillConstants;
@@ -127,6 +129,8 @@ public class WindmillSubsystem extends SubsystemBase {
     @Override
     public void periodic() {
 
+        /* Debug vaues */
+        // SmartDashboard.putNumber("Windmill Position", getPosition());
     }
 
 }
