@@ -16,7 +16,7 @@ public class RunIntake extends Command {
 
     private ManipulatorSubsystem m_manipulator;
     private LinearFilter m_filter = LinearFilter.movingAverage(10);
-    private double[] m_inputBuffer = {30.0, 30.0, 30.0, 30.0, 30.0, 30.0, 30.0, 30.0, 30.0, 30.0};
+    private double[] m_inputBuffer = {80.0, 80.0, 80.0, 80.0, 80.0, 80.0, 80.0, 80.0, 80.0, 80.0};
     private double[] m_outputBuffer = {};
     
     /**

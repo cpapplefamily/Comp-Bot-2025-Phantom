@@ -4,11 +4,9 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Calibrations.ElevatorCalibrations;
 import frc.robot.Calibrations.WindmillCalibrations;
-import frc.robot.Utils;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.WindmillSubsystem;
 
@@ -16,9 +14,6 @@ import frc.robot.subsystems.WindmillSubsystem;
  * L4 command.
  */
 public class L4 extends SequentialCommandGroup {
-  
-    private WindmillSubsystem m_windmill;
-    private ElevatorSubsystem m_elevator;
 
     /**
      * CoralStation command constructor.
