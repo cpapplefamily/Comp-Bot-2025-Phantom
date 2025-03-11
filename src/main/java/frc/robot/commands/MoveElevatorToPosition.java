@@ -14,14 +14,15 @@ public class MoveElevatorToPosition extends Command {
     private ElevatorSubsystem m_elevator;
 
     private double m_newSetpoint;
+    private double m_tolerance;
     private boolean m_isClimbing;
 
     /**
      * MoveWindmillToPosition command constructor.
      */
-    public MoveElevatorToPosition(double newSetpoint, boolean isClimbing, ElevatorSubsystem elevator) {
-        // TODO: Parameterize tolerance, and do the thing where certain parameters use the default if not passed in
+    public MoveElevatorToPosition(double newSetpoint, double tolerance, boolean isClimbing, ElevatorSubsystem elevator) {
         m_newSetpoint = newSetpoint;
+        m_tolerance = tolerance;
         m_isClimbing = isClimbing;
         m_elevator = elevator;
 
@@ -45,6 +46,6 @@ public class MoveElevatorToPosition extends Command {
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        return m_elevator.atTarget();
+        return m_elevator.isWithinTolerance(m_tolerance);
     }
 }

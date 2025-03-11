@@ -6,6 +6,8 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.Calibrations.ElevatorCalibrations;
+import frc.robot.Calibrations.WindmillCalibrations;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.WindmillSubsystem;
 
@@ -21,10 +23,13 @@ public class CGClimb extends SequentialCommandGroup {
      */
     public CGClimb(WindmillSubsystem windmill, ElevatorSubsystem elevator) {
         super(
-            new MoveElevatorToPosition(18, true, elevator),
-            new MoveWindmillToPosition(180, true, windmill),
+            new MoveElevatorToPosition(
+                ElevatorCalibrations.kClimbUpSetpoint, ElevatorCalibrations.kClimbUpTolerance, true, elevator),
+            new MoveWindmillToPosition(
+                WindmillCalibrations.kClimbPosition, WindmillCalibrations.kClimbTolerance, true, windmill),
             new ParallelRaceGroup(
-                new MoveElevatorToPosition(-5, true, elevator),
+                new MoveElevatorToPosition(
+                    ElevatorCalibrations.kClimbDownSetpoint, ElevatorCalibrations.kClimbDownTolerance, true, elevator),
                 new LockElevatorWhenDown(elevator)
             )            
         );

@@ -20,8 +20,8 @@ public class L4 extends SequentialCommandGroup {
      */
     public L4(ElevatorSubsystem elevator, WindmillSubsystem windmill) {
         super(
-            new MoveElevatorToPosition(ElevatorCalibrations.kL4Position, false, elevator),
-            new MoveWindmillToPosition(WindmillCalibrations.kL4Position, false, windmill)
+            new MoveElevatorToPosition(ElevatorCalibrations.kL4Position, ElevatorCalibrations.kL4Tolerance, false, elevator),
+            new MoveWindmillToPosition(WindmillCalibrations.kL4Position, ElevatorCalibrations.kL4Tolerance, false, windmill)
         );
     }
 

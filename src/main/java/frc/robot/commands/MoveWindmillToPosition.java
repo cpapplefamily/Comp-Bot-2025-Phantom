@@ -14,14 +14,16 @@ public class MoveWindmillToPosition extends Command {
     private WindmillSubsystem m_windmill;
 
     private double m_newSetpoint;
+    private double m_tolerance;
     private boolean m_isClimbing;
 
     /**
      * MoveWindmillToPosition command constructor.
      */
-    public MoveWindmillToPosition(double newSetpoint, boolean isClimbing, WindmillSubsystem windmill) {
+    public MoveWindmillToPosition(double newSetpoint, double tolerance, boolean isClimbing, WindmillSubsystem windmill) {
         // TODO: Parameterize tolerance, and do the thing where certain parameters use the default if not passed in
         m_newSetpoint = newSetpoint;
+        m_tolerance = tolerance;
         m_isClimbing = isClimbing;
         m_windmill = windmill;
 
@@ -45,6 +47,6 @@ public class MoveWindmillToPosition extends Command {
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        return m_windmill.atTarget();
+        return m_windmill.isWithinTolerance(m_tolerance);
     }
 }

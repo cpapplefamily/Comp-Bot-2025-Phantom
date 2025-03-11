@@ -119,7 +119,7 @@ public class WindmillSubsystem extends SubsystemBase {
      * @return true is at target within tolerance
      */
     public boolean atTarget() {
-        return Math.abs(getPosition() - getSetpoint()) < WindmillCalibrations.kWindmillTolerance;
+        return Math.abs(getPosition() - getSetpoint()) < WindmillCalibrations.kDefaultTolerance;
     }
 
     public boolean isWithinTolerance(double tolerance) {

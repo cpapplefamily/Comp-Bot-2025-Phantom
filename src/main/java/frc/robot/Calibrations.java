@@ -103,7 +103,7 @@ public class Calibrations {
         public static final double kCoralStationStowPosition = 30;
 
         /* Climb position in inches */
-        public static final double kClimbPosition = 4;
+        public static final double kPrepClimbPosition = 4;
 
         /* Barge position in inches */
         public static final double kBargePosition = 53.5;
@@ -117,6 +117,14 @@ public class Calibrations {
         public static final double kAlgaePickupPosition = 3;
 
         public static final double kAlgaeL2Position = 13;
+
+        public static final double kClimbUpSetpoint = 18;
+
+        public static final double kClimbUpTolerance = 2;
+
+        public static final double kClimbDownSetpoint = -5;
+
+        public static final double kClimbDownTolerance = 2;
 
     }
 
@@ -146,7 +154,7 @@ public class Calibrations {
         public static final double kClimbMaxSpeedMotionMagic = 0.25;
 
         /* atTarget() returns true if within this tolerance, in degrees */
-        public static final double kWindmillTolerance = 10;
+        public static final double kDefaultTolerance = 10;
 
         /* Lollipop position in degrees */
         public static final double kLollipopPosition = 90;
@@ -176,10 +184,10 @@ public class Calibrations {
         public static final double kCoralStationStowTolerance = 5;
 
         /* Climb position in degrees */
-        public static final double kClimbPosition = 120;
+        public static final double kPrepClimbPosition = 120;
 
         /* Climb tolerance in degrees before any elevator movement */
-        public static final double kClimbTolerance = 5;
+        public static final double kPrepClimbTolerance = 5;
 
         /* Barge position in degrees */
         public static final double kBargePosition = 90;
@@ -192,6 +200,10 @@ public class Calibrations {
         
         /* L2 pickup position for Algae */
         public static final double kAlgaeL2Position = 26;
+
+        public static final double kClimbPosition = 180;
+
+        public static final double kClimbTolerance = 5;
     }
 
     /**

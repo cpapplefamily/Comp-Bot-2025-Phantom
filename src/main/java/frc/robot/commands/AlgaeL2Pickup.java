@@ -21,8 +21,11 @@ public class AlgaeL2Pickup extends SequentialCommandGroup {
      */
     public AlgaeL2Pickup(ElevatorSubsystem elevator, WindmillSubsystem windmill, ManipulatorSubsystem manipulator) {
         super(
-            new MoveElevatorToPosition(ElevatorCalibrations.kAlgaeL2Position, false, elevator),
-            new MoveWindmillToPosition(WindmillCalibrations.kAlgaeL2Position, false, windmill),
+            // TODO: Add tolerances
+            new MoveElevatorToPosition(
+                ElevatorCalibrations.kAlgaeL2Position, ElevatorCalibrations.kDefaultTolerance, false, elevator),
+            new MoveWindmillToPosition(
+                WindmillCalibrations.kAlgaeL2Position, ElevatorCalibrations.kDefaultTolerance, false, windmill),
             new RunAlgaeIntake(manipulator)
         );
     }
