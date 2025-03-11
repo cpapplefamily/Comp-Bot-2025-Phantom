@@ -6,6 +6,10 @@ package frc.robot;
 
 import com.ctre.phoenix6.swerve.SwerveModule.DriveRequestType;
 import com.ctre.phoenix6.swerve.SwerveRequest;
+import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.events.EventTrigger;
+
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
@@ -54,6 +58,9 @@ public class RobotContainer {
             .withRotationalDeadband(Calibrations.DriverCalibrations.kmaxAngularRate * 0.1)
             .withDriveRequestType(DriveRequestType.OpenLoopVoltage);
 
+    /* Path follower */
+    private final SendableChooser<Command> m_autoChooser;
+
     /**
      * The robot container constructor.
      */
@@ -65,6 +72,13 @@ public class RobotContainer {
             () -> m_elevator.setAngle(ElevatorCalibrations.kservoLockAngle))); 
 
         configureBindings();
+
+        new EventTrigger("L4").onTrue(new L4(m_elevator, m_windmill).andThen(new CGOuttakeThenStow(ManipulatorCalibrations.kL4OuttakeSpeed, 1, m_elevator, m_windmill, m_manipulator)));
+        // new EventTrigger("Outtake Piece").onTrue(new RunManipulator(m_manipulator, ManipulatorCalibrations.kL4OuttakeSpeed));
+        new EventTrigger("Lollipop Stow").onTrue(new LollipopStow(m_elevator, m_windmill));
+        
+        m_autoChooser = AutoBuilder.buildAutoChooser("3m test path");
+        SmartDashboard.putData("Auto Mode", m_autoChooser);
     }
 
     /**
@@ -143,6 +157,6 @@ public class RobotContainer {
 
 
     public Command getAutonomousCommand() {
-        return Commands.print("No autonomous command configured");
+        return m_autoChooser.getSelected();
     }
 }
