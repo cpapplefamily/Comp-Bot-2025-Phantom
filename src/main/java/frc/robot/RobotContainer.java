@@ -7,6 +7,7 @@ package frc.robot;
 import com.ctre.phoenix6.swerve.SwerveModule.DriveRequestType;
 import com.ctre.phoenix6.swerve.SwerveRequest;
 import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.auto.NamedCommands;
 import com.pathplanner.lib.events.EventTrigger;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -21,6 +22,7 @@ import frc.robot.commands.BargeAlgae;
 import frc.robot.commands.CGClimb;
 import frc.robot.commands.CGOuttakeThenStow;
 import frc.robot.commands.CoralStation;
+import frc.robot.commands.IsIntakeFinished;
 import frc.robot.commands.L2;
 import frc.robot.commands.L3;
 import frc.robot.commands.L4;
@@ -73,8 +75,11 @@ public class RobotContainer {
 
         new EventTrigger("L4").onTrue(new L4(m_elevator, m_windmill)
             .andThen(new CGOuttakeThenStow(
-                ManipulatorCalibrations.kL4OuttakeSpeed, 1, m_elevator, m_windmill, m_manipulator)));
+                ManipulatorCalibrations.kL4OuttakeSpeed, ManipulatorCalibrations.kL4OuttakeTime, m_elevator, m_windmill, m_manipulator)));
         new EventTrigger("Lollipop Stow").onTrue(new LollipopStow(m_elevator, m_windmill));
+        new EventTrigger("Intake").onTrue(new CoralStation(m_elevator, m_windmill).alongWith(new RunIntake(m_manipulator)));
+
+        NamedCommands.registerCommand("Is Intake Finished?", new IsIntakeFinished(m_manipulator));
         
         m_autoChooser = AutoBuilder.buildAutoChooser("3m test path");
         SmartDashboard.putData("Auto Mode", m_autoChooser);

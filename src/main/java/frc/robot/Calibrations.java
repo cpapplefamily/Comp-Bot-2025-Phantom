@@ -228,6 +228,7 @@ public class Calibrations {
         public static final double kMaxAcceleration = 1000;
         public static final double kCoralAcceleration = 1000;
         public static final double kMaxSpeed = 100;
+        //TODO: Add Calibration value for max coral speed
         public static final double kMaxStatorCurrent = 40;
  
         /* Stator current delta threshold to stop motors */
