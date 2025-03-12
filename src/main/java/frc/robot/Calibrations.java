@@ -164,6 +164,12 @@ public class Calibrations {
 
         /* Pendulum position in degrees */
         public static final double kPendulumPosition = 270;
+
+        /* Horizontal position for before the windmill goes to the Coral Station */
+        public static final double kCoralStationPrepPosition = 180;
+
+        /* Horizontal position tolerance for before the windmill goes to the Coral Station */
+        public static final double kCoralStationPrepTolerance = 10;
         
         /* Coral station position in degrees */
         public static final double kCoralStationPosition = 287;
