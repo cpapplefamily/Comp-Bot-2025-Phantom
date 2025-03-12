@@ -32,7 +32,7 @@ public class Calibrations {
         public static final double kAprilTagTranslationXAlignmentKP = 0.07;
         
         /* Robot-centric X-translational controller - add a little Y-translation to stay flush to the coral reef */
-        public static final double kAprilTagTranslationYRate = -0.8;
+        public static final double kAprilTagTranslationYRate = -2.5;
         
     }
 
@@ -220,6 +220,7 @@ public class Calibrations {
 
         /* MotionMagic constraints for velocity controller */
         public static final double kMaxAcceleration = 1000;
+        public static final double kCoralAcceleration = 1000;
         public static final double kMaxSpeed = 100;
         public static final double kMaxStatorCurrent = 40;
  

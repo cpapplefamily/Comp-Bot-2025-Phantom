@@ -29,7 +29,7 @@ public class RunIntake extends Command {
 
     @Override
     public void initialize() {
-        m_manipulator.updateSetpoint(ManipulatorCalibrations.kMaxSpeed);
+        m_manipulator.updateSetpoint(ManipulatorCalibrations.kMaxSpeed, ManipulatorCalibrations.kCoralAcceleration);
         m_filter.reset(m_inputBuffer, m_outputBuffer);
     }
 
@@ -39,7 +39,7 @@ public class RunIntake extends Command {
 
     @Override
     public void end(boolean interrupted) {
-        m_manipulator.updateSetpoint(0);
+        m_manipulator.updateSetpoint(0, ManipulatorCalibrations.kCoralAcceleration);
     }
 
     // Returns true when the command should end.

@@ -48,10 +48,14 @@ public class TranslationAlignToTag extends Command {
         m_drivetrain.setControl(m_swerveRequest
             .withVelocityX(m_xspeed)
             .withVelocityY(DriverCalibrations.kAprilTagTranslationYRate 
-                           / NetworkTableInstance.getDefault()
+                           / (NetworkTableInstance.getDefault()
                            .getTable("limelight-one")
                            .getEntry("ta")
-                           .getDouble(m_pipeline))
+                           .getDouble(m_pipeline) 
+                           * NetworkTableInstance.getDefault()
+                           .getTable("limelight-one")
+                           .getEntry("ta")
+                           .getDouble(m_pipeline)))
             .withRotationalRate(0)
         );
 

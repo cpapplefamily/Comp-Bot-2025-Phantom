@@ -52,8 +52,8 @@ public class ManipulatorSubsystem extends SubsystemBase {
     *
     * @param newSetpoint New velocity setpoint for the manipulator
     */
-    public void updateSetpoint(double newSetpoint) {
-        m_motor.setControl(m_request.withVelocity(newSetpoint));
+    public void updateSetpoint(double newSetpoint, double acceleration) {
+        m_motor.setControl(m_request.withVelocity(newSetpoint).withAcceleration(acceleration));
     }
 
     /**

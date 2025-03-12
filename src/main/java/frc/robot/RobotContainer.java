@@ -150,7 +150,7 @@ public class RobotContainer {
         m_joystick.povDown().and(m_joystick.leftBumper()).onTrue(new AlgaeL2Pickup(m_elevator, m_windmill, m_manipulator));
 
         m_joystick.back().onTrue(new BargeAlgae(m_elevator, m_windmill))
-                         .onFalse(new RunManipulator(m_manipulator, ManipulatorCalibrations.kAlgaeBargingVelocity)
+                         .onFalse(new RunManipulator(ManipulatorCalibrations.kAlgaeBargingVelocity, ManipulatorCalibrations.kMaxAcceleration, m_manipulator)
                          .withTimeout(1));
 
     }
