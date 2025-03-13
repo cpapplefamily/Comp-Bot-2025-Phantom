@@ -29,10 +29,10 @@ public class Calibrations {
         public static final double kLimelightDefaultKTx = 0;
 
         /* P-gain for robot-centric X-translational controller using LL tx as feedback */
-        public static final double kAprilTagTranslationXAlignmentKP = 0.07;
+        public static final double kAprilTagTranslationXAlignmentKP = 0.05;
         
         /* Robot-centric X-translational controller - add a little Y-translation to stay flush to the coral reef */
-        public static final double kAprilTagTranslationYRate = -0.8;
+        public static final double kAprilTagTranslationYRate = -0.0;
         
     }
 
@@ -103,7 +103,7 @@ public class Calibrations {
         public static final double kCoralStationStowPosition = 30;
 
         /* Climb position in inches */
-        public static final double kClimbPosition = 4;
+        public static final double kPrepClimbPosition = 4;
 
         /* Barge position in inches */
         public static final double kBargePosition = 53.5;
@@ -117,6 +117,14 @@ public class Calibrations {
         public static final double kAlgaePickupPosition = 3;
 
         public static final double kAlgaeL2Position = 13;
+
+        public static final double kClimbUpSetpoint = 18;
+
+        public static final double kClimbUpTolerance = 2;
+
+        public static final double kClimbDownSetpoint = -5;
+
+        public static final double kClimbDownTolerance = 2;
 
     }
 
@@ -146,7 +154,7 @@ public class Calibrations {
         public static final double kClimbMaxSpeedMotionMagic = 0.25;
 
         /* atTarget() returns true if within this tolerance, in degrees */
-        public static final double kWindmillTolerance = 10;
+        public static final double kDefaultTolerance = 10;
 
         /* Lollipop position in degrees */
         public static final double kLollipopPosition = 90;
@@ -156,6 +164,12 @@ public class Calibrations {
 
         /* Pendulum position in degrees */
         public static final double kPendulumPosition = 270;
+
+        /* Horizontal position for before the windmill goes to the Coral Station */
+        public static final double kCoralStationPrepPosition = 180;
+
+        /* Horizontal position tolerance for before the windmill goes to the Coral Station */
+        public static final double kCoralStationPrepTolerance = 10;
         
         /* Coral station position in degrees */
         public static final double kCoralStationPosition = 287;
@@ -176,10 +190,10 @@ public class Calibrations {
         public static final double kCoralStationStowTolerance = 5;
 
         /* Climb position in degrees */
-        public static final double kClimbPosition = 120;
+        public static final double kPrepClimbPosition = 120;
 
         /* Climb tolerance in degrees before any elevator movement */
-        public static final double kClimbTolerance = 5;
+        public static final double kPrepClimbTolerance = 5;
 
         /* Barge position in degrees */
         public static final double kBargePosition = 90;
@@ -192,6 +206,10 @@ public class Calibrations {
         
         /* L2 pickup position for Algae */
         public static final double kAlgaeL2Position = 26;
+
+        public static final double kClimbPosition = 180;
+
+        public static final double kClimbTolerance = 5;
     }
 
     /**
@@ -208,7 +226,9 @@ public class Calibrations {
 
         /* MotionMagic constraints for velocity controller */
         public static final double kMaxAcceleration = 1000;
+        public static final double kCoralAcceleration = 1000;
         public static final double kMaxSpeed = 100;
+        //TODO: Add Calibration value for max coral speed
         public static final double kMaxStatorCurrent = 40;
  
         /* Stator current delta threshold to stop motors */

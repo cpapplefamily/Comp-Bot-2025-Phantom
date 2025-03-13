@@ -21,8 +21,8 @@ public class AlgaeFloorPickup extends SequentialCommandGroup {
      */
     public AlgaeFloorPickup(ElevatorSubsystem elevator, WindmillSubsystem windmill, ManipulatorSubsystem manipulator) {
         super(
-            new MoveElevatorToPosition(ElevatorCalibrations.kAlgaePickupPosition, false, elevator),
-            new MoveWindmillToPosition(WindmillCalibrations.kAlgaePickupPosition, false, windmill),
+            new MoveElevatorToPosition(ElevatorCalibrations.kAlgaePickupPosition, ElevatorCalibrations.kDefaultTolerance, false, elevator),
+            new MoveWindmillToPosition(WindmillCalibrations.kAlgaePickupPosition, WindmillCalibrations.kDefaultTolerance, false, windmill),
             new RunAlgaeIntake(manipulator),
             new LollipopStow(elevator, windmill)
         );

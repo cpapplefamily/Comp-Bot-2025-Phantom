@@ -32,16 +32,16 @@ public class PrepClimb extends Command {
 
     @Override
     public void initialize() {
-        m_windmill.updateSetpoint(WindmillCalibrations.kClimbPosition, false);
-        if (m_windmill.isWithinTolerance(WindmillCalibrations.kClimbTolerance)) {
-            m_elevator.updateSetpoint(ElevatorCalibrations.kClimbPosition, false);
+        m_windmill.updateSetpoint(WindmillCalibrations.kPrepClimbPosition, false);
+        if (m_windmill.isWithinTolerance(WindmillCalibrations.kPrepClimbTolerance)) {
+            m_elevator.updateSetpoint(ElevatorCalibrations.kPrepClimbPosition, false);
         }
     }
   
     @Override
      public void execute() {
-        if (m_windmill.isWithinTolerance(WindmillCalibrations.kClimbTolerance)) {
-            m_elevator.updateSetpoint(ElevatorCalibrations.kClimbPosition, false);
+        if (m_windmill.isWithinTolerance(WindmillCalibrations.kPrepClimbTolerance)) {
+            m_elevator.updateSetpoint(ElevatorCalibrations.kPrepClimbPosition, false);
         }
     }
   
@@ -52,7 +52,7 @@ public class PrepClimb extends Command {
 
     @Override
     public boolean isFinished() {
-        return Utils.isDoubleEqual(m_windmill.getSetpoint(), WindmillCalibrations.kClimbPosition, 0.01)
-               && Utils.isDoubleEqual(m_elevator.getSetpoint(), ElevatorCalibrations.kClimbPosition, 0.01);
+        return Utils.isDoubleEqual(m_windmill.getSetpoint(), WindmillCalibrations.kPrepClimbPosition, 0.01)
+               && Utils.isDoubleEqual(m_elevator.getSetpoint(), ElevatorCalibrations.kPrepClimbPosition, 0.01);
     }
 }

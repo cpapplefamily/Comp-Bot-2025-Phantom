@@ -11,7 +11,6 @@ import com.ctre.phoenix6.signals.GravityTypeValue;
 import com.ctre.phoenix6.signals.InvertedValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.ctre.phoenix6.signals.SensorDirectionValue;
-
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Calibrations.WindmillCalibrations;
@@ -119,7 +118,7 @@ public class WindmillSubsystem extends SubsystemBase {
      * @return true is at target within tolerance
      */
     public boolean atTarget() {
-        return Math.abs(getPosition() - getSetpoint()) < WindmillCalibrations.kWindmillTolerance;
+        return Math.abs(getPosition() - getSetpoint()) < WindmillCalibrations.kDefaultTolerance;
     }
 
     public boolean isWithinTolerance(double tolerance) {

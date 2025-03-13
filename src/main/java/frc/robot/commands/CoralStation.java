@@ -4,49 +4,35 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Calibrations.ElevatorCalibrations;
 import frc.robot.Calibrations.WindmillCalibrations;
-import frc.robot.Utils;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.WindmillSubsystem;
 
 /**
  * CoralStation command.
  */
-public class CoralStation extends Command {
-  
-    private WindmillSubsystem m_windmill;
-    private ElevatorSubsystem m_elevator;
+public class CoralStation extends SequentialCommandGroup {
 
     /**
      * CoralStation command constructor.
      */
     public CoralStation(ElevatorSubsystem elevator, WindmillSubsystem windmill) {
-        m_windmill = windmill;
-        m_elevator = elevator;
-        addRequirements(m_windmill, m_elevator);
-    }
-
-    @Override
-    public void initialize() {
-        m_elevator.updateSetpoint(ElevatorCalibrations.kCoralStationPosition, false);
-        if (m_elevator.isWithinTolerance(ElevatorCalibrations.kCoralStationTolerance)) {
-            m_windmill.updateSetpoint(WindmillCalibrations.kCoralStationPosition, false);
-        }
-    }
-
-    @Override
-    public void execute() {
-        if (m_elevator.isWithinTolerance(ElevatorCalibrations.kCoralStationTolerance)) {
-            m_windmill.updateSetpoint(WindmillCalibrations.kCoralStationPosition, false);
-        }
-    }
-
-    @Override
-    public boolean isFinished() {
-        return Utils.isDoubleEqual(m_windmill.getSetpoint(), WindmillCalibrations.kCoralStationPosition, 0.01)
-               && Utils.isDoubleEqual(m_elevator.getSetpoint(), ElevatorCalibrations.kCoralStationPosition, 0.01);
+        super(
+            new ParallelCommandGroup(
+                new MoveWindmillToPosition(
+                    WindmillCalibrations.kCoralStationPrepPosition, 
+                    WindmillCalibrations.kCoralStationPrepTolerance, 
+                    false, windmill),
+                new MoveElevatorToPosition(
+                    ElevatorCalibrations.kCoralStationPosition, 
+                    ElevatorCalibrations.kCoralStationTolerance, 
+                    false, elevator)
+            ),
+            new MoveWindmillToPosition(WindmillCalibrations.kCoralStationPosition, 10, false, windmill)
+        );
     }
 
 }

@@ -5,6 +5,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.Calibrations.ManipulatorCalibrations;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.ManipulatorSubsystem;
 import frc.robot.subsystems.WindmillSubsystem;
@@ -26,7 +27,8 @@ public class CGOuttakeThenStow extends SequentialCommandGroup {
     public CGOuttakeThenStow(double outtakeSpeed, double outtakeTime, 
                             ElevatorSubsystem elevator, WindmillSubsystem windmill, ManipulatorSubsystem manipulator) {
         super(
-            new RunManipulator(manipulator, outtakeSpeed).withTimeout(outtakeTime),
+            new RunManipulator(outtakeSpeed, ManipulatorCalibrations.kCoralAcceleration, manipulator)
+                .withTimeout(outtakeTime),
             new LollipopStow(elevator, windmill)
         //new CoralStationStow(elevator, windmill)
         );

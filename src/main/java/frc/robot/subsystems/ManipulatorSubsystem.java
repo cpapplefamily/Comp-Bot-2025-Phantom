@@ -20,6 +20,8 @@ public class ManipulatorSubsystem extends SubsystemBase {
     private final MotionMagicVelocityTorqueCurrentFOC m_request;
     private TalonFXConfiguration m_talonFxConfig;
 
+    private boolean m_hasCoral = true;
+
 
     /**
      * Manipulator subsystem constructor.
@@ -52,8 +54,8 @@ public class ManipulatorSubsystem extends SubsystemBase {
     *
     * @param newSetpoint New velocity setpoint for the manipulator
     */
-    public void updateSetpoint(double newSetpoint) {
-        m_motor.setControl(m_request.withVelocity(newSetpoint));
+    public void updateSetpoint(double newSetpoint, double acceleration) {
+        m_motor.setControl(m_request.withVelocity(newSetpoint).withAcceleration(acceleration));
     }
 
     /**
@@ -63,6 +65,14 @@ public class ManipulatorSubsystem extends SubsystemBase {
      */
     public double getVelocity() {
         return m_motor.getVelocity().getValueAsDouble();
+    }
+
+    public boolean hasCoral() {
+        return m_hasCoral;
+    }
+
+    public void changeCoralState(boolean hasCoral) {
+        m_hasCoral = hasCoral;
     }
 
     /**

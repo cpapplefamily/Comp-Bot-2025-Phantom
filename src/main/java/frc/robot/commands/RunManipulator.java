@@ -14,19 +14,21 @@ public class RunManipulator extends Command {
 
     private ManipulatorSubsystem m_manipulator;
     private double m_outtakeSpeed;
+    private double m_acceleration;
     
     /**
      * RunIntake command constructor.
      */
-    public RunManipulator(ManipulatorSubsystem manipulator, double outtakeSpeed) {
+    public RunManipulator(double outtakeSpeed, double acceleration, ManipulatorSubsystem manipulator) {
         m_manipulator = manipulator;
         m_outtakeSpeed = outtakeSpeed;
+        m_acceleration = acceleration;
         addRequirements(m_manipulator);
     }
 
     @Override
     public void initialize() {
-        m_manipulator.updateSetpoint(m_outtakeSpeed);
+        m_manipulator.updateSetpoint(m_outtakeSpeed, m_acceleration);
     }
 
     @Override
@@ -35,7 +37,7 @@ public class RunManipulator extends Command {
 
     @Override
     public void end(boolean interrupted) {
-        m_manipulator.updateSetpoint(0);
+        m_manipulator.updateSetpoint(0, m_acceleration);
     }
 
     // Returns true when the command should end.

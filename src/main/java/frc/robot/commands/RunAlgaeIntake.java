@@ -29,7 +29,8 @@ public class RunAlgaeIntake extends Command {
 
     @Override
     public void initialize() {
-        m_manipulator.updateSetpoint(ManipulatorCalibrations.kAlgaeIntakeVelocity);
+        m_manipulator.updateSetpoint(
+            ManipulatorCalibrations.kAlgaeIntakeVelocity, ManipulatorCalibrations.kMaxAcceleration);
         m_filter.reset(m_inputBuffer, m_outputBuffer);
     }
 
@@ -39,7 +40,8 @@ public class RunAlgaeIntake extends Command {
 
     @Override
     public void end(boolean interrupted) {
-        m_manipulator.updateSetpoint(ManipulatorCalibrations.kAlgaeHoldingVelocity);
+        m_manipulator.updateSetpoint(
+            ManipulatorCalibrations.kAlgaeHoldingVelocity, ManipulatorCalibrations.kMaxAcceleration);
     }
 
     // Returns true when the command should end.

@@ -7,6 +7,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.Calibrations.ManipulatorCalibrations;
 import frc.robot.subsystems.LEDSubsystem;
 
 
@@ -49,7 +50,7 @@ public class Robot extends TimedRobot {
     public void autonomousInit() {
         m_robotContainer.m_windmill.updateSetpoint(m_robotContainer.m_windmill.getPosition(), false);
         m_robotContainer.m_elevator.updateSetpoint(m_robotContainer.m_elevator.getPosition(), false);
-        m_robotContainer.m_manipulator.updateSetpoint(0);
+        m_robotContainer.m_manipulator.updateSetpoint(0, ManipulatorCalibrations.kMaxAcceleration);
         m_autonomousCommand = m_robotContainer.getAutonomousCommand();
         if (m_autonomousCommand != null) {
             m_autonomousCommand.schedule();
@@ -67,7 +68,7 @@ public class Robot extends TimedRobot {
     public void teleopInit() {
         m_robotContainer.m_windmill.updateSetpoint(m_robotContainer.m_windmill.getPosition(), false);
         m_robotContainer.m_elevator.updateSetpoint(m_robotContainer.m_elevator.getPosition(), false);
-        m_robotContainer.m_manipulator.updateSetpoint(0);
+        m_robotContainer.m_manipulator.updateSetpoint(0, ManipulatorCalibrations.kMaxAcceleration);
         if (m_autonomousCommand != null) {
             m_autonomousCommand.cancel();
         }
