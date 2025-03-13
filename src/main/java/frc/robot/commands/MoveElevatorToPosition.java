@@ -20,6 +20,7 @@ public class MoveElevatorToPosition extends Command {
      * MoveWindmillToPosition command constructor.
      */
     public MoveElevatorToPosition(double newSetpoint, boolean isClimbing, ElevatorSubsystem elevator) {
+        // TODO: Parameterize tolerance, and do the thing where certain parameters use the default if not passed in
         m_newSetpoint = newSetpoint;
         m_isClimbing = isClimbing;
         m_elevator = elevator;

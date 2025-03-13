@@ -114,6 +114,10 @@ public class Calibrations {
         /* Servo unlock position in degrees */
         public static final int kservoUnlockAngle = 30;
 
+        public static final double kAlgaePickupPosition = 3;
+
+        public static final double kAlgaeL2Position = 13;
+
     }
 
     /**
@@ -182,7 +186,12 @@ public class Calibrations {
 
         /* Barge tolerance in degrees before any elevator movement */
         public static final double kBargeTolerance = 10;
+
+        /* Floor Pickup Position for Algae */
+        public static final double kAlgaePickupPosition = 345;
         
+        /* L2 pickup position for Algae */
+        public static final double kAlgaeL2Position = 26;
     }
 
     /**
@@ -224,10 +233,16 @@ public class Calibrations {
         public static final double kL2OuttakeTime = 0.25;
 
         /* Algae intake and holding speed, in rotations per second */
-        public static final double kAlgaeHoldingVelocity = -5;
+        public static final double kAlgaeHoldingVelocity = -7;
 
         /* Algae barge outtake speed, in rotations per second */
         public static final double kAlgaeBargingVelocity = 100;
+
+        /* Velocity to intake Algae in the floor position at */
+        public static final double kAlgaeIntakeVelocity = -20;
+
+        /* Current threshold for deciding when we have an algae */
+        public static final double kAlgaeIntakeThreshold = 10;
 
     }
 }

@@ -8,21 +8,22 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Calibrations.ElevatorCalibrations;
 import frc.robot.Calibrations.WindmillCalibrations;
 import frc.robot.subsystems.ElevatorSubsystem;
+import frc.robot.subsystems.ManipulatorSubsystem;
 import frc.robot.subsystems.WindmillSubsystem;
 
 /**
- * L4 command.
+ * AlgaeFloorPickup command.
  */
-public class L4 extends SequentialCommandGroup {
+public class AlgaeL2Pickup extends SequentialCommandGroup {
 
     /**
-     * CoralStation command constructor.
+     * AlgaeFloorPickup command constructor.
      */
-    public L4(ElevatorSubsystem elevator, WindmillSubsystem windmill) {
+    public AlgaeL2Pickup(ElevatorSubsystem elevator, WindmillSubsystem windmill, ManipulatorSubsystem manipulator) {
         super(
-            new MoveElevatorToPosition(ElevatorCalibrations.kL4Position, false, elevator),
-            new MoveWindmillToPosition(WindmillCalibrations.kL4Position, false, windmill)
+            new MoveElevatorToPosition(ElevatorCalibrations.kAlgaeL2Position, false, elevator),
+            new MoveWindmillToPosition(WindmillCalibrations.kAlgaeL2Position, false, windmill),
+            new RunAlgaeIntake(manipulator)
         );
     }
-
 }

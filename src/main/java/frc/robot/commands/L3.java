@@ -23,6 +23,7 @@ public class L3 extends Command {
      * CoralStation command constructor.
      */
     public L3(ElevatorSubsystem elevator, WindmillSubsystem windmill) {
+        // TODO: Make this sequential & position based
         m_windmill = windmill;
         m_elevator = elevator;
         addRequirements(m_windmill, m_elevator);

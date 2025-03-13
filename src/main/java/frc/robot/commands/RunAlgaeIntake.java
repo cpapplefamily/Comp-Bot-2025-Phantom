@@ -12,24 +12,24 @@ import frc.robot.subsystems.ManipulatorSubsystem;
 /**
  * RunIntake.
  */
-public class RunIntake extends Command {
+public class RunAlgaeIntake extends Command {
 
     private ManipulatorSubsystem m_manipulator;
     private LinearFilter m_filter = LinearFilter.movingAverage(10);
-    private double[] m_inputBuffer = {80.0, 80.0, 80.0, 80.0, 80.0, 80.0, 80.0, 80.0, 80.0, 80.0};
+    private double[] m_inputBuffer = {30.0, 30.0, 30.0, 30.0, 30.0, 30.0, 30.0, 30.0, 30.0, 30.0};
     private double[] m_outputBuffer = {};
     
     /**
      * RunIntake command constructor.
      */
-    public RunIntake(ManipulatorSubsystem manipulator) {
+    public RunAlgaeIntake(ManipulatorSubsystem manipulator) {
         m_manipulator = manipulator;
         addRequirements(m_manipulator);
     }
 
     @Override
     public void initialize() {
-        m_manipulator.updateSetpoint(ManipulatorCalibrations.kMaxSpeed);
+        m_manipulator.updateSetpoint(ManipulatorCalibrations.kAlgaeIntakeVelocity);
         m_filter.reset(m_inputBuffer, m_outputBuffer);
     }
 
@@ -39,7 +39,7 @@ public class RunIntake extends Command {
 
     @Override
     public void end(boolean interrupted) {
-        m_manipulator.updateSetpoint(0);
+        m_manipulator.updateSetpoint(ManipulatorCalibrations.kAlgaeHoldingVelocity);
     }
 
     // Returns true when the command should end.
@@ -48,7 +48,7 @@ public class RunIntake extends Command {
         var deltaCurrent = m_manipulator.getStatorCurrent() - m_filter.lastValue();
         m_filter.calculate(m_manipulator.getStatorCurrent());
         
-        return deltaCurrent > ManipulatorCalibrations.kCurrentThreshold;
+        return deltaCurrent > ManipulatorCalibrations.kAlgaeIntakeThreshold;
     }
 
 }
