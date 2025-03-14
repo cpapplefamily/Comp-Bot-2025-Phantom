@@ -172,7 +172,7 @@ public class LEDSubsystem extends SubsystemBase {
                     m_candle.clearAnimation(1);
                     m_candle.animate(m_error, 0);
             }
-            System.out.println(m_currentState);
+            // System.out.println(m_currentState);
         }
         m_pastState = m_currentState;
     }

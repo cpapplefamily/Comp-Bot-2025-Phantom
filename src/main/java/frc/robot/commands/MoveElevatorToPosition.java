@@ -46,6 +46,7 @@ public class MoveElevatorToPosition extends Command {
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
+        // System.out.println("Checking MoveElevatorToPosition");
         return m_elevator.isWithinTolerance(m_tolerance);
     }
 }

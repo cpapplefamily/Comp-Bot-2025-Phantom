@@ -77,7 +77,7 @@ public class ElevatorSubsystem extends SubsystemBase {
         m_talonFxConfig.Slot1.kS = ElevatorCalibrations.kS;
         m_talonFxConfig.Slot1.kV = ElevatorCalibrations.kV;
         m_talonFxConfig.Slot1.kA = ElevatorCalibrations.kA;
-        m_talonFxConfig.Slot1.kP = ElevatorCalibrations.kP;
+        m_talonFxConfig.Slot1.kP = ElevatorCalibrations.kClimbP;
         m_talonFxConfig.Slot1.kD = ElevatorCalibrations.kD;
  
         m_talonFxConfig.MotionMagic.MotionMagicCruiseVelocity = ElevatorCalibrations.kMaxSpeedMotionMagic;
@@ -161,6 +161,7 @@ public class ElevatorSubsystem extends SubsystemBase {
     }
 
     public boolean isWithinTolerance(double tolerance) {
+        // System.out.println(Math.abs(getPosition() - getSetpoint()));
         return Math.abs(getPosition() - getSetpoint()) < tolerance;
     }
 
