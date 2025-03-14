@@ -51,6 +51,7 @@ public class Calibrations {
 
         /* Gains for the MotionMagic profiler for endgame elevator */
         public static final double kClimbG = -25;
+        public static final double kClimbP = 15;
 
         /* MotionMagic constraints for teleoperated elevator */
         public static final double kMaxSpeedMotionMagic = 500;
@@ -144,6 +145,9 @@ public class Calibrations {
         public static final double kP = 800;
         public static final double kD = 200;
 
+        /* Gains for the MotionMagic profiler for endgame */
+        public static final double kClimbP = 1200;
+
         /* MotionMagic constraints for teleoperated */
         public static final double kMaxSpeedMotionMagic = 1;
         public static final double kMaxAccelerationMotionMagic = 4;
@@ -227,7 +231,7 @@ public class Calibrations {
         /* MotionMagic constraints for velocity controller */
         public static final double kMaxAcceleration = 1000;
         public static final double kCoralAcceleration = 1000;
-        public static final double kMaxSpeed = 100;
+        public static final double kMaxSpeed = 50;
         //TODO: Add Calibration value for max coral speed
         public static final double kMaxStatorCurrent = 40;
  
@@ -253,16 +257,16 @@ public class Calibrations {
         public static final double kL2OuttakeTime = 0.25;
 
         /* Algae intake and holding speed, in rotations per second */
-        public static final double kAlgaeHoldingVelocity = -7;
+        public static final double kAlgaeHoldingVelocity = -15;
 
         /* Algae barge outtake speed, in rotations per second */
-        public static final double kAlgaeBargingVelocity = 100;
+        public static final double kAlgaeBargingVelocity = 300;
 
         /* Velocity to intake Algae in the floor position at */
-        public static final double kAlgaeIntakeVelocity = -20;
+        public static final double kAlgaeIntakeVelocity = -35;
 
         /* Current threshold for deciding when we have an algae */
-        public static final double kAlgaeIntakeThreshold = 10;
+        public static final double kAlgaeIntakeThreshold = 15;
 
     }
 }

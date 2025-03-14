@@ -47,6 +47,7 @@ public class MoveWindmillToPosition extends Command {
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
+        //System.out.println("Checking MoveWindmillToPosition");
         return m_windmill.isWithinTolerance(m_tolerance);
     }
 }

@@ -61,6 +61,13 @@ public class WindmillSubsystem extends SubsystemBase {
         m_talonFxConfig.Slot0.kP = WindmillCalibrations.kP;
         m_talonFxConfig.Slot0.kD = WindmillCalibrations.kD;
 
+        m_talonFxConfig.Slot1.kG = WindmillCalibrations.kG;
+        m_talonFxConfig.Slot1.kS = WindmillCalibrations.kS;
+        m_talonFxConfig.Slot1.kV = WindmillCalibrations.kV;
+        m_talonFxConfig.Slot1.kA = WindmillCalibrations.kA;
+        m_talonFxConfig.Slot1.kP = WindmillCalibrations.kClimbP;
+        m_talonFxConfig.Slot1.kD = WindmillCalibrations.kD;
+
         m_talonFxConfig.MotionMagic.MotionMagicCruiseVelocity = WindmillCalibrations.kMaxSpeedMotionMagic;
         m_talonFxConfig.MotionMagic.MotionMagicAcceleration = WindmillCalibrations.kMaxAccelerationMotionMagic;
         m_talonFxConfig.MotionMagic.MotionMagicJerk = WindmillCalibrations.kMaxJerkMotionMagic;
@@ -89,10 +96,12 @@ public class WindmillSubsystem extends SubsystemBase {
     public void updateSetpoint(double newSetpoint, boolean isClimbing) {
         if (isClimbing) {
             m_motor.setControl(m_request.withPosition(newSetpoint / 360)
-                                        .withVelocity(WindmillCalibrations.kClimbMaxSpeedMotionMagic));
+                                        .withVelocity(WindmillCalibrations.kClimbMaxSpeedMotionMagic)
+                                        .withSlot(1));
         } else {
             m_motor.setControl(m_request.withPosition(newSetpoint / 360)
-                                        .withVelocity(WindmillCalibrations.kMaxSpeedMotionMagic));
+                                        .withVelocity(WindmillCalibrations.kMaxSpeedMotionMagic)
+                                        .withSlot(0));
         }
     }
 
@@ -122,6 +131,7 @@ public class WindmillSubsystem extends SubsystemBase {
     }
 
     public boolean isWithinTolerance(double tolerance) {
+        // System.out.println(Math.abs(getPosition() - getSetpoint()));
         return Math.abs(getPosition() - getSetpoint()) < tolerance;
     }
 
