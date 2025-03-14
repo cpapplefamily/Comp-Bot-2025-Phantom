@@ -257,16 +257,16 @@ public class Calibrations {
         public static final double kL2OuttakeTime = 0.25;
 
         /* Algae intake and holding speed, in rotations per second */
-        public static final double kAlgaeHoldingVelocity = -7;
+        public static final double kAlgaeHoldingVelocity = -15;
 
         /* Algae barge outtake speed, in rotations per second */
-        public static final double kAlgaeBargingVelocity = 100;
+        public static final double kAlgaeBargingVelocity = 300;
 
         /* Velocity to intake Algae in the floor position at */
-        public static final double kAlgaeIntakeVelocity = -20;
+        public static final double kAlgaeIntakeVelocity = -35;
 
         /* Current threshold for deciding when we have an algae */
-        public static final double kAlgaeIntakeThreshold = 10;
+        public static final double kAlgaeIntakeThreshold = 15;
 
     }
 }
