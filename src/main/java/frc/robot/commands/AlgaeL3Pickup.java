@@ -14,19 +14,19 @@ import frc.robot.subsystems.WindmillSubsystem;
 /**
  * AlgaeFloorPickup command.
  */
-public class AlgaeFloorPickup extends SequentialCommandGroup {
+public class AlgaeL3Pickup extends SequentialCommandGroup {
 
     /**
      * AlgaeFloorPickup command constructor.
      */
-    public AlgaeFloorPickup(ElevatorSubsystem elevator, WindmillSubsystem windmill, ManipulatorSubsystem manipulator) {
+    public AlgaeL3Pickup(ElevatorSubsystem elevator, WindmillSubsystem windmill, ManipulatorSubsystem manipulator) {
         super(
+            // TODO: Add tolerances
             new MoveElevatorToPosition(
-                ElevatorCalibrations.kAlgaePickupPosition, ElevatorCalibrations.kDefaultTolerance, false, elevator),
+                ElevatorCalibrations.kAlgaeL3Position, ElevatorCalibrations.kDefaultTolerance, false, elevator),
             new MoveWindmillToPosition(
-                WindmillCalibrations.kAlgaePickupPosition, WindmillCalibrations.kDefaultTolerance, false, windmill),
-            new RunAlgaeIntake(manipulator),
-            new LollipopStow(elevator, windmill)
+                WindmillCalibrations.kAlgaeL3Position, ElevatorCalibrations.kDefaultTolerance, false, windmill),
+            new RunAlgaeIntake(manipulator)
         );
     }
 }

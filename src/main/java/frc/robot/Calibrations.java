@@ -29,10 +29,19 @@ public class Calibrations {
         public static final double kLimelightDefaultKTx = 0;
 
         /* P-gain for robot-centric X-translational controller using LL tx as feedback */
-        public static final double kAprilTagTranslationXAlignmentKP = 0.05;
+        public static final double kAprilTagTranslationXAlignmentKP = 0.08;
+
+        /* D-gain for robot-centric X-translational controller using LL tx as feedback */
+        public static final double kAprilTagTranslationXAlignmentKD = 0.005;
         
         /* Robot-centric X-translational controller - add a little Y-translation to stay flush to the coral reef */
-        public static final double kAprilTagTranslationYRate = -0.0;
+        public static final double kAprilTagTranslationYRate = -0.1;
+
+        /* Amount of rumble (0-1) to apply to the driver controller */
+        public static final double kControllerRumbleValue = 1;
+
+        /* Time to apply the controller rumble for before it turns off */
+        public static final double kControllerRumblePulseTime = 0.1;
         
     }
 
@@ -115,16 +124,34 @@ public class Calibrations {
         /* Servo unlock position in degrees */
         public static final int kservoUnlockAngle = 30;
 
+        /* Floor pickup position for Algae */
         public static final double kAlgaePickupPosition = 3;
 
+        /* L2 pickup position for Algae */
         public static final double kAlgaeL2Position = 13;
 
+        /* L3 pickup position for Algae */
+        public static final double kAlgaeL3Position = 28.5;
+
+        /* Position for algae pickup when the algae is on top of a coral */
+        public static final double kAlgaeStandingPosition = 10;
+
+        /* Position to move to when processing algae */
+        public static final double kProcessorPosition = -0.2;
+
+        /* Tolerance for the processor position */
+        public static final double kProcessorTolerance = 1;
+
+        /* Setpoint to go to when on the upstroke of the climb */
         public static final double kClimbUpSetpoint = 18;
 
+        /* Tolerance for the up stroke of the climb */
         public static final double kClimbUpTolerance = 2;
 
+        /* Position to go to on the down stroke of the climb */
         public static final double kClimbDownSetpoint = -5;
 
+        /* Tolerance for the down stroke of the climb */
         public static final double kClimbDownTolerance = 2;
 
     }
@@ -210,9 +237,23 @@ public class Calibrations {
         
         /* L2 pickup position for Algae */
         public static final double kAlgaeL2Position = 26;
+        
+        /* L3 pickup position for Algae */
+        public static final double kAlgaeL3Position = 26;
 
+        /* Position for algae pickup when the algae is on top of a coral */
+        public static final double kAlgaeStandingPosition = 0;
+
+        /* Position to move to when processing algae */
+        public static final double kProcessorPosition = 26;
+
+        /* Tolerance for the processor position */
+        public static final double kProcessorTolerance = 10;
+        
+        /* Position to go to after the up stroke of the climb */
         public static final double kClimbPosition = 180;
 
+        /* Tolerance for after the up stroke of the climb */
         public static final double kClimbTolerance = 5;
     }
 
