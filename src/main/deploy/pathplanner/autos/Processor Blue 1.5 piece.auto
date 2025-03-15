@@ -7,7 +7,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Line to L4 (Processor Red)"
+            "pathName": "Line to L4 (Processor Blue)"
           }
         },
         {
@@ -19,19 +19,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "L4 to Human Player (Processor Red)"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "Is Intake Finished?"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "Human Player to L4 Slow (Processor Red)"
+            "pathName": "L4 to Human Player (Processor Blue)"
           }
         }
       ]

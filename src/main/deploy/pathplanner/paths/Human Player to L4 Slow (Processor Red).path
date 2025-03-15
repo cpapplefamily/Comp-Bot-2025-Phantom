@@ -16,12 +16,12 @@
     },
     {
       "anchor": {
-        "x": 4.163250000000001,
-        "y": 2.855
+        "x": 3.953,
+        "y": 2.925
       },
       "prevControl": {
-        "x": 3.1687500000000006,
-        "y": 2.0067500000000003
+        "x": 2.9585,
+        "y": 2.07675
       },
       "nextControl": null,
       "isLocked": false,
@@ -43,6 +43,12 @@
       "waypointRelativePos": 0.7017369727047098,
       "endWaypointRelativePos": null,
       "command": null
+    },
+    {
+      "name": "Align Right",
+      "waypointRelativePos": 1.0,
+      "endWaypointRelativePos": null,
+      "command": null
     }
   ],
   "globalConstraints": {
@@ -55,7 +61,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 147.20046872738075
+    "rotation": 147.20000000000002
   },
   "reversed": false,
   "folder": null,

@@ -98,13 +98,13 @@ public class Calibrations {
         public static final double kL4Tolerance = 2;
 
         /* Coral reef L3 position in inches */
-        public static final double kL3Position = 24;
+        public static final double kL3Position = 25;
 
         /* Coral reef L3 tolerance in inches before any windmill movement */
         public static final double kL3Tolerance = 2;
 
         /* Coral reef L2 position in inches */
-        public static final double kL2Position = 8.5;
+        public static final double kL2Position = 9.5;
 
         /* Coral reef L2 tolerance in inches before any windmill movement */
         public static final double kL2Tolerance = 2;
@@ -113,7 +113,7 @@ public class Calibrations {
         public static final double kCoralStationStowPosition = 30;
 
         /* Climb position in inches */
-        public static final double kPrepClimbPosition = 4;
+        public static final double kPrepClimbPosition = 4.5;
 
         /* Barge position in inches */
         public static final double kBargePosition = 53.5;
@@ -221,7 +221,7 @@ public class Calibrations {
         public static final double kCoralStationStowTolerance = 5;
 
         /* Climb position in degrees */
-        public static final double kPrepClimbPosition = 120;
+        public static final double kPrepClimbPosition = 115;
 
         /* Climb tolerance in degrees before any elevator movement */
         public static final double kPrepClimbTolerance = 5;
@@ -278,6 +278,10 @@ public class Calibrations {
  
         /* Stator current delta threshold to stop motors */
         public static final double kCurrentThreshold = 15;
+
+        public static final double kIntakeVelocityTolerance = 40;
+
+        public static final double kIntakeZeroTolerance = 7;
 
         /* Coral reef L4 outtake speed, in rotations per second */
         public static final double kL4OuttakeSpeed = -30;

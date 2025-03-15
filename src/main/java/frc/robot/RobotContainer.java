@@ -79,6 +79,8 @@ public class RobotContainer {
 
         configureBindings();
 
+        new EventTrigger("Align Right").onTrue(new TranslationAlignToTag(0, m_drivetrain));
+        new EventTrigger("Align Left").onTrue(new TranslationAlignToTag(1, m_drivetrain));
         new EventTrigger("L4").onTrue(new L4(m_elevator, m_windmill)
             .andThen(new CGOuttakeThenStow(
                 ManipulatorCalibrations.kL4OuttakeSpeed, 
@@ -87,7 +89,7 @@ public class RobotContainer {
         new EventTrigger("Lollipop Stow").onTrue(new LollipopStow(m_elevator, m_windmill));
         new EventTrigger("Intake").onTrue(new CoralStation(m_elevator, m_windmill).alongWith(new RunIntake(m_manipulator)));
 
-        NamedCommands.registerCommand("Is Intake Finished?", new IsIntakeFinished(m_manipulator));
+        NamedCommands.registerCommand("Is Intake Finished?", new IsIntakeFinished(m_manipulator).withTimeout(3));
         
         m_autoChooser = AutoBuilder.buildAutoChooser("3m test path");
         SmartDashboard.putData("Auto Mode", m_autoChooser);

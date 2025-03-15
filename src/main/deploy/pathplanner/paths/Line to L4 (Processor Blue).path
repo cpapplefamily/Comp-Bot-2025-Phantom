@@ -8,8 +8,8 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.103249999999999,
-        "y": 2.27
+        "x": 6.425409836065573,
+        "y": 2.2328381147540983
       },
       "isLocked": false,
       "linkedName": null
@@ -20,8 +20,8 @@
         "y": 3.099
       },
       "prevControl": {
-        "x": 5.55725,
-        "y": 2.6895
+        "x": 5.670184426229508,
+        "y": 2.4486168032786884
       },
       "nextControl": null,
       "isLocked": false,
@@ -34,7 +34,7 @@
   "eventMarkers": [
     {
       "name": "L4",
-      "waypointRelativePos": 0.36823821339950796,
+      "waypointRelativePos": 0.3672907488986707,
       "endWaypointRelativePos": null,
       "command": null
     }
@@ -48,7 +48,7 @@
     "unlimited": false
   },
   "goalEndState": {
-    "velocity": 0,
+    "velocity": 0.0,
     "rotation": -151.355
   },
   "reversed": false,

@@ -7,7 +7,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Line to L4 (Processor Red)"
+            "pathName": "Line to L4 (Processor Blue)"
           }
         },
         {
@@ -19,7 +19,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "L4 to Human Player (Processor Red)"
+            "pathName": "L4 to Human Player (Processor Blue)"
           }
         },
         {
@@ -31,7 +31,19 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Human Player to L4 Slow (Processor Red)"
+            "pathName": "Human Player to L4 Slow (Processor Blue)"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 0.5
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "L4 to Human Player 2 (Processor Blue)"
           }
         }
       ]

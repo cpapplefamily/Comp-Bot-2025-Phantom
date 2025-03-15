@@ -98,6 +98,7 @@ public class LEDSubsystem extends SubsystemBase {
     @Override
     public void periodic() {
 
+        // TODO: Check to see if m_alliance matches the driver station alliance instead of checking if it is null
         boolean colorUpdate = false;
         if (m_alliance == null) {
             Optional<Alliance> value = DriverStation.getAlliance();
