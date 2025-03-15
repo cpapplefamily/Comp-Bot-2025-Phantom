@@ -113,7 +113,7 @@ public class Calibrations {
         public static final double kCoralStationStowPosition = 30;
 
         /* Climb position in inches */
-        public static final double kPrepClimbPosition = 4;
+        public static final double kPrepClimbPosition = 4.5;
 
         /* Barge position in inches */
         public static final double kBargePosition = 53.5;
@@ -221,7 +221,7 @@ public class Calibrations {
         public static final double kCoralStationStowTolerance = 5;
 
         /* Climb position in degrees */
-        public static final double kPrepClimbPosition = 120;
+        public static final double kPrepClimbPosition = 115;
 
         /* Climb tolerance in degrees before any elevator movement */
         public static final double kPrepClimbTolerance = 5;
