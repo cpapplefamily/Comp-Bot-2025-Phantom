@@ -5,6 +5,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.Calibrations.ElevatorCalibrations;
 import frc.robot.Calibrations.WindmillCalibrations;
 import frc.robot.Utils;
@@ -25,6 +26,7 @@ public class PrepClimb extends Command {
      * @param windmill the windmill
      */
     public PrepClimb(ElevatorSubsystem elevator, WindmillSubsystem windmill) {
+        // TODO: Make this a sequential command group
         m_elevator = elevator;
         m_windmill = windmill;
         addRequirements(m_windmill, m_elevator);
@@ -36,6 +38,8 @@ public class PrepClimb extends Command {
         if (m_windmill.isWithinTolerance(WindmillCalibrations.kPrepClimbTolerance)) {
             m_elevator.updateSetpoint(ElevatorCalibrations.kPrepClimbPosition, false);
         }
+
+        new InstantCommand(() -> m_elevator.setAngle(ElevatorCalibrations.kservoUnlockAngle));
     }
   
     @Override

@@ -16,12 +16,12 @@
     },
     {
       "anchor": {
-        "x": 4.003,
-        "y": 2.905
+        "x": 3.953,
+        "y": 2.925
       },
       "prevControl": {
-        "x": 3.0085,
-        "y": 2.05675
+        "x": 2.9585,
+        "y": 2.07675
       },
       "nextControl": null,
       "isLocked": false,
@@ -41,6 +41,12 @@
     {
       "name": "L4",
       "waypointRelativePos": 0.7017369727047098,
+      "endWaypointRelativePos": null,
+      "command": null
+    },
+    {
+      "name": "Align Right",
+      "waypointRelativePos": 1.0,
       "endWaypointRelativePos": null,
       "command": null
     }

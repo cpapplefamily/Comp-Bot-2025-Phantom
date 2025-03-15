@@ -5,6 +5,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.Calibrations.ElevatorCalibrations;
 import frc.robot.Calibrations.WindmillCalibrations;
 import frc.robot.Utils;
@@ -23,6 +24,7 @@ public class PendulumStow extends Command {
      * Pendulum Stow Command Constructor.
      */
     public PendulumStow(ElevatorSubsystem elevator, WindmillSubsystem windmill) {
+        // TODO: Make this a sequential command group
         m_windmill = windmill;
         m_elevator = elevator;
         addRequirements(m_windmill, m_elevator);
@@ -34,6 +36,8 @@ public class PendulumStow extends Command {
         if (m_elevator.isWithinTolerance(ElevatorCalibrations.kPendulumTolerance)) {
             m_windmill.updateSetpoint(WindmillCalibrations.kPendulumPosition, false);
         }
+
+        new InstantCommand(() -> m_elevator.setAngle(ElevatorCalibrations.kservoUnlockAngle));
     }
 
     @Override
