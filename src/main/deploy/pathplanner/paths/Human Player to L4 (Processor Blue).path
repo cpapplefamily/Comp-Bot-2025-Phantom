@@ -8,8 +8,8 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.811,
-        "y": 1.1267499999999995
+        "x": 1.8221311475409834,
+        "y": 1.1539446721311468
       },
       "isLocked": false,
       "linkedName": null
@@ -20,8 +20,8 @@
         "y": 2.905
       },
       "prevControl": {
-        "x": 3.0085,
-        "y": 2.05675
+        "x": 3.452459016393442,
+        "y": 2.0650102459016386
       },
       "nextControl": null,
       "isLocked": false,
@@ -34,13 +34,13 @@
   "eventMarkers": [
     {
       "name": "Lollipop Stow",
-      "waypointRelativePos": 0.0982630272952903,
+      "waypointRelativePos": 0.10077092511012785,
       "endWaypointRelativePos": null,
       "command": null
     },
     {
       "name": "L4",
-      "waypointRelativePos": 0.7017369727047098,
+      "waypointRelativePos": 0.6976872246696068,
       "endWaypointRelativePos": null,
       "command": null
     }

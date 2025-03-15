@@ -48,6 +48,7 @@ public class RunIntake extends Command {
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
+        // TODO: Change deltaCurrent and getStatorCurrent to velocity based values.
         var deltaCurrent = m_manipulator.getStatorCurrent() - m_filter.lastValue();
         m_filter.calculate(m_manipulator.getStatorCurrent());
         
