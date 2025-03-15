@@ -6,7 +6,6 @@ package frc.robot.commands;
 
 import edu.wpi.first.math.filter.LinearFilter;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.Calibrations.DriverCalibrations;
 import frc.robot.Calibrations.ManipulatorCalibrations;
 import frc.robot.subsystems.ManipulatorSubsystem;
 
@@ -17,6 +16,7 @@ public class RunIntake extends Command {
 
     private ManipulatorSubsystem m_manipulator;
     private LinearFilter m_filter = LinearFilter.movingAverage(10);
+    // TODO: add calibration values for the linear filter input buffer
     private double[] m_inputBuffer = {80.0, 80.0, 80.0, 80.0, 80.0, 80.0, 80.0, 80.0, 80.0, 80.0};
     private double[] m_outputBuffer = {};
     

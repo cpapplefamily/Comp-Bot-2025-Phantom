@@ -16,6 +16,7 @@ public class RunAlgaeIntake extends Command {
 
     private ManipulatorSubsystem m_manipulator;
     private LinearFilter m_filter = LinearFilter.movingAverage(10);
+    // TODO: add calibration values for the linear filter input buffer
     private double[] m_inputBuffer = {30.0, 30.0, 30.0, 30.0, 30.0, 30.0, 30.0, 30.0, 30.0, 30.0};
     private double[] m_outputBuffer = {};
     
