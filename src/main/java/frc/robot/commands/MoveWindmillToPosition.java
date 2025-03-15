@@ -21,7 +21,6 @@ public class MoveWindmillToPosition extends Command {
      * MoveWindmillToPosition command constructor.
      */
     public MoveWindmillToPosition(double newSetpoint, double tolerance, boolean isClimbing, WindmillSubsystem windmill) {
-        // TODO: Parameterize tolerance, and do the thing where certain parameters use the default if not passed in
         m_newSetpoint = newSetpoint;
         m_tolerance = tolerance;
         m_isClimbing = isClimbing;

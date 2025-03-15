@@ -33,6 +33,10 @@ public class Calibrations {
         
         /* Robot-centric X-translational controller - add a little Y-translation to stay flush to the coral reef */
         public static final double kAprilTagTranslationYRate = -0.0;
+
+        public static final double kControllerRumbleValue = 1;
+
+        public static final double kControllerRumblePulseTime = 0.1;
         
     }
 
@@ -118,6 +122,12 @@ public class Calibrations {
         public static final double kAlgaePickupPosition = 3;
 
         public static final double kAlgaeL2Position = 13;
+
+        public static final double kAlgaeL3Position = 28.5;
+
+        public static final double kProcessorPosition = -0.2;
+
+        public static final double kProcessorTolerance = 1;
 
         public static final double kClimbUpSetpoint = 18;
 
@@ -210,7 +220,13 @@ public class Calibrations {
         
         /* L2 pickup position for Algae */
         public static final double kAlgaeL2Position = 26;
+        
+        public static final double kAlgaeL3Position = 26;
 
+        public static final double kProcessorPosition = 26;
+
+        public static final double kProcessorTolerance = 10;
+        
         public static final double kClimbPosition = 180;
 
         public static final double kClimbTolerance = 5;
