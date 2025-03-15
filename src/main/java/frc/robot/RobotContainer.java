@@ -23,6 +23,7 @@ import frc.robot.Calibrations.ManipulatorCalibrations;
 import frc.robot.commands.AlgaeFloorPickup;
 import frc.robot.commands.AlgaeL2Pickup;
 import frc.robot.commands.AlgaeL3Pickup;
+import frc.robot.commands.AlgaeStandingPickup;
 import frc.robot.commands.BargeAlgae;
 import frc.robot.commands.CGClimb;
 import frc.robot.commands.CGOuttakeThenStow;
@@ -166,12 +167,15 @@ public class RobotContainer {
 
         m_joystick.a().onTrue(new AlgaeFloorPickup(m_elevator, m_windmill, m_manipulator));
 
+        m_joystick.povDown().and(m_joystick.leftBumper())
+            .onTrue(new AlgaeStandingPickup(m_elevator, m_windmill, m_manipulator));
+
         m_joystick.povRight().and(m_joystick.leftBumper()).onTrue(new AlgaeL2Pickup(m_elevator, m_windmill, m_manipulator));
 
         m_joystick.povLeft().and(m_joystick.leftBumper()).onTrue(new AlgaeL3Pickup(m_elevator, m_windmill, m_manipulator));
 
-        m_joystick.povDown().and(m_joystick.leftBumper()).onTrue(new ProcessAlgae(m_elevator, m_windmill));
-        m_joystick.povDown().and(m_joystick.leftBumper()).onFalse(new RunManipulator(
+        m_joystick.povUp().and(m_joystick.leftBumper()).onTrue(new ProcessAlgae(m_elevator, m_windmill));
+        m_joystick.povUp().and(m_joystick.leftBumper()).onFalse(new RunManipulator(
             ManipulatorCalibrations.kAlgaeBargingVelocity, 
             ManipulatorCalibrations.kMaxAcceleration, 
             m_manipulator).withTimeout(1));
