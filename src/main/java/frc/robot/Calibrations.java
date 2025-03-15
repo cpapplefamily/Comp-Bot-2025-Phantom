@@ -29,7 +29,9 @@ public class Calibrations {
         public static final double kLimelightDefaultKTx = 0;
 
         /* P-gain for robot-centric X-translational controller using LL tx as feedback */
-        public static final double kAprilTagTranslationXAlignmentKP = 0.05;
+        public static final double kAprilTagTranslationXAlignmentKP = 0.08;
+
+        public static final double kAprilTagTranslationXAlignmentKD = 0.005;
         
         /* Robot-centric X-translational controller - add a little Y-translation to stay flush to the coral reef */
         public static final double kAprilTagTranslationYRate = -0.1;

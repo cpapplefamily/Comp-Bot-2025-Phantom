@@ -5,6 +5,8 @@
 package frc.robot.commands;
 
 import com.ctre.phoenix6.swerve.SwerveRequest.RobotCentric;
+
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Calibrations.DriverCalibrations;
@@ -19,6 +21,11 @@ public class TranslationAlignToTag extends Command {
     private CommandSwerveDrivetrain m_drivetrain;
     private double m_xspeed;
     private int m_pipeline;
+
+    private final PIDController m_pid = new PIDController(
+        DriverCalibrations.kAprilTagTranslationXAlignmentKP, 
+        0, 
+        DriverCalibrations.kAprilTagTranslationXAlignmentKD);
 
     private RobotCentric m_swerveRequest = new RobotCentric().withRotationalDeadband(DriverCalibrations.kmaxSpeed * 0.1);
 
@@ -40,9 +47,8 @@ public class TranslationAlignToTag extends Command {
 
     @Override
     public void execute() {
-        m_xspeed = NetworkTableInstance.getDefault().getTable("limelight-one").getEntry("tx")
-                                              .getDouble(DriverCalibrations.kLimelightDefaultKTx)
-                                              * DriverCalibrations.kAprilTagTranslationXAlignmentKP;
+        m_xspeed = m_pid.calculate(-NetworkTableInstance.getDefault().getTable("limelight-one").getEntry("tx")
+                                              .getDouble(DriverCalibrations.kLimelightDefaultKTx));
         
 
         m_drivetrain.setControl(m_swerveRequest
