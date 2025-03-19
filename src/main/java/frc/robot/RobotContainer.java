@@ -32,6 +32,7 @@ import frc.robot.commands.L2;
 import frc.robot.commands.L3;
 import frc.robot.commands.L4;
 import frc.robot.commands.LollipopStow;
+import frc.robot.commands.MoveElevatorToPosition;
 import frc.robot.commands.PendulumStow;
 import frc.robot.commands.PrepClimb;
 import frc.robot.commands.ProcessAlgae;
@@ -111,82 +112,85 @@ public class RobotContainer {
         /* This allows the driver to reset the rotation */
         m_joystick.start().onTrue(m_drivetrain.runOnce(() -> m_drivetrain.seedFieldCentric()));
 
-        m_joystick.b().onTrue(new LollipopStow(m_elevator, m_windmill));
+        // m_joystick.b().onTrue(new LollipopStow(m_elevator, m_windmill));
 
-        m_joystick.x().onTrue(new PendulumStow(m_elevator, m_windmill));
+        // m_joystick.x().onTrue(new PendulumStow(m_elevator, m_windmill));
     
-        /* Coral station pickup sequence */
-        m_joystick.rightBumper().onTrue(new CoralStation(m_elevator, m_windmill));
-        m_joystick.rightBumper().onTrue(new RunIntake(m_manipulator)
-            .andThen(new InstantCommand(
-                () -> m_joystick.setRumble(RumbleType.kBothRumble, DriverCalibrations.kControllerRumbleValue)))
-            .andThen(new WaitCommand(DriverCalibrations.kControllerRumblePulseTime))
-            .andThen(new InstantCommand(
-                () -> m_joystick.setRumble(RumbleType.kBothRumble, 0))));
-        m_joystick.rightBumper().onFalse(new LollipopStow(m_elevator, m_windmill));
+        // /* Coral station pickup sequence */
+        // m_joystick.rightBumper().onTrue(new CoralStation(m_elevator, m_windmill));
+        // m_joystick.rightBumper().onTrue(new RunIntake(m_manipulator)
+        //     .andThen(new InstantCommand(
+        //         () -> m_joystick.setRumble(RumbleType.kBothRumble, DriverCalibrations.kControllerRumbleValue)))
+        //     .andThen(new WaitCommand(DriverCalibrations.kControllerRumblePulseTime))
+        //     .andThen(new InstantCommand(
+        //         () -> m_joystick.setRumble(RumbleType.kBothRumble, 0))));
+        // m_joystick.rightBumper().onFalse(new LollipopStow(m_elevator, m_windmill));
 
-        /* Coral reef L4 dropoff sequence */
-        m_joystick.povUp().and(m_joystick.leftBumper().negate()).onTrue(new L4(m_elevator, m_windmill));
-        m_joystick.povUp().and(m_joystick.leftBumper().negate())
-            .onFalse(new CGOuttakeThenStow(ManipulatorCalibrations.kL4OuttakeSpeed, 
-                                                         ManipulatorCalibrations.kL4OuttakeTime, 
-                                                         m_elevator, m_windmill, m_manipulator));
+        // /* Coral reef L4 dropoff sequence */
+        // m_joystick.povUp().and(m_joystick.leftBumper().negate()).onTrue(new L4(m_elevator, m_windmill));
+        // m_joystick.povUp().and(m_joystick.leftBumper().negate())
+        //     .onFalse(new CGOuttakeThenStow(ManipulatorCalibrations.kL4OuttakeSpeed, 
+        //                                                  ManipulatorCalibrations.kL4OuttakeTime, 
+        //                                                  m_elevator, m_windmill, m_manipulator));
 
-        /* Coral reef L3 dropoff sequence */
-        m_joystick.povLeft().and(m_joystick.leftBumper().negate()).onTrue(new L3(m_elevator, m_windmill));
-        m_joystick.povLeft().and(m_joystick.leftBumper().negate())
-            .onFalse(new CGOuttakeThenStow(
-                ManipulatorCalibrations.kL3OuttakeSpeed,
-                ManipulatorCalibrations.kL3OuttakeTime,
-                m_elevator, m_windmill, m_manipulator));
+        // /* Coral reef L3 dropoff sequence */
+        // m_joystick.povLeft().and(m_joystick.leftBumper().negate()).onTrue(new L3(m_elevator, m_windmill));
+        // m_joystick.povLeft().and(m_joystick.leftBumper().negate())
+        //     .onFalse(new CGOuttakeThenStow(
+        //         ManipulatorCalibrations.kL3OuttakeSpeed,
+        //         ManipulatorCalibrations.kL3OuttakeTime,
+        //         m_elevator, m_windmill, m_manipulator));
 
-        /* Coral reef L2 dropoff sequence */
-        m_joystick.povRight().and(m_joystick.leftBumper().negate()).onTrue(new L2(m_elevator, m_windmill));
-        m_joystick.povRight().and(m_joystick.leftBumper().negate())
-            .onFalse(new CGOuttakeThenStow(
-                ManipulatorCalibrations.kL2OuttakeSpeed, ManipulatorCalibrations.kL2OuttakeTime, 
-                    m_elevator, m_windmill, m_manipulator));
+        // /* Coral reef L2 dropoff sequence */
+        // m_joystick.povRight().and(m_joystick.leftBumper().negate()).onTrue(new L2(m_elevator, m_windmill));
+        // m_joystick.povRight().and(m_joystick.leftBumper().negate())
+        //     .onFalse(new CGOuttakeThenStow(
+        //         ManipulatorCalibrations.kL2OuttakeSpeed, ManipulatorCalibrations.kL2OuttakeTime, 
+        //             m_elevator, m_windmill, m_manipulator));
+        // // /* Target the left coral reef stick */
+        // // m_joystick.axisGreaterThan(2, 0.1).whileTrue(new RotationAlignToTag(1,
+        // //                                                                            () -> m_joystick.getLeftY(), 
+        // //                                                                            () -> m_joystick.getLeftX(), 
+        // //                                                                            m_drivetrain));
+        // // /* Target the right coral reef stick */
+        // // m_joystick.axisGreaterThan(3, 0.1).whileTrue(new RotationAlignToTag(0,
+        // //                                                                            () -> m_joystick.getLeftY(), 
+        // //                                                                            () -> m_joystick.getLeftX(), 
+        // //                                                                            m_drivetrain));
+
         // /* Target the left coral reef stick */
-        // m_joystick.axisGreaterThan(2, 0.1).whileTrue(new RotationAlignToTag(1,
-        //                                                                            () -> m_joystick.getLeftY(), 
-        //                                                                            () -> m_joystick.getLeftX(), 
+        // m_joystick.axisGreaterThan(2, 0.1).whileTrue(new TranslationAlignToTag(1, 
         //                                                                            m_drivetrain));
         // /* Target the right coral reef stick */
-        // m_joystick.axisGreaterThan(3, 0.1).whileTrue(new RotationAlignToTag(0,
-        //                                                                            () -> m_joystick.getLeftY(), 
-        //                                                                            () -> m_joystick.getLeftX(), 
+        // m_joystick.axisGreaterThan(3, 0.1).whileTrue(new TranslationAlignToTag(0,
         //                                                                            m_drivetrain));
 
-        /* Target the left coral reef stick */
-        m_joystick.axisGreaterThan(2, 0.1).whileTrue(new TranslationAlignToTag(1, 
-                                                                                   m_drivetrain));
-        /* Target the right coral reef stick */
-        m_joystick.axisGreaterThan(3, 0.1).whileTrue(new TranslationAlignToTag(0,
-                                                                                   m_drivetrain));
+        // m_joystick.y().onTrue(new PrepClimb(m_elevator, m_windmill)).onFalse(new CGClimb(m_windmill, m_elevator));
 
-        m_joystick.y().onTrue(new PrepClimb(m_elevator, m_windmill)).onFalse(new CGClimb(m_windmill, m_elevator));
+        // m_joystick.a().onTrue(new AlgaeFloorPickup(m_elevator, m_windmill, m_manipulator));
 
-        m_joystick.a().onTrue(new AlgaeFloorPickup(m_elevator, m_windmill, m_manipulator));
+        // m_joystick.povDown().and(m_joystick.leftBumper())
+        //     .onTrue(new AlgaeStandingPickup(m_elevator, m_windmill, m_manipulator));
 
-        m_joystick.povDown().and(m_joystick.leftBumper())
-            .onTrue(new AlgaeStandingPickup(m_elevator, m_windmill, m_manipulator));
+        // m_joystick.povRight().and(m_joystick.leftBumper()).onTrue(new AlgaeL2Pickup(m_elevator, m_windmill, m_manipulator));
 
-        m_joystick.povRight().and(m_joystick.leftBumper()).onTrue(new AlgaeL2Pickup(m_elevator, m_windmill, m_manipulator));
+        // m_joystick.povLeft().and(m_joystick.leftBumper()).onTrue(new AlgaeL3Pickup(m_elevator, m_windmill, m_manipulator));
 
-        m_joystick.povLeft().and(m_joystick.leftBumper()).onTrue(new AlgaeL3Pickup(m_elevator, m_windmill, m_manipulator));
+        // m_joystick.povUp().and(m_joystick.leftBumper()).onTrue(new ProcessAlgae(m_elevator, m_windmill));
+        // m_joystick.povUp().and(m_joystick.leftBumper()).onFalse(new RunManipulator(
+        //     ManipulatorCalibrations.kAlgaeBargingVelocity, 
+        //     ManipulatorCalibrations.kMaxAcceleration, 
+        //     m_manipulator).withTimeout(1));
 
-        m_joystick.povUp().and(m_joystick.leftBumper()).onTrue(new ProcessAlgae(m_elevator, m_windmill));
-        m_joystick.povUp().and(m_joystick.leftBumper()).onFalse(new RunManipulator(
-            ManipulatorCalibrations.kAlgaeBargingVelocity, 
-            ManipulatorCalibrations.kMaxAcceleration, 
-            m_manipulator).withTimeout(1));
+        // m_joystick.back().onTrue(new BargeAlgae(m_elevator, m_windmill))
+        //     .onFalse(new RunManipulator(
+        //         ManipulatorCalibrations.kAlgaeBargingVelocity, 
+        //         ManipulatorCalibrations.kMaxAcceleration, 
+        //         m_manipulator)
+        //     .withTimeout(1));
 
-        m_joystick.back().onTrue(new BargeAlgae(m_elevator, m_windmill))
-            .onFalse(new RunManipulator(
-                ManipulatorCalibrations.kAlgaeBargingVelocity, 
-                ManipulatorCalibrations.kMaxAcceleration, 
-                m_manipulator)
-            .withTimeout(1));
+        m_joystick.povUp().onTrue(new MoveElevatorToPosition(53.5, 3, false, m_elevator));
+        m_joystick.povDown().onTrue(new MoveElevatorToPosition(3, 3, false, m_elevator));
 
     }
 

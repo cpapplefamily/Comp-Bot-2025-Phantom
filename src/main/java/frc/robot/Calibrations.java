@@ -51,27 +51,27 @@ public class Calibrations {
     public static class ElevatorCalibrations {
 
         /* Gains for the MotionMagic profiler for teleoperated elevator */
-        public static final double kG = 5;
-        public static final double kS = 2.5;
+        public static final double kG = 7;
+        public static final double kS = 4.2;
         public static final double kA = 0;
         public static final double kV = 0;
         public static final double kP = 4;
-        public static final double kD = 0.6;
+        public static final double kD = 1;
 
         /* Gains for the MotionMagic profiler for endgame elevator */
-        public static final double kClimbG = -25;
-        public static final double kClimbP = 15;
+        public static final double kClimbG = 0;
+        public static final double kClimbP = 0;
 
         /* MotionMagic constraints for teleoperated elevator */
-        public static final double kMaxSpeedMotionMagic = 500;
-        public static final double kMaxAccelerationMotionMagic = 600;
+        public static final double kMaxSpeedMotionMagic = 100;
+        public static final double kMaxAccelerationMotionMagic = 1100;
         public static final double kMaxCurrentPerMotor = 80;
 
         /* MotionMagic constraints for engame elevator */
         public static final double kClimbSpeedMotionMagic = 18;
 
         /* Soft limit in rotor rotations */
-        public static final double kForwardSoftLimitThreshold = 88;
+        public static final double kForwardSoftLimitThreshold = 61.2;
 
         /* atTarget() returns true if within this tolerance, in inches */
         public static final double kDefaultTolerance = 5;
