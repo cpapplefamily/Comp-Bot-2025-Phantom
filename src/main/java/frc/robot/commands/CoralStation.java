@@ -4,6 +4,8 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj2.command.ConditionalCommand;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Calibrations.ElevatorCalibrations;
@@ -22,10 +24,13 @@ public class CoralStation extends SequentialCommandGroup {
     public CoralStation(ElevatorSubsystem elevator, WindmillSubsystem windmill) {
         super(
             new ParallelCommandGroup(
-                new MoveWindmillToPosition(
-                    WindmillCalibrations.kCoralStationPrepPosition, 
-                    WindmillCalibrations.kCoralStationPrepTolerance, 
-                    false, windmill),
+                new ConditionalCommand(
+                    new InstantCommand(), 
+                    new MoveWindmillToPosition(
+                        WindmillCalibrations.kCoralStationPrepPosition, 
+                        WindmillCalibrations.kCoralStationPrepTolerance, 
+                        false, windmill), 
+                    () -> Math.abs(windmill.getPosition() - 270) < WindmillCalibrations.kBypassCoralPrepTolerance),
                 new MoveElevatorToPosition(
                     ElevatorCalibrations.kCoralStationPosition, 
                     ElevatorCalibrations.kCoralStationTolerance, 

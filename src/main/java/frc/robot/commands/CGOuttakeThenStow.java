@@ -29,7 +29,7 @@ public class CGOuttakeThenStow extends SequentialCommandGroup {
         super(
             new RunManipulator(outtakeSpeed, ManipulatorCalibrations.kCoralAcceleration, manipulator)
                 .withTimeout(outtakeTime),
-            new LollipopStow(elevator, windmill)
+            new PendulumStow(elevator, windmill)
         //new CoralStationStow(elevator, windmill)
         );
     }

@@ -55,12 +55,12 @@ public class Calibrations {
         public static final double kS = 4.2;
         public static final double kA = 0;
         public static final double kV = 0;
-        public static final double kP = 4;
+        public static final double kP = 10;
         public static final double kD = 1;
 
         /* Gains for the MotionMagic profiler for endgame elevator */
-        public static final double kClimbG = 0;
-        public static final double kClimbP = 0;
+        public static final double kClimbG = -25;
+        public static final double kClimbP = 15;
 
         /* MotionMagic constraints for teleoperated elevator */
         public static final double kMaxSpeedMotionMagic = 100;
@@ -85,14 +85,16 @@ public class Calibrations {
         /* Pendulum tolerance in inches before any windmill movement */
         public static final double kPendulumTolerance = 2;
 
+        public static final double kRaisedStowPosition = 17;
+
         /* Coral station position in inches */
-        public static final double kCoralStationPosition = 34.5;
+        public static final double kCoralStationPosition = 34;
 
         /* Coral station tolerance in inches before any windmill movement */
         public static final double kCoralStationTolerance = 2;
 
         /* Coral reef L4 position in inches */
-        public static final double kL4Position = 52.5;
+        public static final double kL4Position = 51.5;
 
         /* Coral reef L4 tolerance in inches before any windmill movement */
         public static final double kL4Tolerance = 2;
@@ -193,14 +195,22 @@ public class Calibrations {
         /* Lollipop tolerance in degrees before any elevator movement */
         public static final double kLollipopTolerance = 30;
 
+        public static final double kPendulumPrepPosition = 0;
+
+        public static final double kPendulumPrepTolerance = 25;
+
         /* Pendulum position in degrees */
         public static final double kPendulumPosition = 270;
+
+        public static final double kPendulumTolerance = 2;
 
         /* Horizontal position for before the windmill goes to the Coral Station */
         public static final double kCoralStationPrepPosition = 180;
 
         /* Horizontal position tolerance for before the windmill goes to the Coral Station */
         public static final double kCoralStationPrepTolerance = 10;
+
+        public static final double kBypassCoralPrepTolerance = 20;
         
         /* Coral station position in degrees */
         public static final double kCoralStationPosition = 287;
