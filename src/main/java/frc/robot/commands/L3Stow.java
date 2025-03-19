@@ -21,12 +21,12 @@ public class L3Stow extends Command {
     private ElevatorSubsystem m_elevator;
 
     /**
-     * LollipopStor command constructor.
+     * L3Stow command constructor.
      *
      * <p>1. Move the arm to 90deg +- frame perimeter tolerance...this assumes the arm will ALWAYS go travale the
      *    shortest path (doesn't swing through 180deg)
      *
-     * <p>2. Move the elevator to fully down
+     * <p>2. Move the elevator a partly raised position
      */
     public L3Stow(ElevatorSubsystem elevator, WindmillSubsystem windmill) {
         m_windmill = windmill;

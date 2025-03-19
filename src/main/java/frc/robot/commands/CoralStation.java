@@ -30,7 +30,9 @@ public class CoralStation extends SequentialCommandGroup {
                         WindmillCalibrations.kCoralStationPrepPosition, 
                         WindmillCalibrations.kCoralStationPrepTolerance, 
                         false, windmill), 
-                    () -> Math.abs(windmill.getPosition() - 270) < WindmillCalibrations.kBypassCoralPrepTolerance),
+                    () -> Math.abs(windmill.getPosition() 
+                        - WindmillCalibrations.kPendulumPosition) 
+                        < WindmillCalibrations.kBypassCoralPrepTolerance),
                 new MoveElevatorToPosition(
                     ElevatorCalibrations.kCoralStationPosition, 
                     ElevatorCalibrations.kCoralStationTolerance, 

@@ -85,6 +85,7 @@ public class Calibrations {
         /* Pendulum tolerance in inches before any windmill movement */
         public static final double kPendulumTolerance = 2;
 
+        /* Position to go to for a raised lollipop stow. */
         public static final double kRaisedStowPosition = 17;
 
         /* Coral station position in inches */
@@ -195,13 +196,16 @@ public class Calibrations {
         /* Lollipop tolerance in degrees before any elevator movement */
         public static final double kLollipopTolerance = 30;
 
+        /* Position to go to before going to the pendulum position */
         public static final double kPendulumPrepPosition = 0;
 
+        /* Tolerance for the prep position in degrees */
         public static final double kPendulumPrepTolerance = 25;
 
         /* Pendulum position in degrees */
         public static final double kPendulumPosition = 270;
 
+        /* Tolerance for the pendulum position in degrees */
         public static final double kPendulumTolerance = 2;
 
         /* Horizontal position for before the windmill goes to the Coral Station */
@@ -210,6 +214,7 @@ public class Calibrations {
         /* Horizontal position tolerance for before the windmill goes to the Coral Station */
         public static final double kCoralStationPrepTolerance = 10;
 
+        /* Tolerance to bypass the prep position of the coral station command group */
         public static final double kBypassCoralPrepTolerance = 20;
         
         /* Coral station position in degrees */
