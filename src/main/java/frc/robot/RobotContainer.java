@@ -117,14 +117,14 @@ public class RobotContainer {
         m_joystick.x().onTrue(new PendulumStow(m_elevator, m_windmill));
     
         /* Coral station pickup sequence */
-        m_joystick.rightBumper().onTrue(new CoralStation(m_elevator, m_windmill));
+        m_joystick.rightBumper().onTrue(new CoralStation(m_elevator, m_windmill).andThen(new InstantCommand(LEDSubsystem::setIntake)));
         m_joystick.rightBumper().onTrue(new RunIntake(m_manipulator)
             .andThen(new InstantCommand(
-                () -> m_joystick.setRumble(RumbleType.kBothRumble, DriverCalibrations.kControllerRumbleValue)))
+                () -> m_joystick.setRumble(RumbleType.kBothRumble, DriverCalibrations.kControllerRumbleValue)).alongWith(new InstantCommand(LEDSubsystem::setManipulatorReady)))
             .andThen(new WaitCommand(DriverCalibrations.kControllerRumblePulseTime))
             .andThen(new InstantCommand(
                 () -> m_joystick.setRumble(RumbleType.kBothRumble, 0))));
-        m_joystick.rightBumper().onFalse(new L3Stow(m_elevator, m_windmill));
+        m_joystick.rightBumper().onFalse(new L3Stow(m_elevator, m_windmill).alongWith(new InstantCommand(LEDSubsystem::setNeutral)));
 
         /* Coral reef L4 dropoff sequence */
         m_joystick.povUp().and(m_joystick.leftBumper().negate()).onTrue(new L4(m_elevator, m_windmill));

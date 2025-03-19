@@ -31,6 +31,7 @@ public class LEDSubsystem extends SubsystemBase {
         MANIPULATOR_NOT_READY,
         MANIPULATOR_READY,
         CLIMB,
+        CLIMB_HOOKED,
         ERROR
     }
 
@@ -42,7 +43,8 @@ public class LEDSubsystem extends SubsystemBase {
     private final StrobeAnimation m_noAlliance;
     private final SingleFadeAnimation m_redDisabled;
     private final SingleFadeAnimation m_blueDisabled;
-    private final LarsonAnimation m_intake;
+    //private final LarsonAnimation m_intake;
+    private final StrobeAnimation m_intake;
     private final StrobeAnimation m_error;
     private final TwinkleOffAnimation m_manipulatorNotReady;
     private final StrobeAnimation m_manipulatorReady;
@@ -81,12 +83,12 @@ public class LEDSubsystem extends SubsystemBase {
             m_noAlliance = new StrobeAnimation(255, 0, 255, 0, 0.5, Constants.LEDConstants.kRGBCount);
             m_redDisabled = new SingleFadeAnimation(255, 0, 0, 0, 0.3, Constants.LEDConstants.kRGBCount);
             m_blueDisabled = new SingleFadeAnimation(0, 0, 255, 0, 0.3, Constants.LEDConstants.kRGBCount);
-            m_intake = new LarsonAnimation(165, 255, 0, 0, 0.25, Constants.LEDConstants.kRGBCount,
-                                           LarsonAnimation.BounceMode.Back, 3);
+            m_intake = new StrobeAnimation(255, 255, 0, 0, 0.5, Constants.LEDConstants.kRGBCount);
+            //m_intake = new LarsonAnimation(165, 255, 0, 0, 0.25, Constants.LEDConstants.kRGBCount, LarsonAnimation.BounceMode.Back, 3);
             m_error = new StrobeAnimation(255, 0, 0, 0, 0.5, Constants.LEDConstants.kRGBCount);
             m_manipulatorNotReady = new TwinkleOffAnimation(0, 255, 0, 0, 1, Constants.LEDConstants.kRGBCount,
                                                             TwinkleOffAnimation.TwinkleOffPercent.Percent64);
-            m_manipulatorReady = new StrobeAnimation(255, 0, 0, 0,  1, Constants.LEDConstants.kRGBCount);
+            m_manipulatorReady = new StrobeAnimation(0, 255, 0, 0,  1, Constants.LEDConstants.kRGBCount);
             m_climbLEFT = new LarsonAnimation(255, 0, 255, 0, .1, Constants.LEDConstants.kRGBSection1.m_length,
                                               LarsonAnimation.BounceMode.Back, 4, Constants.LEDConstants.kRGBSection1.m_start);
             m_climbTOP = new LarsonAnimation(255, 0, 255, 0, .5, Constants.LEDConstants.kRGBSection2.m_length,
@@ -135,7 +137,7 @@ public class LEDSubsystem extends SubsystemBase {
                             m_candle.clearAnimation(2);
                             m_candle.clearAnimation(1);
                             m_candle.clearAnimation(0);
-                            m_candle.setLEDs(0, 255, 0, 0, 0, Constants.LEDConstants.kRGBCount);
+                            m_candle.setLEDs(255, 0, 0, 0, 0, Constants.LEDConstants.kRGBCount);
                         } else {
                             m_candle.clearAnimation(2);
                             m_candle.clearAnimation(1);
