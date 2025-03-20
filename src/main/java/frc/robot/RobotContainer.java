@@ -112,9 +112,9 @@ public class RobotContainer {
         /* This allows the driver to reset the rotation */
         m_joystick.start().onTrue(m_drivetrain.runOnce(() -> m_drivetrain.seedFieldCentric()));
 
-        m_joystick.b().onTrue(new LollipopStow(m_elevator, m_windmill));
+        m_joystick.b().onTrue(new LollipopStow(m_elevator, m_windmill).alongWith(new InstantCommand(()->m_elevator.setAngle(ElevatorCalibrations.kservoUnlockAngle))));
 
-        m_joystick.x().onTrue(new PendulumStow(m_elevator, m_windmill));
+        m_joystick.x().onTrue(new PendulumStow(m_elevator, m_windmill).alongWith(new InstantCommand(()->m_elevator.setAngle(ElevatorCalibrations.kservoUnlockAngle))));
     
         /* Coral station pickup sequence */
         m_joystick.rightBumper().onTrue(new CoralStation(m_elevator, m_windmill).andThen(new InstantCommand(LEDSubsystem::setIntake)));
