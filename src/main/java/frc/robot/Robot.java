@@ -9,6 +9,7 @@ import java.util.Optional;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
@@ -36,6 +37,7 @@ public class Robot extends TimedRobot {
 
     @Override
     public void disabledInit() {
+
         m_robotContainer.m_elevator.disableServo();
         DriverStation.reportError("m_robotContainer.m_leds.getState().toString(): ", false);
         DriverStation.reportError(m_robotContainer.m_leds.getState().toString(), false);
@@ -86,6 +88,7 @@ public class Robot extends TimedRobot {
 
     @Override
     public void teleopInit() {
+        Shuffleboard.selectTab("Teleoperated");
         m_robotContainer.m_windmill.updateSetpoint(m_robotContainer.m_windmill.getPosition(), false);
         m_robotContainer.m_elevator.updateSetpoint(m_robotContainer.m_elevator.getPosition(), false);
         m_robotContainer.m_manipulator.updateSetpoint(0, ManipulatorCalibrations.kMaxAcceleration);
