@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Calibrations.ElevatorCalibrations;
 import frc.robot.subsystems.ElevatorSubsystem;
@@ -30,6 +31,7 @@ public class LockElevatorWhenDown extends Command {
     public void end(boolean interrupted) {
         m_elevator.setAngle(ElevatorCalibrations.kservoLockAngle);
         LEDSubsystem.setClimb();
+        NetworkTableInstance.getDefault().getTable("limelight-two").getEntry("pipeline").setDouble(0);
     }
 
     @Override
