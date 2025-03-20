@@ -125,7 +125,7 @@ public class Calibrations {
         public static final int kservoLockAngle = 100;
 
         /* Servo unlock position in degrees */
-        public static final int kservoUnlockAngle = 30;
+        public static final int kservoUnlockAngle = 28;
 
         /* Floor pickup position for Algae */
         public static final double kAlgaePickupPosition = 3;
