@@ -73,10 +73,10 @@ public class RobotContainer {
      */
     public RobotContainer() {
         SmartDashboard.putData("Unlock", new InstantCommand(
-            () -> m_elevator.setAngle(ElevatorCalibrations.kservoUnlockAngle)));
+            () -> m_elevator.setAngle(ElevatorCalibrations.kservoUnlockAngle)).alongWith(new InstantCommand(LEDSubsystem::setNeutral)));
 
         SmartDashboard.putData("Lock", new InstantCommand(
-            () -> m_elevator.setAngle(ElevatorCalibrations.kservoLockAngle))); 
+            () -> m_elevator.setAngle(ElevatorCalibrations.kservoLockAngle)).alongWith(new InstantCommand(LEDSubsystem::setClimb))); 
 
         configureBindings();
 
