@@ -24,7 +24,7 @@ import java.util.Optional;
  */
 public class LEDSubsystem extends SubsystemBase {
 
-    private static enum LEDSubsystemState {
+    public static enum LEDSubsystemState {
         DISABLED,
         NEUTRAL,
         INTAKE,
@@ -210,6 +210,10 @@ public class LEDSubsystem extends SubsystemBase {
 
     public static void setError() {
         m_currentState = LEDSubsystemState.ERROR;
+    }
+
+    public LEDSubsystemState getState(){
+        return m_currentState;
     }
 
 }

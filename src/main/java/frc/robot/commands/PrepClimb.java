@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.Calibrations.ElevatorCalibrations;
@@ -34,6 +35,7 @@ public class PrepClimb extends Command {
 
     @Override
     public void initialize() {
+        NetworkTableInstance.getDefault().getTable("limelight-two").getEntry("pipeline").setDouble(1);
         m_windmill.updateSetpoint(WindmillCalibrations.kPrepClimbPosition, false);
         if (m_windmill.isWithinTolerance(WindmillCalibrations.kPrepClimbTolerance)) {
             m_elevator.updateSetpoint(ElevatorCalibrations.kPrepClimbPosition, false);
