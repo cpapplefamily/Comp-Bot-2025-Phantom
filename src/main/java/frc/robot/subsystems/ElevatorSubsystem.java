@@ -41,6 +41,8 @@ public class ElevatorSubsystem extends SubsystemBase {
     private CANdiConfiguration m_candiConfig;
     private final DynamicMotionMagicTorqueCurrentFOC m_request;
 
+    private boolean m_pastCaNdi = false;
+
     /**
      * Elevator subsystem constructor.
      */
@@ -89,6 +91,8 @@ public class ElevatorSubsystem extends SubsystemBase {
         m_talonFxConfig.HardwareLimitSwitch.ReverseLimitSource = ReverseLimitSourceValue.RemoteCANdiS1;
         m_talonFxConfig.HardwareLimitSwitch.ReverseLimitRemoteSensorID = m_candi.getDeviceID();
         m_talonFxConfig.HardwareLimitSwitch.ReverseLimitEnable = true;
+        m_talonFxConfig.HardwareLimitSwitch.ReverseLimitAutosetPositionEnable = true;
+        m_talonFxConfig.HardwareLimitSwitch.ReverseLimitAutosetPositionValue = 0.0;
 
         m_talonFxConfig.SoftwareLimitSwitch.ForwardSoftLimitEnable = true;
         m_talonFxConfig.SoftwareLimitSwitch.ForwardSoftLimitThreshold = ElevatorCalibrations.kForwardSoftLimitThreshold;
@@ -193,6 +197,11 @@ public class ElevatorSubsystem extends SubsystemBase {
     @Override
     public void periodic() {
 
+        if ((m_candi.getS2Closed().getValue().booleanValue() != m_pastCaNdi) && (m_pastCaNdi == false)) {
+            m_motor1.setPosition(0);
+        }
+        m_pastCaNdi = m_candi.getS2Closed().getValue().booleanValue();
+          
         /* Debug values */
         SmartDashboard.putNumber("Elevator Position", getPosition());
         SmartDashboard.putBoolean("CANdi State", getCANdiState());

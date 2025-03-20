@@ -51,27 +51,27 @@ public class Calibrations {
     public static class ElevatorCalibrations {
 
         /* Gains for the MotionMagic profiler for teleoperated elevator */
-        public static final double kG = 5;
-        public static final double kS = 2.5;
+        public static final double kG = 7;
+        public static final double kS = 4.2;
         public static final double kA = 0;
         public static final double kV = 0;
-        public static final double kP = 4;
-        public static final double kD = 0.6;
+        public static final double kP = 10;
+        public static final double kD = 1;
 
         /* Gains for the MotionMagic profiler for endgame elevator */
         public static final double kClimbG = -25;
         public static final double kClimbP = 15;
 
         /* MotionMagic constraints for teleoperated elevator */
-        public static final double kMaxSpeedMotionMagic = 500;
-        public static final double kMaxAccelerationMotionMagic = 600;
+        public static final double kMaxSpeedMotionMagic = 100;
+        public static final double kMaxAccelerationMotionMagic = 1100;
         public static final double kMaxCurrentPerMotor = 80;
 
         /* MotionMagic constraints for engame elevator */
         public static final double kClimbSpeedMotionMagic = 18;
 
         /* Soft limit in rotor rotations */
-        public static final double kForwardSoftLimitThreshold = 88;
+        public static final double kForwardSoftLimitThreshold = 61.2;
 
         /* atTarget() returns true if within this tolerance, in inches */
         public static final double kDefaultTolerance = 5;
@@ -85,14 +85,17 @@ public class Calibrations {
         /* Pendulum tolerance in inches before any windmill movement */
         public static final double kPendulumTolerance = 2;
 
+        /* Position to go to for a raised lollipop stow. */
+        public static final double kRaisedStowPosition = 17;
+
         /* Coral station position in inches */
-        public static final double kCoralStationPosition = 34.5;
+        public static final double kCoralStationPosition = 34;
 
         /* Coral station tolerance in inches before any windmill movement */
         public static final double kCoralStationTolerance = 2;
 
         /* Coral reef L4 position in inches */
-        public static final double kL4Position = 52.5;
+        public static final double kL4Position = 51.5;
 
         /* Coral reef L4 tolerance in inches before any windmill movement */
         public static final double kL4Tolerance = 2;
@@ -193,14 +196,26 @@ public class Calibrations {
         /* Lollipop tolerance in degrees before any elevator movement */
         public static final double kLollipopTolerance = 30;
 
+        /* Position to go to before going to the pendulum position */
+        public static final double kPendulumPrepPosition = 0;
+
+        /* Tolerance for the prep position in degrees */
+        public static final double kPendulumPrepTolerance = 25;
+
         /* Pendulum position in degrees */
         public static final double kPendulumPosition = 270;
+
+        /* Tolerance for the pendulum position in degrees */
+        public static final double kPendulumTolerance = 2;
 
         /* Horizontal position for before the windmill goes to the Coral Station */
         public static final double kCoralStationPrepPosition = 180;
 
         /* Horizontal position tolerance for before the windmill goes to the Coral Station */
         public static final double kCoralStationPrepTolerance = 10;
+
+        /* Tolerance to bypass the prep position of the coral station command group */
+        public static final double kBypassCoralPrepTolerance = 20;
         
         /* Coral station position in degrees */
         public static final double kCoralStationPosition = 287;

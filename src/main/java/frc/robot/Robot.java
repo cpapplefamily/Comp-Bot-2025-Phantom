@@ -36,7 +36,7 @@ public class Robot extends TimedRobot {
 
     @Override
     public void disabledPeriodic() {
-        if (m_robotContainer.m_elevator.getCANdiState()) {
+        if (!m_robotContainer.m_elevator.getCANdiState()) {
             LEDSubsystem.setError();
         } else {
             LEDSubsystem.setDisabled();

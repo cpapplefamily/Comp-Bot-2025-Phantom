@@ -4,52 +4,33 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Calibrations.ElevatorCalibrations;
 import frc.robot.Calibrations.WindmillCalibrations;
-import frc.robot.Utils;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.WindmillSubsystem;
 
 /**
  * Pendulum Stow Command.
  */
-public class PendulumStow extends Command {
-
-    private WindmillSubsystem m_windmill;
-    private ElevatorSubsystem m_elevator;
+public class PendulumStow extends SequentialCommandGroup {
 
     /**
      * Pendulum Stow Command Constructor.
      */
     public PendulumStow(ElevatorSubsystem elevator, WindmillSubsystem windmill) {
-        // TODO: Make this a sequential command group
-        m_windmill = windmill;
-        m_elevator = elevator;
-        addRequirements(m_windmill, m_elevator);
-    }
-
-    @Override
-    public void initialize() {
-        m_elevator.updateSetpoint(ElevatorCalibrations.kPendulumPosition, false);
-        if (m_elevator.isWithinTolerance(ElevatorCalibrations.kPendulumTolerance)) {
-            m_windmill.updateSetpoint(WindmillCalibrations.kPendulumPosition, false);
-        }
-
-        new InstantCommand(() -> m_elevator.setAngle(ElevatorCalibrations.kservoUnlockAngle));
-    }
-
-    @Override
-    public void execute() {
-        if (m_elevator.isWithinTolerance(ElevatorCalibrations.kPendulumTolerance)) {
-            m_windmill.updateSetpoint(WindmillCalibrations.kPendulumPosition, false);
-        }
-    }
-
-    @Override
-    public boolean isFinished() {
-        return Utils.isDoubleEqual(m_windmill.getSetpoint(), WindmillCalibrations.kPendulumPosition, 0.01)
-               && Utils.isDoubleEqual(m_elevator.getSetpoint(), ElevatorCalibrations.kPendulumPosition, 0.01);
+        super(
+            new InstantCommand(() -> elevator.setAngle(ElevatorCalibrations.kservoUnlockAngle)),
+            new ParallelCommandGroup(
+                new MoveElevatorToPosition(
+                    ElevatorCalibrations.kPendulumPosition, ElevatorCalibrations.kPendulumTolerance, false, elevator),
+                new MoveWindmillToPosition(
+                    WindmillCalibrations.kPendulumPrepPosition, WindmillCalibrations.kPendulumPrepTolerance, false, windmill)
+            ),
+            new MoveWindmillToPosition(
+                WindmillCalibrations.kPendulumPosition, WindmillCalibrations.kPendulumTolerance, false, windmill)
+        );
     }
 }

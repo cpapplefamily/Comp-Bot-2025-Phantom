@@ -30,6 +30,7 @@ import frc.robot.commands.CoralStation;
 import frc.robot.commands.IsIntakeFinished;
 import frc.robot.commands.L2;
 import frc.robot.commands.L3;
+import frc.robot.commands.L3Stow;
 import frc.robot.commands.L4;
 import frc.robot.commands.LollipopStow;
 import frc.robot.commands.PendulumStow;
@@ -123,7 +124,7 @@ public class RobotContainer {
             .andThen(new WaitCommand(DriverCalibrations.kControllerRumblePulseTime))
             .andThen(new InstantCommand(
                 () -> m_joystick.setRumble(RumbleType.kBothRumble, 0))));
-        m_joystick.rightBumper().onFalse(new LollipopStow(m_elevator, m_windmill));
+        m_joystick.rightBumper().onFalse(new L3Stow(m_elevator, m_windmill));
 
         /* Coral reef L4 dropoff sequence */
         m_joystick.povUp().and(m_joystick.leftBumper().negate()).onTrue(new L4(m_elevator, m_windmill));

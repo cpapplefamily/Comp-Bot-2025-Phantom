@@ -19,7 +19,8 @@ public final class Constants {
         public static final int kmotor3CanId = 4;
         public static final int kmotor4CanId = 15;
         public static final int kcandiCanId = 55;
-        public static final double kPulleyGearRatio = 1.6925;
+        /* Rotations of the motor per inch */
+        public static final double kPulleyGearRatio = 1.167;
         public static final int kservoPort = 0;
     }
 
