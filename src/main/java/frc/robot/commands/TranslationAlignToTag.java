@@ -10,6 +10,7 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Calibrations.DriverCalibrations;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
+import frc.robot.subsystems.LEDSubsystem;
 
 
 /**
@@ -46,18 +47,36 @@ public class TranslationAlignToTag extends Command {
 
     @Override
     public void execute() {
-        m_xspeed = m_pid.calculate(-NetworkTableInstance.getDefault().getTable("limelight-one").getEntry("tx")
-                                              .getDouble(DriverCalibrations.kLimelightDefaultKTx));
-        
+        //Check if there is a target
+        double isTarget = NetworkTableInstance.getDefault().getTable("limelight-one").getEntry("tv")
+        .getDouble(0);
+        //Get the Error
+        double txValue = NetworkTableInstance.getDefault().getTable("limelight-one").getEntry("tx")
+        .getDouble(DriverCalibrations.kLimelightDefaultKTx);
 
+        //Invert the error and calculate PID
+        m_xspeed = m_pid.calculate(-txValue);
+        
         m_drivetrain.setControl(m_swerveRequest
             .withVelocityX(m_xspeed)
             .withVelocityY(DriverCalibrations.kAprilTagTranslationYRate));
 
+        if(isTarget>0){
+            if(Math.abs(txValue)<1.75){
+                LEDSubsystem.setCoralOnTarget();
+            }else{
+                LEDSubsystem.setCoralTargeting();
+            }
+        }else{
+            LEDSubsystem.setNeutral();
+        }
+        
     }
-
+    
     @Override
-    public void end(boolean interrupted) {}
+    public void end(boolean interrupted) {
+        LEDSubsystem.setNeutral();
+    }
 
     @Override
     public boolean isFinished() {
