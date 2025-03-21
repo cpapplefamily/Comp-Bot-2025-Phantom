@@ -5,7 +5,6 @@
 package frc.robot.commands;
 
 import com.ctre.phoenix6.swerve.SwerveRequest.RobotCentric;
-import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.math.trajectory.TrapezoidProfile.Constraints;
@@ -25,15 +24,11 @@ public class TranslationAlignToTag extends Command {
     private double m_xspeed;
     private int m_pipeline;
 
-    private final ProfiledPIDController m_profiled_PID = new ProfiledPIDController(DriverCalibrations.kAprilTagTranslationXAlignmentKP,
-     0.0, 
-     DriverCalibrations.kAprilTagTranslationXAlignmentKD,
-      new TrapezoidProfile.Constraints(1, 1));
-
-    private final PIDController m_pid = new PIDController(
-        DriverCalibrations.kAprilTagTranslationXAlignmentKP, 
-        0, 
-        DriverCalibrations.kAprilTagTranslationXAlignmentKD);
+    private final ProfiledPIDController m_profiled_PID = 
+        new ProfiledPIDController(DriverCalibrations.kAprilTagTranslationXAlignmentKP,
+                                0.0, 
+                                DriverCalibrations.kAprilTagTranslationXAlignmentKD,
+                                new TrapezoidProfile.Constraints(1, .05));
 
     private RobotCentric m_swerveRequest = new RobotCentric().withRotationalDeadband(DriverCalibrations.kmaxSpeed * 0.1);
 
@@ -63,7 +58,6 @@ public class TranslationAlignToTag extends Command {
         .getDouble(DriverCalibrations.kLimelightDefaultKTx);
 
         //Invert the error and calculate PID
-        m_xspeed = m_pid.calculate(-txValue);
         m_xspeed = m_profiled_PID.calculate(-txValue);
         
         m_drivetrain.setControl(m_swerveRequest
