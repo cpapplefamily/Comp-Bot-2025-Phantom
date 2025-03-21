@@ -29,7 +29,7 @@ public class Calibrations {
         public static final double kLimelightDefaultKTx = 0;
 
         /* P-gain for robot-centric X-translational controller using LL tx as feedback */
-        public static final double kAprilTagTranslationXAlignmentKP = 0.08;
+        public static final double kAprilTagTranslationXAlignmentKP = 0.1;
 
         /* D-gain for robot-centric X-translational controller using LL tx as feedback */
         public static final double kAprilTagTranslationXAlignmentKD = 0.005;
@@ -80,13 +80,13 @@ public class Calibrations {
         public static final double kBottomPosition = -0.2;
 
         /* Pendulum position in inches */
-        public static final double kPendulumPosition = 28;
+        public static final double kPendulumPosition = 24;
 
         /* Pendulum tolerance in inches before any windmill movement */
         public static final double kPendulumTolerance = 2;
 
         /* Position to go to for a raised lollipop stow. */
-        public static final double kRaisedStowPosition = 17;
+        public static final double kRaisedStowPosition = 15;
 
         /* Coral station position in inches */
         public static final double kCoralStationPosition = 34;
@@ -125,7 +125,7 @@ public class Calibrations {
         public static final int kservoLockAngle = 100;
 
         /* Servo unlock position in degrees */
-        public static final int kservoUnlockAngle = 30;
+        public static final int kservoUnlockAngle = 28;
 
         /* Floor pickup position for Algae */
         public static final double kAlgaePickupPosition = 3;
@@ -236,7 +236,7 @@ public class Calibrations {
         public static final double kCoralStationStowTolerance = 5;
 
         /* Climb position in degrees */
-        public static final double kPrepClimbPosition = 115;
+        public static final double kPrepClimbPosition = 110;
 
         /* Climb tolerance in degrees before any elevator movement */
         public static final double kPrepClimbTolerance = 5;

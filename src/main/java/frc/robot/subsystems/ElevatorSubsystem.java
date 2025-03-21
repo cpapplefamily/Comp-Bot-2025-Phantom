@@ -206,5 +206,9 @@ public class ElevatorSubsystem extends SubsystemBase {
         SmartDashboard.putNumber("Elevator Position", getPosition());
         SmartDashboard.putBoolean("CANdi State", getCANdiState());
     }
+
+    public void setElevatorZero(){
+        m_motor1.set(0);
+    }
  
 }

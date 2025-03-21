@@ -4,8 +4,10 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Calibrations.ElevatorCalibrations;
 import frc.robot.Calibrations.WindmillCalibrations;
 import frc.robot.subsystems.ElevatorSubsystem;
@@ -31,7 +33,10 @@ public class CGClimb extends SequentialCommandGroup {
                 new MoveElevatorToPosition(
                     ElevatorCalibrations.kClimbDownSetpoint, ElevatorCalibrations.kClimbDownTolerance, true, elevator),
                 new LockElevatorWhenDown(elevator)
-            )            
+            ),
+            new WaitCommand(3),
+            new InstantCommand(elevator::setElevatorZero)
+
         );
     }
 }
