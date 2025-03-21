@@ -4,19 +4,15 @@
 
 package frc.robot;
 
-import java.util.Optional;
-
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.PrintCommand;
 import frc.robot.Calibrations.ManipulatorCalibrations;
 import frc.robot.subsystems.LEDSubsystem;
-
+import java.util.Optional;
 
 /**
  * Robot.
@@ -42,9 +38,9 @@ public class Robot extends TimedRobot {
         DriverStation.reportError("m_robotContainer.m_leds.getState().toString(): ", false);
         DriverStation.reportError(m_robotContainer.m_leds.getState().toString(), false);
        
-        if(m_robotContainer.m_leds.getState() == LEDSubsystem.LEDSubsystemState.CLIMB){
+        if (m_robotContainer.m_leds.getState() == LEDSubsystem.LEDSubsystemState.CLIMB) {
             LEDSubsystem.setClimb();
-        }else{
+        } else {
             LEDSubsystem.setDisabled();
         }
     }
@@ -52,9 +48,10 @@ public class Robot extends TimedRobot {
     @Override
     public void disabledPeriodic() {
         Optional<Alliance> value = DriverStation.getAlliance();
-        if(m_robotContainer.m_leds.getState() == LEDSubsystem.LEDSubsystemState.CLIMB){
-        }else{
-            if(value.isPresent()){
+        if (m_robotContainer.m_leds.getState() == LEDSubsystem.LEDSubsystemState.CLIMB) {
+            // TODO: What was supposed to be here?  It was left empty.
+        } else {
+            if (value.isPresent()) {
                 LEDSubsystem.setAlliance(value.get());
             }
             if (!m_robotContainer.m_elevator.getCANdiState()) {

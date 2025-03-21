@@ -73,10 +73,12 @@ public class RobotContainer {
      */
     public RobotContainer() {
         SmartDashboard.putData("Unlock", new InstantCommand(
-            () -> m_elevator.setAngle(ElevatorCalibrations.kservoUnlockAngle)).alongWith(new InstantCommand(LEDSubsystem::setNeutral)));
+            () -> m_elevator.setAngle(ElevatorCalibrations.kservoUnlockAngle))
+            .alongWith(new InstantCommand(LEDSubsystem::setNeutral)));
 
         SmartDashboard.putData("Lock", new InstantCommand(
-            () -> m_elevator.setAngle(ElevatorCalibrations.kservoLockAngle)).alongWith(new InstantCommand(LEDSubsystem::setClimb))); 
+            () -> m_elevator.setAngle(ElevatorCalibrations.kservoLockAngle))
+            .alongWith(new InstantCommand(LEDSubsystem::setClimb))); 
 
         configureBindings();
 
@@ -112,19 +114,24 @@ public class RobotContainer {
         /* This allows the driver to reset the rotation */
         m_joystick.start().onTrue(m_drivetrain.runOnce(() -> m_drivetrain.seedFieldCentric()));
 
-        m_joystick.b().onTrue(new LollipopStow(m_elevator, m_windmill).alongWith(new InstantCommand(()->m_elevator.setAngle(ElevatorCalibrations.kservoUnlockAngle))));
+        m_joystick.b().onTrue(new LollipopStow(m_elevator, m_windmill)
+                      .alongWith(new InstantCommand(() -> m_elevator.setAngle(ElevatorCalibrations.kservoUnlockAngle))));
 
-        m_joystick.x().onTrue(new PendulumStow(m_elevator, m_windmill).alongWith(new InstantCommand(()->m_elevator.setAngle(ElevatorCalibrations.kservoUnlockAngle))));
+        m_joystick.x().onTrue(new PendulumStow(m_elevator, m_windmill)
+                      .alongWith(new InstantCommand(() -> m_elevator.setAngle(ElevatorCalibrations.kservoUnlockAngle))));
     
         /* Coral station pickup sequence */
-        m_joystick.rightBumper().onTrue(new CoralStation(m_elevator, m_windmill).andThen(new InstantCommand(LEDSubsystem::setIntake)));
+        m_joystick.rightBumper().onTrue(new CoralStation(m_elevator, m_windmill)
+                                .andThen(new InstantCommand(LEDSubsystem::setIntake)));
         m_joystick.rightBumper().onTrue(new RunIntake(m_manipulator)
             .andThen(new InstantCommand(
-                () -> m_joystick.setRumble(RumbleType.kBothRumble, DriverCalibrations.kControllerRumbleValue)).alongWith(new InstantCommand(LEDSubsystem::setManipulatorReady)))
+                () -> m_joystick.setRumble(RumbleType.kBothRumble, DriverCalibrations.kControllerRumbleValue))
+                .alongWith(new InstantCommand(LEDSubsystem::setManipulatorReady)))
             .andThen(new WaitCommand(DriverCalibrations.kControllerRumblePulseTime))
             .andThen(new InstantCommand(
                 () -> m_joystick.setRumble(RumbleType.kBothRumble, 0))));
-        m_joystick.rightBumper().onFalse(new L3Stow(m_elevator, m_windmill).alongWith(new InstantCommand(LEDSubsystem::setNeutral)));
+        m_joystick.rightBumper().onFalse(new L3Stow(m_elevator, m_windmill)
+                                .alongWith(new InstantCommand(LEDSubsystem::setNeutral)));
 
         /* Coral reef L4 dropoff sequence */
         m_joystick.povUp().and(m_joystick.leftBumper().negate()).onTrue(new L4(m_elevator, m_windmill));
@@ -147,16 +154,6 @@ public class RobotContainer {
             .onFalse(new CGOuttakeThenStow(
                 ManipulatorCalibrations.kL2OuttakeSpeed, ManipulatorCalibrations.kL2OuttakeTime, 
                     m_elevator, m_windmill, m_manipulator));
-        // /* Target the left coral reef stick */
-        // m_joystick.axisGreaterThan(2, 0.1).whileTrue(new RotationAlignToTag(1,
-        //                                                                            () -> m_joystick.getLeftY(), 
-        //                                                                            () -> m_joystick.getLeftX(), 
-        //                                                                            m_drivetrain));
-        // /* Target the right coral reef stick */
-        // m_joystick.axisGreaterThan(3, 0.1).whileTrue(new RotationAlignToTag(0,
-        //                                                                            () -> m_joystick.getLeftY(), 
-        //                                                                            () -> m_joystick.getLeftX(), 
-        //                                                                            m_drivetrain));
 
         /* Target the left coral reef stick */
         m_joystick.axisGreaterThan(2, 0.1).whileTrue(new TranslationAlignToTag(1, 

@@ -23,6 +23,9 @@ import java.util.Optional;
  */
 public class LEDSubsystem extends SubsystemBase {
 
+    /**
+     * LED state enumerations.
+     */
     public static enum LEDSubsystemState {
         DISABLED,
         NEUTRAL,

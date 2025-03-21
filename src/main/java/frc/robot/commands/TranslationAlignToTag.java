@@ -7,7 +7,6 @@ package frc.robot.commands;
 import com.ctre.phoenix6.swerve.SwerveRequest.RobotCentric;
 import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
-import edu.wpi.first.math.trajectory.TrapezoidProfile.Constraints;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Calibrations.DriverCalibrations;
@@ -24,7 +23,7 @@ public class TranslationAlignToTag extends Command {
     private double m_xspeed;
     private int m_pipeline;
 
-    private final ProfiledPIDController m_profiled_PID = 
+    private final ProfiledPIDController m_profiledPid = 
         new ProfiledPIDController(DriverCalibrations.kAprilTagTranslationXAlignmentKP,
                                 0.0, 
                                 DriverCalibrations.kAprilTagTranslationXAlignmentKD,
@@ -51,26 +50,25 @@ public class TranslationAlignToTag extends Command {
     @Override
     public void execute() {
         //Check if there is a target
-        double isTarget = NetworkTableInstance.getDefault().getTable("limelight-one").getEntry("tv")
-        .getDouble(0);
+        double isTarget = NetworkTableInstance.getDefault().getTable("limelight-one").getEntry("tv").getDouble(0);
         //Get the Error
         double txValue = NetworkTableInstance.getDefault().getTable("limelight-one").getEntry("tx")
-        .getDouble(DriverCalibrations.kLimelightDefaultKTx);
+                                             .getDouble(DriverCalibrations.kLimelightDefaultKTx);
 
         //Invert the error and calculate PID
-        m_xspeed = m_profiled_PID.calculate(-txValue);
+        m_xspeed = m_profiledPid.calculate(-txValue);
         
         m_drivetrain.setControl(m_swerveRequest
             .withVelocityX(m_xspeed)
             .withVelocityY(DriverCalibrations.kAprilTagTranslationYRate));
 
-        if(isTarget>0){
-            if(Math.abs(txValue)<1.75){
+        if (isTarget > 0) {
+            if (Math.abs(txValue) < 1.75) {
                 LEDSubsystem.setCoralOnTarget();
-            }else{
+            } else {
                 LEDSubsystem.setCoralTargeting();
             }
-        }else{
+        } else {
             LEDSubsystem.setNeutral();
         }
         
