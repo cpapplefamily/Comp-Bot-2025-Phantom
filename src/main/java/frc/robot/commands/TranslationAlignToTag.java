@@ -6,6 +6,9 @@ package frc.robot.commands;
 
 import com.ctre.phoenix6.swerve.SwerveRequest.RobotCentric;
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.math.controller.ProfiledPIDController;
+import edu.wpi.first.math.trajectory.TrapezoidProfile;
+import edu.wpi.first.math.trajectory.TrapezoidProfile.Constraints;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Calibrations.DriverCalibrations;
@@ -21,6 +24,11 @@ public class TranslationAlignToTag extends Command {
     private CommandSwerveDrivetrain m_drivetrain;
     private double m_xspeed;
     private int m_pipeline;
+
+    private final ProfiledPIDController m_profiled_PID = new ProfiledPIDController(DriverCalibrations.kAprilTagTranslationXAlignmentKP,
+     0.0, 
+     DriverCalibrations.kAprilTagTranslationXAlignmentKD,
+      new TrapezoidProfile.Constraints(1, 1));
 
     private final PIDController m_pid = new PIDController(
         DriverCalibrations.kAprilTagTranslationXAlignmentKP, 
@@ -56,6 +64,7 @@ public class TranslationAlignToTag extends Command {
 
         //Invert the error and calculate PID
         m_xspeed = m_pid.calculate(-txValue);
+        m_xspeed = m_profiled_PID.calculate(-txValue);
         
         m_drivetrain.setControl(m_swerveRequest
             .withVelocityX(m_xspeed)

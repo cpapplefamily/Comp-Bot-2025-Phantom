@@ -29,7 +29,7 @@ public class Calibrations {
         public static final double kLimelightDefaultKTx = 0;
 
         /* P-gain for robot-centric X-translational controller using LL tx as feedback */
-        public static final double kAprilTagTranslationXAlignmentKP = 0.08;
+        public static final double kAprilTagTranslationXAlignmentKP = 0.1;
 
         /* D-gain for robot-centric X-translational controller using LL tx as feedback */
         public static final double kAprilTagTranslationXAlignmentKD = 0.005;
@@ -80,13 +80,13 @@ public class Calibrations {
         public static final double kBottomPosition = -0.2;
 
         /* Pendulum position in inches */
-        public static final double kPendulumPosition = 28;
+        public static final double kPendulumPosition = 24;
 
         /* Pendulum tolerance in inches before any windmill movement */
         public static final double kPendulumTolerance = 2;
 
         /* Position to go to for a raised lollipop stow. */
-        public static final double kRaisedStowPosition = 17;
+        public static final double kRaisedStowPosition = 15;
 
         /* Coral station position in inches */
         public static final double kCoralStationPosition = 34;
