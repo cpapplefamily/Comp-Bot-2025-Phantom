@@ -33,6 +33,18 @@
           "data": {
             "pathName": "Human Player to L4 Slow (Processor Red)"
           }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 0.5
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Outtake"
+          }
         }
       ]
     }

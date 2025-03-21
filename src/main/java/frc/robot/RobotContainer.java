@@ -82,17 +82,54 @@ public class RobotContainer {
 
         configureBindings();
 
+        /* This trigger is used to move the elevator and windmill into L4 position and should be called near the end
+         * of the path. This requires some experimentation to determine the point along the path to call the trigger. 
+         * !!!THIS WILL GET CANCELLED WHEN THE PATH COMPLETES SO WE NEED VISIBILITY INTO THIS TO ENSURE THIS IS CALLED
+         * EARLY ENOUGH ALONG THE PATH!!!
+         */
+        new EventTrigger("L4").onTrue(new L4(m_elevator, m_windmill));
+
+        /* These are used to do any final adjustments to the end of the auto path. 
+         * TODO: These are currently called at the end of a path...which interrupts the path to run. Why not a named
+         * command that gets called after the path is finished? Does it terminate the auto command group?
+        */
         new EventTrigger("Align Right").onTrue(new TranslationAlignToTag(0, m_drivetrain));
         new EventTrigger("Align Left").onTrue(new TranslationAlignToTag(1, m_drivetrain));
-        new EventTrigger("L4").onTrue(new L4(m_elevator, m_windmill)
-            .andThen(new CGOuttakeThenStow(
-                ManipulatorCalibrations.kL4OuttakeSpeed, 
-                ManipulatorCalibrations.kL4OuttakeTime, 
-                m_elevator, m_windmill, m_manipulator)));
-        new EventTrigger("Lollipop Stow").onTrue(new LollipopStow(m_elevator, m_windmill));
+
+        /* This trigger is used to score the coral and then stow the elevator and manipulator and should be called at
+         * the beginning of a path. This requires some experimentation to determine if there's enough time for the
+         * manipulator to shoot the coral before the robot starts leaving for the coral station.
+         * TODO: Probably better to split this into 2 commands. The outtake can be a named command and the stow can be
+         * a trigger.
+         */
+        new EventTrigger("Outtake then Stow").onTrue(new CGOuttakeThenStow(ManipulatorCalibrations.kL4OuttakeSpeed,
+                                                                                ManipulatorCalibrations.kL4OuttakeTime, 
+                                                                                m_elevator, m_windmill, m_manipulator));
+
+        NamedCommands.registerCommand("Outtake", 
+            new RunManipulator(ManipulatorCalibrations.kL4OuttakeSpeed,
+                               ManipulatorCalibrations.kCoralAcceleration,
+                               m_manipulator).withTimeout(ManipulatorCalibrations.kL4OuttakeTime));
+
+
+        /* This trigger is used to get the move the elevator/windmill into postion for the coral station. The intake is
+         * also spunup. This get called during the path from the coral reef to the coral station.
+         * TODO: The prior trigger "Outtake then Stow" is run prior to this...only to updated to this...why not just go
+         * to this straight away?
+         */
         new EventTrigger("Intake").onTrue(new CoralStation(m_elevator, m_windmill).alongWith(new RunIntake(m_manipulator)));
 
+        /* This command is used to sense when the intake has coral. This will timeout after 3 seconds. This is used
+         * between paths which go to and from the coral station.
+         */
         NamedCommands.registerCommand("Is Intake Finished?", new IsIntakeFinished(m_manipulator).withTimeout(3));
+
+        /* This trigger is used to move the elevator and windmill into the stow position.
+         * TODO: This trigger ends up being follow by the "L4" trigger which updates the windmill/elevator positions...
+         * again, why not just hold the coral station elevator/windmill positions and then go to the L4 position.
+        */
+        new EventTrigger("Lollipop Stow").onTrue(new LollipopStow(m_elevator, m_windmill));
+
         
         m_autoChooser = AutoBuilder.buildAutoChooser("3m test path");
         SmartDashboard.putData("Auto Mode", m_autoChooser);
